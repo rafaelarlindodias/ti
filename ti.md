@@ -39,13 +39,95 @@
   - RDP
   - DHCP
 
-## Infraestrutura e Sistemas Operacionais
+---
 
+## Infraestrutura e Sistemas Operacionais
+### Gerenciamento e monitoramento de equipamentos de rede
+### Ativos de rede
+### Passivos de rede
+### Softwares e métricas de monitoramento
+
+## Gerenciamento e monitoramento de equipamentos de rede
+### Conhecimento sobre ferramentas e métricas de monitoramento
+
+## Virtualização de Servidores
+
+## Virtual Lans (VLAN)
+
+## Cabeamento estruturado
+### Conceitos
+### Técnicas e boas práticas de instalação
+
+## Sistemas de comunicação óptica 
+### técnicas e práticasde instalação
+
+## Arquitetura das redes de comunicação
+
+## Armazenamento
+### SAN
+### NAS
+### RAID
+
+## Noções de Backup
+## Armazenamento
+### Meios de armazenamento
+### Sistemas e tipos de backup
+### planos de contingência ferramentas
+
+## Administração de sistemas operacionais
+### LINU
+### MS-WINDOWS
+
+## Configuração e administração de servidores Windows Server 2016 e Linux
+
+## Configuração e administração de serviços 
+### AD
+### DNS
+### DHCP
+### GPO
+
+## Administração de usuários
+
+## Noções de administração de serviços:
+### apache
+### NFS
+### Samba
+### SSH
+### cron
+### sistemas de arquivos
+
+## Noções de Virtualização
+### Hypervisors
+### containers
+
+## Tecnologia de roteamento de pacotes
+
+## Gerência de redes
+
+## Auditoria de redes
+
+## Detecção e correço de problemas de nível físico e lógico; Segurança de redes
+
+## Noções de tecnologias Voip e SIP
+
+---
 
 ## Segurança da Informação
 
-## Leis e Regulamentações
+### conceitos básicos de confidencialidade, integridade e disponibilidade
 
+### Segurança e proteção de redes
+
+### Firewall
+- conceito de firewall
+- suas funções
+- tipos
+
+### Noções decriptografia
+
+## Leis e Regulamentações
+### Lei Geral de Proteção de Dados (Lei nº 13.709, de 14 de agosto de 2018, e suas alterações)
+### Contratação de soluções de Tecnologia da Informação e Comunicação.
 
 
 
