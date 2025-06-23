@@ -4,13 +4,13 @@ Este conteúdo está em **Markdown** e pode ser visualizado direto no navegador 
 
 ## Redes de computadores
 
-###  Conceitos de Redes de computadores
+### - Conceitos de Redes de computadores
 #### Meios de transmissão
 #### Classificação
 #### Topologias de rede
 #### Infraestrutura e organização das redes LAN, MAN, WAN e WLAN
 
-### Redes de computadores e sistemas distribuídos: arquiteturas de rede
+### - Redes de computadores e sistemas distribuídos: arquiteturas de rede
 
 ### Equipamentos de interconexão e transmissão de redes de computadores
 #### Hubs
