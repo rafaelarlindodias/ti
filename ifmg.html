@@ -69,34 +69,23 @@
 
 <nav>
     <h2>Menu</h2>
-    <a href="#ola-mundo">Olá Mundo</a>
-    <a href="#lista">Lista</a>
-    <a href="#codigo">Código</a>
+<!--    <a href="#ola-mundo">Olá Mundo</a>-->
+<!--    <a href="#lista">Lista</a>-->
+<!--    <a href="#codigo">Código</a>-->
 </nav>
 
 <main>
-    <h1>Conteúdo Markdown Renderizado</h1>
+    <h1>Concurso Analista de Sistemas IFMG 2025</h1>
     <div id="content"></div>
 </main>
 
 <script>
     const markdown = `
-# <a id="ola-mundo">Olá Mundo</a>
+## <a href="analista_sistemas_ifmg_2025/legislacao.md">Legislação</a>
+## <a href="analista_sistemas_ifmg_2025/informatica.md">Informática</a>
+## <a href="analista_sistemas_ifmg_2025/ti.md">Conhecimento Específico</a>
 
-Este é um exemplo de conteúdo **Markdown** sendo renderizado no navegador!
 
-## <a id="lista">Lista</a>
-- Item 1
-- Item 2
-- Item 3
-
-## <a id="codigo">Código</a>
-
-\`\`\`javascript
-function ola() {
-  console.log("Olá Mundo!");
-}
-\`\`\`
 `;
 
     document.getElementById("content").innerHTML = marked.parse(markdown);
