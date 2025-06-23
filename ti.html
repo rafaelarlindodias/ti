@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Markdown no Navegador</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            max-width: 800px;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<h1>Conteúdo Markdown Renderizado</h1>
+<div id="content"></div>
+
+<script>
+    const markdown = `
+# Olá Mundo
+
+Este é um exemplo de conteúdo **Markdown** sendo renderizado no navegador!
+
+## Lista
+- Item 1
+- Item 2
+- Item 3
+
+## Código
+\`\`\`javascript
+function ola() {
+  console.log("Olá Mundo!");
+}
+\`\`\`
+`;
+
+    document.getElementById("content").innerHTML = marked.parse(markdown);
+</script>
+</body>
+</html>
