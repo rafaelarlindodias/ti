@@ -21,6 +21,6 @@
 ### Capítulo IV, Do Direito à Educação, à Cultura, ao Esporte e ao Lazer (artigos 53 ao 59-A); 
 ### Título VII, Dos Crimes e Das Infrações Administrativas, Capítulo I e Capítulo II (artigos 225 a 258).
 
-# Estatuto do Instituto Federal de Educação, Ciência e Tecnologia de Minas Gerais – IFMG:   Resolução IFMG nº 12, de 2 de maio de 2018.
+## Estatuto do Instituto Federal de Educação, Ciência e Tecnologia de Minas Gerais – IFMG:   Resolução IFMG nº 12, de 2 de maio de 2018.
 
-# Regimento Geral do IFMG: Resolução IFMG nº 20, de 8 de outubro de 2021.
+## Regimento Geral do IFMG: Resolução IFMG nº 20, de 8 de outubro de 2021.
