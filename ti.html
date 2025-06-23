@@ -2,40 +2,96 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Página Markdown no Navegador</title>
+    <title>Página Markdown com Navegação</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
+            margin: 0;
+            display: flex;
+        }
+
+        nav {
+            width: 200px;
+            background-color: #333;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        nav h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        nav a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        main {
+            margin-left: 220px;
+            padding: 40px;
             max-width: 800px;
         }
+
         pre {
             background: #f0f0f0;
             padding: 10px;
             overflow-x: auto;
         }
+
         code {
             font-family: monospace;
+        }
+
+        h2, h3 {
+            scroll-margin-top: 80px; /* Para evitar sobreposição com o menu */
         }
     </style>
 </head>
 <body>
-<h1>Conteúdo Markdown Renderizado</h1>
-<div id="content"></div>
+
+<nav>
+    <h2>Menu</h2>
+    <a href="#ola-mundo">Olá Mundo</a>
+    <a href="#lista">Lista</a>
+    <a href="#codigo">Código</a>
+</nav>
+
+<main>
+    <h1>Conteúdo Markdown Renderizado</h1>
+    <div id="content"></div>
+</main>
 
 <script>
     const markdown = `
-# Olá Mundo
+# <a id="ola-mundo">Olá Mundo</a>
 
 Este é um exemplo de conteúdo **Markdown** sendo renderizado no navegador!
 
-## Lista
+## <a id="lista">Lista</a>
 - Item 1
 - Item 2
 - Item 3
 
-## Código
+## <a id="codigo">Código</a>
+
 \`\`\`javascript
 function ola() {
   console.log("Olá Mundo!");
@@ -45,5 +101,6 @@ function ola() {
 
     document.getElementById("content").innerHTML = marked.parse(markdown);
 </script>
+
 </body>
 </html>
