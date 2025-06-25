@@ -3,10 +3,36 @@
 ## Redes de computadores
 
 ### Conceitos de Redes de computadores
-- Meios de transmissão
-- Classificação
-- Topologias de rede
-- Infraestrutura e organização das redes LAN, MAN, WAN e WLAN
+
+Conjunto de dispositivos interconectados por um meio de comunicação com **objetivo de compartilhar recursos.**
+
+- **Componentes**
+  - Dispositivos finais (hosts)
+  - Dispositivos intermediários (switches, roteadores)
+  - Meios de transmissão
+  - Protocolos de comunicação
+  - Serviços de rede (DNS, Web, E-mail)
+
+- **Meios de transmissão**
+  - Meios Guiados (Físicos)
+    - Par trançado **(UTP/STP)**: usado em **redes LAN**; categorias como **CAT5e, CAT6, CAT7**.
+    - Cabo coaxial: usado em **redes antigas** e TV a cabo.
+    - Fibra óptica:
+      - Monomodo: longas distâncias 
+      - Multimodo: curtas distâncias 
+      - Alta velocidade, **sem interferência eletromagnética**
+  - Meios Não Guiados (Sem fio)
+    - Ondas de rádio (Wi-Fi, Bluetooth, 5G)
+    - Infravermelho, micro-ondas**, satélite
+
+- **Classificação**
+
+
+- **Topologias de rede**
+
+
+- **Infraestrutura e organização das redes LAN, MAN, WAN e WLAN**
+- 
 
 ### Redes de computadores e sistemas distribuídos: arquiteturas de rede
 
