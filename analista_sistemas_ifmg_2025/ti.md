@@ -23,16 +23,82 @@ Conjunto de dispositivos interconectados por um meio de comunicação com **obje
       - Alta velocidade, **sem interferência eletromagnética**
   - Meios Não Guiados (Sem fio)
     - Ondas de rádio (Wi-Fi, Bluetooth, 5G)
-    - Infravermelho, micro-ondas**, satélite
+    - Infravermelho, micro-ondas, satélite
 
 - **Classificação**
 
+  - Por Escopo Geográfico
+  
+| Tipo | Sigla | Características |
+|------|-------|------------------|
+| Local | LAN | Pequenas áreas (escolas, escritórios) |
+| Metropolitana | MAN | Áreas urbanas, campus universitários |
+| Ampla | WAN | Grandes distâncias (Internet) |
+| Sem fio | WLAN | Versão sem fio de LAN, padrão 802.11 |
 
-- **Topologias de rede**
+  - Por Arquitetura
 
+    - **Cliente-servidor**: cliente solicita, servidor fornece.
+    - **Ponto-a-ponto (P2P)**: todos os nós são iguais.
+    
+**Topologias de rede**
+  - **Barramento (Bus)**: um único cabo conecta todos os nós.
+  - **Anel (Ring)**: conexão circular entre os nós.
+  - **Estrela (Star)**: todos os dispositivos conectam a um ponto central.
+  - **Malha (Mesh)**: todos os nós conectados entre si.
+  - **Árvore (Tree)**: hierarquia de dispositivos.
+  - **Híbrida**: combinação de topologias anteriores.
 
-- **Infraestrutura e organização das redes LAN, MAN, WAN e WLAN**
-- 
+- **Infraestrutura e organização**
+  - Equipamentos de Rede
+  
+    | Equipamento | Função |
+    |------------|--------|
+    | Hub | Repetidor; envia dados para todos |
+    | Switch | Comutador; filtra pacotes por MAC |
+    | Roteador | Encaminha pacotes entre redes |
+    | Access Point | Permite acesso wireless à re
+
+  - Modelos de Referência
+
+    - Modelo OSI (ISO/IEC 7498)
+      ```
+      1. Física
+      2. Enlace
+      3. Rede
+      4. Transporte
+      5. Sessão
+      6. Apresentação
+      7. Aplicação
+      ```
+
+    - **Modelo TCP/IP**
+      ```
+      1. Acesso à Rede
+      2. Internet
+      3. Transporte
+      4. Aplicação
+      ```
+      
+    - **Endereçamento IP**
+      ```
+      IPv4: 32 bits (ex: 192.168.0.1)
+      IPv6: 128 bits (ex: 2001:db8::1)
+      ```
+
+  - Endereçamento e Protocolos
+
+    - Protocolos importantes:
+    
+    | Protocolo | Finalidade |
+    |----------|------------|
+    | HTTP/HTTPS | Acesso à web |
+    | FTP/SFTP | Transferência de arquivos |
+    | SMTP/POP3/IMAP | E-mail |
+    | TCP/UDP | Transporte de dados |
+    | ICMP | Diagnóstico (ping) |
+    | DNS | Resolução de nomes |
+    | DHCP | Atribuição dinâmica de IP |
 
 ### Redes de computadores e sistemas distribuídos: arquiteturas de rede
 
