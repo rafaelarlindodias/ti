@@ -72,12 +72,12 @@ Esse cabo pode ser de dois tipos principais:
 
     Tabela: Vantagens e Desvantagens do **Cabo de Par Trançado**
 
-  | **Vantagens**                                | **Desvantagens**                                         |
-      |----------------------------------------------|----------------------------------------------------------|
-  | Custo acessível                              | Menor proteção contra interferências externas (UTP)      |
-  | Facilidade de instalação e manutenção        | Distância limitada (100 metros sem repetidor)            |
-  | Suporte a altas taxas de transmissão (CAT6+) | Pode exigir blindagem adicional em ambientes industriais |
-  | Compatível com topologia estrela             |                                                          |
+| **Vantagens**                                | **Desvantagens**                                         |
+|----------------------------------------------|----------------------------------------------------------|
+| Custo acessível                              | Menor proteção contra interferências externas (UTP)      |
+| Facilidade de instalação e manutenção        | Distância limitada (100 metros sem repetidor)            |
+| Suporte a altas taxas de transmissão (CAT6+) | Pode exigir blindagem adicional em ambientes industriais |
+| Compatível com topologia estrela             |            |
 
 - **Comparativo UTP vs STP**
 
