@@ -1,31 +1,104 @@
-# TI para Concurso
-
-## Redes de computadores
-
-### Conceitos de Redes de computadores
+# Redes de computadores
 
 Conjunto de dispositivos interconectados por um meio de comunicação com **objetivo de compartilhar recursos.**
 
-- **Componentes**
+## Componentes
   - Dispositivos finais (hosts)
   - Dispositivos intermediários (switches, roteadores)
   - Meios de transmissão
   - Protocolos de comunicação
   - Serviços de rede (DNS, Web, E-mail)
 
-- **Meios de transmissão**
-  - Meios Guiados (Físicos)
-    - Par trançado **(UTP/STP)**: usado em **redes LAN**; categorias como **CAT5e, CAT6, CAT7**.
-    - Cabo coaxial: usado em **redes antigas** e TV a cabo.
-    - Fibra óptica:
-      - Monomodo: longas distâncias 
-      - Multimodo: curtas distâncias 
-      - Alta velocidade, **sem interferência eletromagnética**
-  - Meios Não Guiados (Sem fio)
-    - Ondas de rádio (Wi-Fi, Bluetooth, 5G)
-    - Infravermelho, micro-ondas, satélite
+## Meios de transmissão
 
-- **Classificação**
+Tabela: Meios de Transmissão – Guiados e Não Guiados
+
+| **Tipo**                     | **Meio**                 | **Características**                                                                 | **Exemplos/Aplicações**                       |
+|------------------------------|--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------|
+| **Meios Guiados (Físicos)**  | **Par trançado (UTP/STP)** | - Dois fios de cobre entrelaçados<br>- UTP: sem blindagem<br>- STP: com blindagem    | Redes LAN, Ethernet (CAT5e, CAT6, CAT7)       |
+|                              | **Cabo coaxial**         | - Condutor central + blindagem metálica<br>- Boa imunidade a ruídos                 | Redes antigas, TV a cabo, câmeras analógicas  |
+|                              | **Fibra óptica**         | - Transmissão por pulsos de luz<br>- Imune a EMI<br>- Altíssima velocidade           | Backbone, data centers, operadoras            |
+|                              | → Monomodo               | - Núcleo fino<br>- Longas distâncias<br>- Mais caro                                  | Redes troncais, interligação entre cidades    |
+|                              | → Multimodo              | - Núcleo mais largo<br>- Curtas distâncias<br>- Mais barato                          | Ambientes internos, prédios corporativos      |
+| **Meios Não Guiados (Sem fio)** | **Ondas de rádio**         | - Propagação por ar<br>- Sujeito a interferências<br>- Mobilidade                    | Wi-Fi, Bluetooth, 4G/5G                        |
+|                              | **Infravermelho**        | - Comunicação ponto a ponto<br>- Não atravessa obstáculos                            | Controles remotos, sensores                   |
+|                              | **Micro-ondas**          | - Linha reta (visada direta)<br>- Alta frequência                                    | Enlaces ponto-a-ponto, antenas parabólicas    |
+|                              | **Satélite**             | - Comunicação via satélite geoestacionário<br>- Alta cobertura geográfica            | TV por assinatura, internet via satélite      |
+
+### Par Trançado (UTP/STP)
+
+Par trançado é um tipo de meio físico de transmissão, formado por **dois fios de cobre entrelaçados** (*twisted pairs*), geralmente usados em **redes locais (LAN)**. O entrelaçamento dos fios reduz a **interferência eletromagnética** (EMI) e a **diafonia** (*crosstalk*) entre pares.
+
+Esse cabo pode ser de dois tipos principais:
+
+| Tipo | Descrição |
+|------|-----------|
+| **UTP (Unshielded Twisted Pair)** | Par trançado **sem blindagem**, mais comum, menor custo e mais flexível |
+| **STP (Shielded Twisted Pair)** | Par trançado **com blindagem**, possui proteção contra interferências externas (RFI/EMI), usado em ambientes com ruído elétrico |
+
+- **Estrutura e Funcionamento**
+  - **Fios de cobre:** Cada par é composto por dois fios de cobre isolados e entrelaçados. Em um cabo típico de rede, há **4 pares trançados** (8 fios no total).
+  - **Trançamento:** O trançamento tem como objetivo:
+    - **Reduzir interferências eletromagnéticas**
+    - **Minimizar a diafonia** entre os pares
+
+  - **Blindagem (STP)**
+    No **STP**, cada par pode ter sua própria blindagem (individual) e/ou uma blindagem geral externa. Pode-se ter:
+    - **FTP** (Foiled Twisted Pair): blindagem geral
+    - **S/FTP**: blindagem geral + blindagem por par
+
+- **Categorias de Cabo (Padronização ANSI/TIA/EIA)**
+  As categorias indicam a **capacidade de transmissão de dados**, **frequência suportada** e aplicação recomendada. A seguir, as mais relevantes:
+
+| Categoria | Tipo | Velocidade | Frequência | Aplicação |
+|-----------|------|------------|------------|-----------|
+| **CAT5**   | UTP/STP | até 100 Mbps | 100 MHz | Ethernet 100BASE-T |
+| **CAT5e**  | UTP/STP | até 1 Gbps   | 100 MHz | Gigabit Ethernet (1000BASE-T) |
+| **CAT6**   | UTP/STP | até 1 Gbps (a 100m) ou 10 Gbps (a 55m) | 250 MHz | Redes Gigabit/10Gigabit |
+| **CAT6a**  | STP     | até 10 Gbps | 500 MHz | Redes 10Gigabit (100 m) |
+| **CAT7**   | STP     | até 10 Gbps | 600 MHz | Alta interferência (uso profissional) |
+| **CAT8**   | STP     | até 25–40 Gbps | 2000 MHz | Data centers, curta distância (até 30 m) |
+
+> 🔍 **Observação**: A categoria 5e substituiu a CAT5 em aplicações modernas.
+
+- **Aplicações em Cabeamento Estruturado (MARIN, 2009)**
+  - O par trançado é amplamente utilizado no **cabeamento horizontal** em sistemas de cabeamento estruturado. Deve-se considerar:
+  - **Segmento máximo de 100 metros** (90m de cabo + 10m de patch cords)
+  - Compatibilidade com normas **TIA/EIA-568-B** e **ISO/IEC 11801**
+  - Requisitos de separação de cabos elétricos para evitar interferências
+
+- **Vantagens e Desvantagens**
+
+    Tabela: Vantagens e Desvantagens do **Cabo de Par Trançado**
+
+    | ✅ **Vantagens**                                    | ❌ **Desvantagens**                                                       |
+    |----------------------------------------------------|---------------------------------------------------------------------------|
+    | Custo acessível                                    | Menor proteção contra interferências externas (UTP)                      |
+    | Facilidade de instalação e manutenção              | Distância limitada (100 metros sem repetidor)                            |
+    | Suporte a altas taxas de transmissão (CAT6+)       | Pode exigir blindagem adicional em ambientes industriais                 |
+    | Compatível com topologia estrela                   |                                                                           |
+
+- **Comparativo UTP vs STP**
+
+| Característica | UTP | STP |
+|----------------|-----|-----|
+| Custo | Baixo | Médio/Alto |
+| Instalação | Simples | Mais complexa |
+| Blindagem | Não | Sim |
+| Imunidade a ruído | Menor | Maior |
+| Aplicações | Escritórios, ambientes limpos | Ambientes industriais ou com ruído |
+
+- **Questões comuns em prova**
+> 1. Assinale a alternativa correta sobre o cabo de par trançado:  
+> A) O cabo STP é mais barato que o UTP.  
+> B) O CAT5e suporta até 10 Gbps a 100 metros.  
+> C) O UTP não possui blindagem, sendo mais vulnerável a interferências.  
+> D) O padrão CAT6 não pode ser usado em redes Gigabit.
+>
+> ✅ **Resposta correta: C**
+
+
+## Classificação
 
   - Por Escopo Geográfico
   
