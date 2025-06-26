@@ -50,14 +50,14 @@ Esse cabo pode ser de dois tipos principais:
 - **Categorias de Cabo (Padronização ANSI/TIA/EIA)**
   As categorias indicam a **capacidade de transmissão de dados**, **frequência suportada** e aplicação recomendada. A seguir, as mais relevantes:
 
-| Categoria | Tipo | Velocidade | Frequência | Aplicação |
-|-----------|------|------------|------------|-----------|
-| **CAT5**   | UTP/STP | até 100 Mbps | 100 MHz | Ethernet 100BASE-T |
-| **CAT5e**  | UTP/STP | até 1 Gbps   | 100 MHz | Gigabit Ethernet (1000BASE-T) |
-| **CAT6**   | UTP/STP | até 1 Gbps (a 100m) ou 10 Gbps (a 55m) | 250 MHz | Redes Gigabit/10Gigabit |
-| **CAT6a**  | STP     | até 10 Gbps | 500 MHz | Redes 10Gigabit (100 m) |
-| **CAT7**   | STP     | até 10 Gbps | 600 MHz | Alta interferência (uso profissional) |
-| **CAT8**   | STP     | até 25–40 Gbps | 2000 MHz | Data centers, curta distância (até 30 m) |
+| Categoria | Tipo    | Velocidade                             | Frequência | Aplicação                                |
+|-----------|---------|----------------------------------------|------------|------------------------------------------|
+| **CAT5**  | UTP/STP | até 100 Mbps                           | 100 MHz    | Ethernet 100BASE-T                       |
+| **CAT5e** | UTP/STP | até 1 Gbps                             | 100 MHz    | Gigabit Ethernet (1000BASE-T)            |
+| **CAT6**  | UTP/STP | até 1 Gbps (a 100m) ou 10 Gbps (a 55m) | 250 MHz    | Redes Gigabit/10Gigabit                  |
+| **CAT6a** | STP     | até 10 Gbps                            | 500 MHz    | Redes 10Gigabit (100 m)                  |
+| **CAT7**  | STP     | até 10 Gbps                            | 600 MHz    | Alta interferência (uso profissional)    |
+| **CAT8**  | STP     | até 25–40 Gbps                         | 2000 MHz   | Data centers, curta distância (até 30 m) |
 
 > 🔍 **Observação**: A categoria 5e substituiu a CAT5 em aplicações modernas.
 
@@ -72,22 +72,23 @@ Esse cabo pode ser de dois tipos principais:
 
     Tabela: Vantagens e Desvantagens do **Cabo de Par Trançado**
 
-    | **Vantagens**                                | **Desvantagens**                                         |
-    |----------------------------------------------|----------------------------------------------------------|
-    | Custo acessível                              | Menor proteção contra interferências externas (UTP)      |
-    | Facilidade de instalação e manutenção        | Distância limitada (100 metros sem repetidor)            |
-    | Suporte a altas taxas de transmissão (CAT6+) | Pode exigir blindagem adicional em ambientes industriais |
-    | Compatível com topologia estrela             |                                                          |
+  | **Vantagens**                                | **Desvantagens**                                         |
+      |----------------------------------------------|----------------------------------------------------------|
+  | Custo acessível                              | Menor proteção contra interferências externas (UTP)      |
+  | Facilidade de instalação e manutenção        | Distância limitada (100 metros sem repetidor)            |
+  | Suporte a altas taxas de transmissão (CAT6+) | Pode exigir blindagem adicional em ambientes industriais |
+  | Compatível com topologia estrela             |                                                          |
 
 - **Comparativo UTP vs STP**
 
-    | Característica    | UTP                           | STP                                |
-    |-------------------|-------------------------------|------------------------------------|
-    | Custo             | Baixo                         | Médio/Alto                         |
-    | Instalação        | Simples                       | Mais complexa                      |
-    | Blindagem         | Não                           | Sim                                |
-    | Imunidade a ruído | Menor                         | Maior                              |
-    | Aplicações        | Escritórios, ambientes limpos | Ambientes industriais ou com ruído |
+  | Característica    | UTP                           | STP                                |
+  |-------------------|-------------------------------|------------------------------------|
+  | Custo             | Baixo                         | Médio/Alto                         |
+  | Instalação        | Simples                       | Mais complexa                      |
+  | Blindagem         | Não                           | Sim                                |
+  | Imunidade a ruído | Menor                         | Maior                              |
+  | Aplicações        | Escritórios, ambientes limpos | Ambientes industriais ou com ruído |
+
 
 - **Questões comuns em prova**
 > 1. Assinale a alternativa correta sobre o cabo de par trançado:  
