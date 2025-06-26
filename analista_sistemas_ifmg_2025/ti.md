@@ -68,16 +68,16 @@ Esse cabo pode ser de dois tipos principais:
   - Compatibilidade com normas **TIA/EIA-568-B** e **ISO/IEC 11801**
   - Requisitos de separação de cabos elétricos para evitar interferências
 
-- **Vantagens e Desvantagens**
-
-    Tabela: Vantagens e Desvantagens do **Cabo de Par Trançado**
-
-| **Vantagens**                                | **Desvantagens**                                         |
-|----------------------------------------------|----------------------------------------------------------|
-| Custo acessível                              | Menor proteção contra interferências externas (UTP)      |
-| Facilidade de instalação e manutenção        | Distância limitada (100 metros sem repetidor)            |
-| Suporte a altas taxas de transmissão (CAT6+) | Pode exigir blindagem adicional em ambientes industriais |
-| Compatível com topologia estrela             |            |
+- **Vantagens e Desvantagens do Cabo de Par Trançado**
+  - **Vantagens:**
+    - Custo acessível
+    - Facilidade de instalação e manutenção
+    - Suporte a altas taxas de transmissão (CAT6+)
+    - Compatível com topologia estrela
+  - **Desvantagens**
+    - Menor proteção contra interferências externas (UTP)
+    - Distância limitada (100 metros sem repetidor)
+    - Pode exigir blindagem adicional em ambientes industriais
 
 - **Comparativo UTP vs STP**
 
