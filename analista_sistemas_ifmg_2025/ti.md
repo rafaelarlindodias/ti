@@ -99,10 +99,9 @@ Esse cabo pode ser de dois tipos principais:
 >
 > ✅ **Resposta correta: C**
 
-
 ## Classificação
 
-  - Por Escopo Geográfico
+### Escopo Geográfico
   
 | Tipo | Sigla | Características |
 |------|-------|------------------|
@@ -111,12 +110,145 @@ Esse cabo pode ser de dois tipos principais:
 | Ampla | WAN | Grandes distâncias (Internet) |
 | Sem fio | WLAN | Versão sem fio de LAN, padrão 802.11 |
 
-  - Por Arquitetura
+####  LAN – Local Area Network
 
-    - **Cliente-servidor**: cliente solicita, servidor fornece.
-    - **Ponto-a-ponto (P2P)**: todos os nós são iguais.
-    
-**Topologias de rede**
+> **Tanenbaum (2011)**: LANs são projetadas para abranger distâncias curtas e possuem **altas taxas de transmissão** (tipicamente de 100 Mbps a 10 Gbps).
+
+- Conecta dispositivos em **uma única localização física** (ex: escritório, escola, laboratório).
+- Usa normalmente **Ethernet (IEEE 802.3)** ou **Wi-Fi (IEEE 802.11)**.
+- **Gerência local** e **baixo custo de implantação**.
+- Geralmente é **propriedade privada**.
+
+#### MAN – Metropolitan Area Network
+
+> **Soares, Lemos & Colcher (2001)**: MANs conectam várias LANs próximas entre si, como em **campi universitários**, **hospitais**, **órgãos públicos**, usando geralmente **fibra óptica**.
+
+- Abrange **áreas urbanas** ou **cidades inteiras**.
+- Usa tecnologias como **MPLS**, **Metro Ethernet** e **SONET/SDH**.
+- Pode ser **administrada por operadoras** ou **instituições públicas**.
+- Transmissão de **alta velocidade** e **média distância**.
+
+#### WAN - Wide Area Network
+
+> **Kurose & Ross (2014)**: WANs são responsáveis por **conectar redes LAN e MAN geograficamente distantes**, formando a base da **Internet**.
+
+- Abrange **países, continentes ou o mundo inteiro**.
+- Requer **roteadores**, **provedores de serviços** e protocolos como **IP/MPLS**.
+- Menor velocidade e maior latência em relação às LANs.
+- Ex: **Internet**, redes corporativas com filiais em diferentes estados ou países.
+
+#### WLAN – Wireless Local Area Network
+
+> **Torres (2009)**: WLANs são **LANs que utilizam meios não guiados**, geralmente ondas de rádio, para comunicação.
+
+- Baseada no padrão **IEEE 802.11 (Wi-Fi)**.
+- Permite **mobilidade** dos usuários sem cabeamento físico.
+- Usa técnicas como **CSMA/CA** para acesso ao meio.
+- Segurança é um aspecto crítico (WPA2, WPA3).
+
+### Arquitetura
+
+> A arquitetura de redes define a **organização lógica das funções de comunicação** entre dispositivos conectados em rede. As duas formas clássicas são: **Cliente-Servidor** e **Ponto-a-Ponto (P2P)**.
+
+#### Cliente-servidor
+
+> **Kurose & Ross (2014)**: A arquitetura cliente-servidor caracteriza-se por um dispositivo (cliente) requisitando serviços a outro dispositivo centralizado (servidor).
+
+- **Conceito** 
+
+  - A rede é organizada em torno de **servidores centrais**, que oferecem recursos ou serviços (como arquivos, páginas web, bancos de dados).
+  - Os **clientes** solicitam esses serviços, e o **servidor os processa e responde**.
+
+- **Características**
+
+| Característica      | Descrição                                              |
+|---------------------|--------------------------------------------------------|
+| Papel distinto      | Cliente consome; servidor fornece.                     |
+| Centralização       | Os dados e o controle estão centralizados no servidor. |
+| Segurança           | Maior controle de acesso e autenticação.               |
+| Escalabilidade      | Limitada, pois o servidor pode se tornar gargalo.      |
+| Exemplo de serviços | HTTP (web), FTP, banco de dados, e-mail.               |
+
+- **Exemplos práticos**
+
+  - Acesso a um site (o navegador é o cliente, o servidor web responde).
+  - Sistemas empresariais centralizados (ERP, sistemas de ponto eletrônico).
+  - Aplicações de correio eletrônico (SMTP/IMAP).
+
+- **Vantagens e Desvantagens**
+
+| Vantagens                               | Desvantagens                              |
+|-----------------------------------------|-------------------------------------------|
+| Maior controle e segurança centralizada | Dependência de um único ponto: o servidor |
+| Gerenciamento e backup mais fáceis      | Custos de manutenção e infraestrutura     |
+| Escalabilidade com servidores dedicados | Gargalos podem surgir com muitos clientes |
+
+> 📚 **Tanenbaum (2011)** destaca que, em redes corporativas, o modelo cliente-servidor é preferido pela **previsibilidade e controle administrativo**.
+
+#### Ponto-a-ponto (P2P)
+
+> 📚 **Kurose & Ross (2014)**: Em uma arquitetura ponto-a-ponto, os **nós funcionam simultaneamente como clientes e servidores**.
+
+- **Conceito**
+
+  - Todos os dispositivos conectados à rede podem **compartilhar recursos diretamente uns com os outros**.
+  - Não há servidor centralizado; a comunicação é distribuída entre os pares (peers).
+
+- **Características**
+
+| Característica             | Descrição                                                       |
+|----------------------------|-----------------------------------------------------------------|
+| Descentralização           | Todos os nós podem prover e consumir serviços.                  |
+| Distribuição de carga      | Compartilhamento da carga de trabalho entre os peers.           |
+| Autonomia                  | Cada usuário gerencia seus próprios dados.                      |
+| Eficiência em larga escala | Útil em redes com muitos dispositivos e grande volume de dados. |
+
+- **Exemplos práticos**
+
+  - Compartilhamento de arquivos via BitTorrent.
+  - Redes Gnutella, eMule, Kazaa (redes P2P clássicas).
+  - Aplicações modernas de blockchain (ex: IPFS, Ethereum).
+
+- **Vantagens e Desvantagens**
+
+| Vantagens                                          | Desvantagens                                           |
+|----------------------------------------------------|--------------------------------------------------------|
+| Escalabilidade horizontal                          | Difícil de controlar segurança e integridade dos dados |
+| Menor custo de infraestrutura                      | Gestão e suporte descentralizados                      |
+| Alta disponibilidade (não há ponto único de falha) | Performance pode ser imprevisível                      |
+
+> 📚 **Torres (2009)** observa que o modelo P2P é eficiente para **compartilhamento de arquivos em grande escala**, mas apresenta **riscos quanto à segurança** e integridade.
+
+##### Comparativo Resumido (Cliente-Servidor x | Ponto-a-Ponto (P2P)
+
+| Aspecto              | Cliente-Servidor                          | Ponto-a-Ponto (P2P)                            |
+|----------------------|--------------------------------------------|------------------------------------------------|
+| Centralização        | Sim (servidor central)                     | Não (nós iguais)                               |
+| Controle de acesso   | Centralizado                               | Distribuído                                    |
+| Custo de implantação | Alto (infraestrutura de servidor)          | Baixo (compartilhamento entre peers)           |
+| Escalabilidade       | Limitada ao servidor                       | Alta, distribuída entre os nós                 |
+| Confiabilidade       | Sujeita a falha do servidor                | Resiliente, sem ponto único de falha           |
+| Exemplos             | Web, e-mail, bancos de dados               | BitTorrent, blockchain, Gnutella               |
+
+- **Questões**
+Com relação às arquiteturas de rede, analise as afirmativas a seguir:
+
+1. Na arquitetura cliente-servidor, os dispositivos clientes e servidores desempenham papéis bem definidos, sendo o servidor responsável por prover serviços centralizados, como e-mail ou banco de dados.
+2. Em uma rede ponto-a-ponto (P2P), não existe hierarquia entre os dispositivos conectados, permitindo que qualquer nó atue como servidor e cliente simultaneamente.
+3. Redes ponto-a-ponto são mais seguras e fáceis de gerenciar do que redes cliente-servidor, pois eliminam a necessidade de um servidor centralizado.
+
+Assinale a alternativa correta:
+
+A) Apenas as afirmativas 1 e 2 estão corretas.
+B) Apenas as afirmativas 1 e 3 estão corretas.
+C) Apenas as afirmativas 2 e 3 estão corretas.
+D) Todas as afirmativas estão corretas.
+E) Nenhuma afirmativa está correta.
+
+✅ Gabarito: A
+
+
+## Topologias de rede
   - **Barramento (Bus)**: um único cabo conecta todos os nós.
   - **Anel (Ring)**: conexão circular entre os nós.
   - **Estrela (Star)**: todos os dispositivos conectam a um ponto central.
