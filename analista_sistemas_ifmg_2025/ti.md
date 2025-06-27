@@ -183,11 +183,11 @@ Esse cabo pode ser de dois tipos principais:
 | Gerenciamento e backup mais fáceis      | Custos de manutenção e infraestrutura     |
 | Escalabilidade com servidores dedicados | Gargalos podem surgir com muitos clientes |
 
-> 📚 **Tanenbaum (2011)** destaca que, em redes corporativas, o modelo cliente-servidor é preferido pela **previsibilidade e controle administrativo**.
+> **Tanenbaum (2011)** destaca que, em redes corporativas, o modelo cliente-servidor é preferido pela **previsibilidade e controle administrativo**.
 
 #### Ponto-a-ponto (P2P)
 
-> 📚 **Kurose & Ross (2014)**: Em uma arquitetura ponto-a-ponto, os **nós funcionam simultaneamente como clientes e servidores**.
+> **Kurose & Ross (2014)**: Em uma arquitetura ponto-a-ponto, os **nós funcionam simultaneamente como clientes e servidores**.
 
 - **Conceito**
 
@@ -217,7 +217,7 @@ Esse cabo pode ser de dois tipos principais:
 | Menor custo de infraestrutura                      | Gestão e suporte descentralizados                      |
 | Alta disponibilidade (não há ponto único de falha) | Performance pode ser imprevisível                      |
 
-> 📚 **Torres (2009)** observa que o modelo P2P é eficiente para **compartilhamento de arquivos em grande escala**, mas apresenta **riscos quanto à segurança** e integridade.
+> **Torres (2009)** observa que o modelo P2P é eficiente para **compartilhamento de arquivos em grande escala**, mas apresenta **riscos quanto à segurança** e integridade.
 
 ##### Comparativo Resumido (Cliente-Servidor x | Ponto-a-Ponto (P2P)
 
@@ -249,12 +249,146 @@ E) Nenhuma afirmativa está correta.
 
 
 ## Topologias de rede
+
+A **topologia de rede** define a forma como os dispositivos (nós) estão **fisicamente ou logicamente organizados** dentro da rede. As escolhas de topologia impactam diretamente na **performance**, **resiliência**, **custo** e **facilidade de manutenção** da rede.
+
   - **Barramento (Bus)**: um único cabo conecta todos os nós.
   - **Anel (Ring)**: conexão circular entre os nós.
   - **Estrela (Star)**: todos os dispositivos conectam a um ponto central.
   - **Malha (Mesh)**: todos os nós conectados entre si.
   - **Árvore (Tree)**: hierarquia de dispositivos.
   - **Híbrida**: combinação de topologias anteriores.
+
+![img.png](img.png)
+
+### Barramento (Bus)
+
+> **Tanenbaum (2011)**: A topologia em barramento é uma das mais antigas e simples. Todos os dispositivos compartilham um **único meio de transmissão** (cabo principal).
+
+- **Características**
+  - Todos os dispositivos são ligados a um **único cabo troncal** (backbone).
+  - Transmissão ocorre em **difusão (broadcast)**.
+  - Requer **terminadores** nas extremidades do cabo para evitar reflexões.
+
+- **Vantagens**
+  - Baixo custo de instalação.
+  - Pouco cabeamento.
+
+- **Desvantagens**
+  - **Baixa escalabilidade** (quanto mais dispositivos, mais colisões).
+  - **Difícil de diagnosticar falhas**.
+  - Uma falha no cabo principal derruba toda a rede.
+
+- **Aplicações históricas**
+  - Redes **Ethernet 10BASE-2 / 10BASE-5**.
+
+### Anel (Ring)
+
+> **Torres (2009)**: Na topologia em anel, os dispositivos são conectados de forma **circular**, e os dados circulam em um único sentido ou ambos (em caso de anel duplo).
+
+**Características**
+  - Cada nó é conectado ao **vizinho anterior e ao próximo**, formando um círculo fechado.
+  - A transmissão segue de nó em nó até chegar ao destino.
+  - Em algumas implementações usa-se **token** para controlar o envio (ex: Token Ring da IBM).
+
+**Vantagens**
+  - Ordenamento natural do tráfego.
+  - Reduz colisões de dados com uso de token.
+
+**Desvantagens**
+  - A falha de um único nó ou enlace **pode derrubar toda a rede** (salvo uso de anel redundante).
+  - Dificuldade de reconfiguração.
+
+### Estrela (Star)
+
+> **Kurose & Ross (2014)**: É a topologia predominante em redes modernas (Ethernet com switches), onde todos os nós se conectam a um **ponto central**.
+
+**Características**
+  - Todos os dispositivos são conectados a um **ponto central** (hub ou switch).
+  - A comunicação passa **obrigatoriamente pelo ponto central**.
+
+**Vantagens**
+  - **Fácil de instalar, configurar e diagnosticar problemas**.
+  - Falha em um cabo afeta apenas o nó correspondente.
+  - Alto desempenho com switches modernos.
+
+**Desvantagens**
+  - Dependência do **ponto central** (ponto único de falha).
+
+**Aplicações**
+  - **Ethernet moderna (100BASE-T, 1000BASE-T)**.
+  - Redes corporativas e residenciais.
+
+### Malha (Mesh)
+
+> **Soares, Lemos & Colcher (2001)**: Na topologia em malha, cada dispositivo é conectado a **todos os outros dispositivos** da rede.
+
+**Características**
+  - Pode ser **completa** (todos os pares conectados) ou **parcial**.
+  - Comunicação direta entre pares.
+  - Tolerância a falhas muito elevada.
+
+**Vantagens**
+  - **Alta disponibilidade** e **resiliência**.
+  - Roteamento múltiplo e eficiente.
+
+**Desvantagens**
+  - **Alto custo e complexidade** (crescimento exponencial de enlaces).
+  - Instalação e manutenção complexas.
+
+**Aplicações**
+  - Backbones de redes críticas.
+  - Redes de sensores sem fio (em malha parcial).
+
+### Árvore (Tree)
+
+> **Torres (2009)**: Topologia em **forma hierárquica**, combinando aspectos de **estrela** e **barramento**.
+
+**Características**
+  - Nós organizados de forma **hierárquica**, como em uma **árvore genealógica**.
+  - Usa **switches ou roteadores intermediários**.
+
+**Vantagens**
+  - **Fácil de expandir**.
+  - Estrutura organizada para grandes redes.
+
+**Desvantagens**
+  - A falha de um nó de nível superior pode afetar os nós subordinados.
+
+**Aplicações**
+  - **Redes corporativas** e **escolares** com múltiplos andares ou setores.
+
+### Híbrida
+
+> **Tanenbaum (2011)**: A topologia híbrida **combina duas ou mais topologias** para atender requisitos específicos de uma organização.
+
+**Características**
+  - Adaptações de topologias como estrela, anel, barramento, etc.
+  - Flexível e personalizável.
+
+**Vantagens**
+  - **Aproveita os pontos fortes** das topologias combinadas.
+  - Permite **ajustes conforme a necessidade da organização**.
+
+**Desvantagens**
+  - Planejamento e manutenção mais complexos.
+  - Pode exigir diferentes tecnologias e equipamentos.
+
+**Aplicações**
+  - **Ambientes corporativos heterogêneos**.
+  - Grandes redes com múltiplas filiais.
+
+**Comparativo Resumido**
+
+| Topologia  | Vantagens principais                 | Desvantagens principais                            |
+|------------|--------------------------------------|----------------------------------------------------|
+| Barramento | Simples, econômica                   | Colisões, difícil de diagnosticar, pouco escalável |
+| Anel       | Ordenamento do tráfego, sem colisões | Uma falha derruba tudo, difícil de manter          |
+| Estrela    | Fácil de gerenciar, falha isolada    | Ponto central é crítico                            |
+| Malha      | Alta resiliência e redundância       | Custo e complexidade elevados                      |
+| Árvore     | Boa organização e expansão           | Dependência de nós superiores                      |
+| Híbrida    | Flexível, adaptável                  | Mais complexa para planejar e manter               |
+
 
 - **Infraestrutura e organização**
   - Equipamentos de Rede
