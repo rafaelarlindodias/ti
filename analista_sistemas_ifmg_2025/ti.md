@@ -390,42 +390,129 @@ A **topologia de rede** define a forma como os dispositivos (nós) estão **fisi
 | Híbrida    | Flexível, adaptável                  | Mais complexa para planejar e manter               |
 
 
-- **Infraestrutura e organização**
-  - Equipamentos de Rede
-  
-    | Equipamento | Função |
-    |------------|--------|
-    | Hub | Repetidor; envia dados para todos |
-    | Switch | Comutador; filtra pacotes por MAC |
-    | Roteador | Encaminha pacotes entre redes |
-    | Access Point | Permite acesso wireless à re
+## Infraestrutura e organização
 
-  - Modelos de Referência
+> Com base no modelo **OSI** e no **modelo TCP/IP**, os equipamentos de rede atuam em diferentes camadas, com finalidades específicas no tráfego de dados, controle de rede e conectividade.
 
-    - Modelo OSI (ISO/IEC 7498)
-      ```
-      1. Física
-      2. Enlace
-      3. Rede
-      4. Transporte
-      5. Sessão
-      6. Apresentação
-      7. Aplicação
-      ```
+### Tabela Comparativa
 
-    - **Modelo TCP/IP**
-      ```
-      1. Acesso à Rede
-      2. Internet
-      3. Transporte
-      4. Aplicação
-      ```
+| **Equipamento**  | **Função**                                            | **Camada OSI**    | **Camada TCP/IP** | **Gerenciamento**    | **Velocidade comum**           | **Observações**                                       |
+|------------------|-------------------------------------------------------|-------------------|-------------------|----------------------|--------------------------------|-------------------------------------------------------|
+| **Hub**          | Repetidor físico; envia dados para todas as portas    | Camada 1 (Física) | Acesso à Rede     | Não gerenciável      | 10/100 Mbps                    | Obsoleto, causa colisões, sem inteligência            |
+| **Switch**       | Comutador; encaminha quadros com base no endereço MAC | Camada 2 (Enlace) | Acesso à Rede     | Pode ser gerenciável | 100 Mbps, 1 Gbps, 10 Gbps      | Reduz colisões, suporta VLANs (gerenciável)           |
+| **Roteador**     | Encaminha pacotes entre redes distintas (IP)          | Camada 3 (Rede)   | Internet          | Gerenciável          | 100 Mbps a 10 Gbps             | Usa tabelas de roteamento e protocolos como OSPF, BGP |
+| **Access Point** | Permite conexões sem fio a uma rede cabeada           | Camada 2 (Enlace) | Acesso à Rede     | Pode ser gerenciável | 300 Mbps a +1 Gbps (Wi-Fi 5/6) | Opera em 2,4 GHz e 5 GHz; suporta SSID, autenticação  |
+
+
+### Hub
+
+> **Tanenbaum (2011)**: Equipamento simples que apenas **repete os sinais elétricos** recebidos em uma porta para todas as outras.
+
+- Opera na **camada física (OSI – camada 1)**.
+- Não tem inteligência de rede (não lê endereços MAC).
+- Sujeito a **colisões** (CSMA/CD em Ethernet legado).
+- Usado em topologias **estrela com lógica de barramento**.
+- Foi substituído por **switches** em redes modernas.
+- 
+### Switch
+
+> **Kurose & Ross (2014)**: Atua na **comutação de quadros** com base no endereço MAC de destino.
+
+- Opera na **camada de enlace (OSI – camada 2)**.
+- Mantém uma **tabela MAC** para encaminhamento eficiente.
+- Reduz o domínio de colisão (uma porta = um domínio).
+- **Switches gerenciáveis** suportam:
+  - VLANs (IEEE 802.1Q)
+  - SNMP para monitoramento
+  - QoS, espelhamento de portas
+
+> **Torres (2009)** destaca que switches modernos podem ter funções da camada 3 (roteamento interno).
+
+### Roteador
+
+> **Kurose & Ross (2014)**: Atua na **camada de rede (OSI – camada 3)**, com base em **endereços IP**.
+
+- Encaminha pacotes entre **redes diferentes**.
+- Mantém **tabelas de roteamento** (estáticas e dinâmicas).
+- Utiliza protocolos como:
+  - **OSPF**, **BGP**, **RIP**
+- Realiza funções como:
+  - NAT (Network Address Translation)
+  - DHCP (servidor/cliente)
+  - Firewall (em roteadores avançados)
+- É essencial em redes domésticas e corporativas (ex: roteador Wi-Fi).
+
+### Access Point (AP)
+
+> **Torres (2009)**: Permite **acesso sem fio** a uma rede cabeada, funcionando como uma **ponte** entre dispositivos Wi-Fi e a LAN com fio.
+
+- Opera na **camada de enlace (OSI – camada 2)**.
+- Suporte a padrões:
+  - **IEEE 802.11a/b/g/n/ac/ax** (Wi-Fi 4 a 6)
+- Configurações típicas:
+  - SSID (nome da rede)
+  - Criptografia (WPA2, WPA3)
+  - Controle de acesso por MAC
+- Pode ser:
+  - **Autônomo** (stand-alone)
+  - **Controlado** (por controladora wireless)
+
+```
+Questão 1
+
+Com relação aos equipamentos utilizados na infraestrutura de redes de computadores, analise as afirmações a seguir:
+1. O switch opera, por padrão, na camada de enlace do modelo OSI e realiza comutação com base nos endereços MAC dos dispositivos conectados.
+2. O roteador atua na camada de transporte, sendo responsável por controlar o fluxo de pacotes entre dispositivos da mesma rede local.
+3. O hub é um equipamento inteligente que realiza encaminhamento de pacotes com base em endereços IP.
+4. O Access Point (AP) possibilita a conexão de dispositivos sem fio a uma rede com fio, funcionando como uma ponte na camada de enlace.
+
+Assinale a alternativa correta:
+
+A) Apenas as afirmativas 1 e 2 estão corretas.
+B) Apenas as afirmativas 1 e 4 estão corretas.
+C) Apenas a afirmativa 2 está correta.
+D) Apenas as afirmativas 3 e 4 estão corretas.
+E) Todas as afirmativas estão incorretas.
+
+Gabarito: B
+```
+
+### CSMA/CD x CSMA/CA
+
+
+## Modelo OSI (ISO/IEC 7498)
+     
+1. Física
+2. Enlace
+3. Rede
+4. Transporte
+5. Sessão
+6. Apresentação
+7. Aplicação
+
+### Camada 1 - Física 
+
+### Camada 2 - Enlace
+
+### Camada 3 - Rede
+
+### Camada 4 - Transporte
+
+### Camada 5 - Sessão
+
+### Camada 6 - Apresentação
+
+### Camada 7 - Aplicação
+
+
+
+
       
     - **Endereçamento IP**
-      ```
-      IPv4: 32 bits (ex: 192.168.0.1)
-      IPv6: 128 bits (ex: 2001:db8::1)
-      ```
+   ```
+   IPv4: 32 bits (ex: 192.168.0.1)
+   IPv6: 128 bits (ex: 2001:db8::1)
+   ```
 
   - Endereçamento e Protocolos
 
