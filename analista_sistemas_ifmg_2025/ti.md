@@ -13,17 +13,17 @@ Conjunto de dispositivos interconectados por um meio de comunicação com **obje
 
 Tabela: Meios de Transmissão – Guiados e Não Guiados
 
-| **Tipo**                     | **Meio**                 | **Características**                                                                 | **Exemplos/Aplicações**                       |
-|------------------------------|--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------|
-| **Meios Guiados (Físicos)**  | **Par trançado (UTP/STP)** | - Dois fios de cobre entrelaçados<br>- UTP: sem blindagem<br>- STP: com blindagem    | Redes LAN, Ethernet (CAT5e, CAT6, CAT7)       |
-|                              | **Cabo coaxial**         | - Condutor central + blindagem metálica<br>- Boa imunidade a ruídos                 | Redes antigas, TV a cabo, câmeras analógicas  |
-|                              | **Fibra óptica**         | - Transmissão por pulsos de luz<br>- Imune a EMI<br>- Altíssima velocidade           | Backbone, data centers, operadoras            |
-|                              | → Monomodo               | - Núcleo fino<br>- Longas distâncias<br>- Mais caro                                  | Redes troncais, interligação entre cidades    |
-|                              | → Multimodo              | - Núcleo mais largo<br>- Curtas distâncias<br>- Mais barato                          | Ambientes internos, prédios corporativos      |
-| **Meios Não Guiados (Sem fio)** | **Ondas de rádio**         | - Propagação por ar<br>- Sujeito a interferências<br>- Mobilidade                    | Wi-Fi, Bluetooth, 4G/5G                        |
-|                              | **Infravermelho**        | - Comunicação ponto a ponto<br>- Não atravessa obstáculos                            | Controles remotos, sensores                   |
-|                              | **Micro-ondas**          | - Linha reta (visada direta)<br>- Alta frequência                                    | Enlaces ponto-a-ponto, antenas parabólicas    |
-|                              | **Satélite**             | - Comunicação via satélite geoestacionário<br>- Alta cobertura geográfica            | TV por assinatura, internet via satélite      |
+| **Tipo**                        | **Meio**                   | **Características**                                                               | **Exemplos/Aplicações**                      |
+|---------------------------------|----------------------------|-----------------------------------------------------------------------------------|----------------------------------------------|
+| **Meios Guiados (Físicos)**     | **Par trançado (UTP/STP)** | - Dois fios de cobre entrelaçados<br>- UTP: sem blindagem<br>- STP: com blindagem | Redes LAN, Ethernet (CAT5e, CAT6, CAT7)      |
+|                                 | **Cabo coaxial**           | - Condutor central + blindagem metálica<br>- Boa imunidade a ruídos               | Redes antigas, TV a cabo, câmeras analógicas |
+|                                 | **Fibra óptica**           | - Transmissão por pulsos de luz<br>- Imune a EMI<br>- Altíssima velocidade        | Backbone, data centers, operadoras           |
+|                                 | → Monomodo                 | - Núcleo fino<br>- Longas distâncias<br>- Mais caro                               | Redes troncais, interligação entre cidades   |
+|                                 | → Multimodo                | - Núcleo mais largo<br>- Curtas distâncias<br>- Mais barato                       | Ambientes internos, prédios corporativos     |
+| **Meios Não Guiados (Sem fio)** | **Ondas de rádio**         | - Propagação por ar<br>- Sujeito a interferências<br>- Mobilidade                 | Wi-Fi, Bluetooth, 4G/5G                      |
+|                                 | **Infravermelho**          | - Comunicação ponto a ponto<br>- Não atravessa obstáculos                         | Controles remotos, sensores                  |
+|                                 | **Micro-ondas**            | - Linha reta (visada direta)<br>- Alta frequência                                 | Enlaces ponto-a-ponto, antenas parabólicas   |
+|                                 | **Satélite**               | - Comunicação via satélite geoestacionário<br>- Alta cobertura geográfica         | TV por assinatura, internet via satélite     |
 
 ### Par Trançado (UTP/STP)
 
@@ -31,10 +31,10 @@ Par trançado é um tipo de meio físico de transmissão, formado por **dois fio
 
 Esse cabo pode ser de dois tipos principais:
 
-| Tipo | Descrição |
-|------|-----------|
-| **UTP (Unshielded Twisted Pair)** | Par trançado **sem blindagem**, mais comum, menor custo e mais flexível |
-| **STP (Shielded Twisted Pair)** | Par trançado **com blindagem**, possui proteção contra interferências externas (RFI/EMI), usado em ambientes com ruído elétrico |
+| Tipo                              | Descrição                                                                                                                       |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| **UTP (Unshielded Twisted Pair)** | Par trançado **sem blindagem**, mais comum, menor custo e mais flexível                                                         |
+| **STP (Shielded Twisted Pair)**   | Par trançado **com blindagem**, possui proteção contra interferências externas (RFI/EMI), usado em ambientes com ruído elétrico |
 
 - **Estrutura e Funcionamento**
   - **Fios de cobre:** Cada par é composto por dois fios de cobre isolados e entrelaçados. Em um cabo típico de rede, há **4 pares trançados** (8 fios no total).
@@ -103,12 +103,12 @@ Esse cabo pode ser de dois tipos principais:
 
 ### Escopo Geográfico
   
-| Tipo | Sigla | Características |
-|------|-------|------------------|
-| Local | LAN | Pequenas áreas (escolas, escritórios) |
-| Metropolitana | MAN | Áreas urbanas, campus universitários |
-| Ampla | WAN | Grandes distâncias (Internet) |
-| Sem fio | WLAN | Versão sem fio de LAN, padrão 802.11 |
+| Tipo          | Sigla | Características                       |
+|---------------|-------|---------------------------------------|
+| Local         | LAN   | Pequenas áreas (escolas, escritórios) |
+| Metropolitana | MAN   | Áreas urbanas, campus universitários  |
+| Ampla         | WAN   | Grandes distâncias (Internet)         |
+| Sem fio       | WLAN  | Versão sem fio de LAN, padrão 802.11  |
 
 ####  LAN – Local Area Network
 
@@ -221,14 +221,14 @@ Esse cabo pode ser de dois tipos principais:
 
 ##### Comparativo Resumido (Cliente-Servidor x | Ponto-a-Ponto (P2P)
 
-| Aspecto              | Cliente-Servidor                          | Ponto-a-Ponto (P2P)                            |
-|----------------------|--------------------------------------------|------------------------------------------------|
-| Centralização        | Sim (servidor central)                     | Não (nós iguais)                               |
-| Controle de acesso   | Centralizado                               | Distribuído                                    |
-| Custo de implantação | Alto (infraestrutura de servidor)          | Baixo (compartilhamento entre peers)           |
-| Escalabilidade       | Limitada ao servidor                       | Alta, distribuída entre os nós                 |
-| Confiabilidade       | Sujeita a falha do servidor                | Resiliente, sem ponto único de falha           |
-| Exemplos             | Web, e-mail, bancos de dados               | BitTorrent, blockchain, Gnutella               |
+| Aspecto              | Cliente-Servidor                  | Ponto-a-Ponto (P2P)                  |
+|----------------------|-----------------------------------|--------------------------------------|
+| Centralização        | Sim (servidor central)            | Não (nós iguais)                     |
+| Controle de acesso   | Centralizado                      | Distribuído                          |
+| Custo de implantação | Alto (infraestrutura de servidor) | Baixo (compartilhamento entre peers) |
+| Escalabilidade       | Limitada ao servidor              | Alta, distribuída entre os nós       |
+| Confiabilidade       | Sujeita a falha do servidor       | Resiliente, sem ponto único de falha |
+| Exemplos             | Web, e-mail, bancos de dados      | BitTorrent, blockchain, Gnutella     |
 
 - **Questões**
 Com relação às arquiteturas de rede, analise as afirmativas a seguir:
@@ -413,7 +413,7 @@ A **topologia de rede** define a forma como os dispositivos (nós) estão **fisi
 - Sujeito a **colisões** (CSMA/CD em Ethernet legado).
 - Usado em topologias **estrela com lógica de barramento**.
 - Foi substituído por **switches** em redes modernas.
-- 
+
 ### Switch
 
 > **Kurose & Ross (2014)**: Atua na **comutação de quadros** com base no endereço MAC de destino.
@@ -481,33 +481,285 @@ Gabarito: B
 
 
 ## Modelo OSI (ISO/IEC 7498)
-     
-1. Física
-2. Enlace
-3. Rede
-4. Transporte
-5. Sessão
-6. Apresentação
-7. Aplicação
+
+> O modelo OSI (Open Systems Interconnection), desenvolvido pela **ISO** em parceria com a **IEC**, define uma arquitetura em **7 camadas** para a **comunicação em redes de computadores**. Ele promove **interoperabilidade**, **padronização de protocolos** e **modularidade** na construção de redes.
+
+### Estrutura Geral
+
+| Camada | Nome            | Função principal                        | Unidade de dados |
+|--------|-----------------|-----------------------------------------|------------------|
+| 7      | Aplicação       | Interface com o usuário final           | Dados            |
+| 6      | Apresentação    | Codificação, criptografia e compressão  | Dados            |
+| 5      | Sessão          | Gerência de conexões e sessões          | Dados            |
+| 4      | Transporte      | Controle fim a fim, confiabilidade      | Segmentos        |
+| 3      | Rede            | Endereçamento lógico e roteamento       | Pacotes          |
+| 2      | Enlace de Dados | Endereçamento físico, detecção de erros | Quadros (Frames) |
+| 1      | Física          | Transmissão de bits no meio físico      | Bits             |
 
 ### Camada 1 - Física 
 
+> **Tanenbaum (2011)**
+
+- Responsável pela **transmissão bruta de bits** no meio físico (cabos, rádio, fibra).
+- Define características elétricas, mecânicas e funcionais dos meios de transmissão.
+- **Não interpreta dados**, apenas os transmite como sinais elétricos, ópticos ou de rádio.
+
+#### Principais funções
+
+- Codificação de sinais (NRZ, Manchester, etc.)
+- Taxa de transmissão (bps)
+- Tipo de conector e pinagem
+- Meio de transmissão (UTP, fibra óptica, etc.)
+
+#### Equipamentos
+
+- Hub
+- Repetidores
+- Meios físicos (cabos, conectores)
+
 ### Camada 2 - Enlace
+
+> **Kurose & Ross (2014)**
+
+- Estabelece uma **ligação confiável entre dois nós diretamente conectados**.
+- Controla **erro**, **fluxo** e **delimitação de quadros**.
+- Adiciona **endereçamento físico (MAC)**.
+
+#### Principais funções
+
+- Framing (estruturação dos quadros)
+- Detecção e correção de erros (CRC, paridade)
+- Controle de acesso ao meio (CSMA/CD, CSMA/CA, Token)
+- Controle de fluxo
+
+#### Protocolos
+
+- Ethernet (IEEE 802.3)
+- PPP (Point-to-Point Protocol)
+- HDLC
+
+#### Equipamentos
+
+- Switches
+- Access Points (operam também na 2)
+
 
 ### Camada 3 - Rede
 
+> **Tanenbaum (2011)**
+
+- Responsável pelo **endereçamento lógico (IP)** e **roteamento de pacotes entre redes diferentes**.
+- Define como os pacotes são **encaminhados** através da rede.
+
+#### Principais funções
+
+- Roteamento (estático e dinâmico)
+- Fragmentação e remontagem de pacotes
+- Endereçamento lógico (IP)
+- Controle de congestionamento
+
+#### Protocolos
+
+- IP (IPv4, IPv6)
+- ICMP (ping, traceroute)
+- OSPF, BGP, RIP
+
+#### Equipamentos
+- Roteadores
+
 ### Camada 4 - Transporte
+
+> **Kurose & Ross (2014)**
+ 
+- Responsável pelo **transporte fim a fim confiável (ou não)** entre dois hosts.
+- Divide os dados em **segmentos** e garante a entrega correta.
+
+#### Principais funções
+
+- Controle de conexão (estabelecimento, manutenção e término)
+- Controle de fluxo fim a fim
+- Detecção e retransmissão de pacotes perdidos
+- Multiplexação de conexões
+
+### Protocolos
+
+- TCP (confiável, orientado à conexão)
+- UDP (não confiável, sem conexão)
 
 ### Camada 5 - Sessão
 
+> **Torres (2009)**
+
+- Gerencia **sessões de comunicação entre aplicações**.
+- Fornece **controle de diálogo**, sincronização e recuperação.
+
+#### Principais funções
+
+- Estabelecimento e encerramento de sessões
+- Diálogo full-duplex ou half-duplex
+- Sincronização de pontos de verificação
+
+#### Exemplos
+
+- RPC (Remote Procedure Call)
+- Gerência de sessão em aplicações multimídia (VoIP, videoconferência)
+
+
 ### Camada 6 - Apresentação
+
+> **Kurose & Ross (2014)**
+
+- Tradução dos dados entre **formato da aplicação e formato da rede**.
+- Responsável por **codificação, compressão e criptografia**.
+
+#### Principais funções
+- Conversão de formatos (EBCDIC ↔ ASCII)
+- Compressão de dados (JPEG, MP3)
+- Criptografia (SSL/TLS)
+
+#### Exemplos
+- Codificações MIME
+- Protocolos de sessão segura como TLS/SSL
 
 ### Camada 7 - Aplicação
 
+Camada 7 – Aplicação
+
+> **Tanenbaum (2011)**
+
+- Camada que interage diretamente com o **usuário ou a aplicação**.
+- Proporciona **serviços de rede para as aplicações**.
+
+#### Principais funções
+- Acesso à rede e aos serviços de aplicação
+- Manipulação de arquivos, e-mail, navegação, etc.
+
+#### Protocolos
+- HTTP (web)
+- FTP (transferência de arquivos)
+- SMTP/IMAP (e-mail)
+- DNS (resolução de nomes)
+
+### Observações Importantes
+
+- O modelo OSI é **conceitual**, enquanto o modelo TCP/IP é **prático e implementado**.
+- As **camadas 1 a 4** tratam de **transporte de dados** (camadas inferiores).
+- As **camadas 5 a 7** tratam da **interface com o usuário e aplicação**.
+- Muitas aplicações atuais combinam funções das camadas 5, 6 e 7.
+
+## Modelo TCP/IP (DARPA)   
+
+> O modelo TCP/IP é um **modelo de arquitetura de protocolos** desenvolvido pelo **Departamento de Defesa dos EUA (DARPA)** e se tornou a **base da Internet**. É um modelo **prático** e amplamente **implementado**, composto por **4 ou 5 camadas**, dependendo da forma de apresentação.
+
+### Estrutura Geral
+
+| Camada (TCP/IP) | Função principal                            | Equivalente no OSI |
+|-----------------|---------------------------------------------|--------------------|
+| Aplicação       | Serviços para aplicações do usuário         | Camadas 5, 6 e 7   |
+| Transporte      | Comunicação fim a fim entre processos       | Camada 4           |
+| Internet        | Endereçamento lógico e roteamento           | Camada 3           |
+| Acesso à Rede   | Acesso físico ao meio (MAC e meios físicos) | Camadas 1 e 2      |
+
+> Observação: Alguns autores apresentam uma **5ª camada** chamada **Camada Física**, separando da subcamada de enlace. No entanto, em muitas abordagens simplificadas, ela está embutida na **camada de acesso à rede**.
+
+### Camada de Aplicação
+
+> KUROSE & ROSS (2014)
+
+- Fornece **serviços de rede diretamente às aplicações dos usuários**.
+- Aqui operam os protocolos de **transferência de arquivos, navegação, e-mail, etc.**
+- Trata do **formato de dados, autenticação, criptografia, etc.**
+
+#### Principais protocolos
+
+| Protocolo        | Função                              |
+|------------------|-------------------------------------|
+| HTTP             | Navegação web                       |
+| HTTPS            | Web segura (SSL/TLS)                |
+| FTP              | Transferência de arquivos           |
+| SMTP, IMAP, POP3 | Envio e recebimento de e-mails      |
+| DNS              | Resolução de nomes                  |
+| DHCP             | Atribuição dinâmica de endereços IP |
+| SNMP             | Gerência de redes                   |
+
+### Camada de Transporte
+
+> TANENBAUM (2011)
+
+- Responsável pela **comunicação lógica fim a fim** entre processos em hosts diferentes.
+- Garante confiabilidade, controle de fluxo, detecção de erro, etc.
+
+#### Protocolos principais
+
+| Protocolo | Características                                                                         |
+|-----------|-----------------------------------------------------------------------------------------|
+| TCP       | Confiável, orientado à conexão (3-way handshake, ACK, controle de fluxo, retransmissão) |
+| UDP       | Não confiável, sem conexão, menor overhead, usado em streaming, DNS, VoIP               |
+
+#### Funções
+- Segmentação e remontagem
+- Controle de congestionamento
+- Multiplexação por portas (ex: TCP/80, UDP/53)
+
+### Camada de Internet
+
+> RFC 791 e **Kurose & Ross**
+
+- Responsável por **endereçamento lógico**, **roteamento** e entrega de pacotes na rede.
+- Trata da **comunicação entre redes diferentes** (inter-rede).
+
+#### Principais protocolos
+
+| Protocolo | Função                                      |
+|-----------|---------------------------------------------|
+| IP        | Encaminhamento de pacotes (IPv4/IPv6)       |
+| ICMP      | Diagnóstico (ping, traceroute)              |
+| ARP       | Descoberta de endereços MAC a partir de IPs |
+| IGMP      | Gerência de grupos multicast                |
+
+#### Características
+- Camada **sem conexão** e **não confiável**
+- Usa **endereçamento IP**
+- Permite fragmentação de pacotes
+
+## Camada de Acesso à Rede
+*(Link Layer ou Host-to-Network)*
+
+> TANENBAUM (2011), RFC 1122
+
+- Responsável por **entregar os dados fisicamente através da rede local**.
+- Inclui:
+  - **Controle de acesso ao meio (MAC)**
+  - **Endereçamento físico**
+  - **Transmissão elétrica, óptica ou por radiofrequência**
+
+#### Exemplos de tecnologias
+| Tecnologia      | Descrição                        |
+|-----------------|----------------------------------|
+| Ethernet        | IEEE 802.3 (com fio)             |
+| Wi-Fi           | IEEE 802.11 (sem fio)            |
+| Token Ring      | IBM (obsoleta)                   |
+| Frame Relay     | Redes WAN                        |
+| PPP             | Redes ponto a ponto              |
+
+> Obs: Essa camada **engloba as camadas Física e Enlace do modelo OSI**.
+
+## Comparativo OSI x TCP/IP
+
+| OSI              | TCP/IP                    |
+|------------------|---------------------------|
+| 7 – Aplicação    |                           |
+| 6 – Apresentação |                           |
+| 5 – Sessão       |                           |
+| 4 – Transporte   | Transporte                |
+| 3 – Rede         | Internet                  |
+| 2 – Enlace       | Acesso à Rede             |
+| 1 – Física       | Acesso à Rede             |
+|                  | Aplicação (combina 5,6,7) |
+
+---
 
 
-
-      
     - **Endereçamento IP**
    ```
    IPv4: 32 bits (ex: 192.168.0.1)
@@ -518,15 +770,15 @@ Gabarito: B
 
     - Protocolos importantes:
     
-    | Protocolo | Finalidade |
-    |----------|------------|
-    | HTTP/HTTPS | Acesso à web |
-    | FTP/SFTP | Transferência de arquivos |
-    | SMTP/POP3/IMAP | E-mail |
-    | TCP/UDP | Transporte de dados |
-    | ICMP | Diagnóstico (ping) |
-    | DNS | Resolução de nomes |
-    | DHCP | Atribuição dinâmica de IP |
+    | Protocolo      | Finalidade                |
+    |----------------|---------------------------|
+    | HTTP/HTTPS     | Acesso à web              |
+    | FTP/SFTP       | Transferência de arquivos |
+    | SMTP/POP3/IMAP | E-mail                    |
+    | TCP/UDP        | Transporte de dados       |
+    | ICMP           | Diagnóstico (ping)        |
+    | DNS            | Resolução de nomes        |
+    | DHCP           | Atribuição dinâmica de IP |
 
 ### Redes de computadores e sistemas distribuídos: arquiteturas de rede
 
