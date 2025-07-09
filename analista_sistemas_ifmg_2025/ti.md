@@ -1408,10 +1408,134 @@ e) Adicionar repetidores entre os departamentos
 
 > **Resposta correta:** c) Configurar VLANs nos switches gerenciáveis
 
+## Cabeamento estruturado
+
+**Cabeamento Estruturado** é um sistema padronizado para conectar dispositivos de rede (dados, voz, vídeo e controle) com **organização, flexibilidade e escalabilidade**, independentemente do fabricante.
+
+- Facilita manutenção e expansão
+- Suporta múltiplas aplicações simultaneamente
+- Reduz custo e complexidade a longo prazo
+
+### Subsistemas do Cabeamento Estruturado
+
+| Subsistema                    | Função Principal                                                      |
+|-------------------------------|-----------------------------------------------------------------------|
+| **Entrada de Serviços**       | Conecta a rede interna à operadora/ISP                                |
+| **Sala de Equipamentos (ER)** | Centraliza switches, roteadores, servidores                           |
+| **Backbone Vertical**         | Liga salas de telecomunicação em andares/prédios diferentes           |
+| **Sala de Telecomunicações**  | Interface entre backbone vertical e cabos horizontais                 |
+| **Backbone Horizontal**       | Conecta a sala de telecomunicações à área de trabalho (usuário final) |
+| **Área de Trabalho**          | Conecta dispositivos finais às tomadas (PCs, IP phones etc.)          |
+
+### Componentes Principais
+
+- Cabos de par trançado (UTP, STP, FTP, S/FTP)
+- Patch panels
+- Racks e organizadores verticais/horizontais
+- Tomadas modulares (faceplates)
+- Patch cords (cabos de conexão)
+- Dutos, eletrocalhas, canaletas
+- Etiquetas e identificadores (TIA/EIA-606)
+- Testadores e certificadores de rede
+
+### Categorias de Cabo (TIA/EIA-568)
+
+| Categoria | Velocidade Máxima | Frequência   | Aplicação                               |
+|-----------|-------------------|--------------|-----------------------------------------|
+| CAT5e     | 1 Gbps            | 100 MHz      | Redes gigabit residenciais/corporativas |
+| CAT6      | 1–10 Gbps         | 250 MHz      | Ambientes corporativos exigentes        |
+| CAT6a     | 10 Gbps           | 500 MHz      | Data centers, alta interferência        |
+| CAT7      | 10 Gbps+          | 600–1000 MHz | Ambientes industriais e críticos        |
+
+
+###  Técnicas de Instalação e Boas Práticas
+
+- Instalação física
+
+| Boa prática                                   | Justificativa                         |
+|-----------------------------------------------|---------------------------------------|
+| Distância mínima de 30 cm de cabos elétricos  | Reduz interferência eletromagnética   |
+| Curvas suaves (raio > 4x o diâmetro do cabo)  | Evita atenuação e danos ao sinal      |
+| Fixação adequada sem apertos excessivos       | Mantém integridade do par trançado    |
+| Evitar cruzamento com fluorescentes e motores | Minimiza ruídos e EMI                 |
+| Seguir padrão de crimpagem (TIA-568A ou B)    | Garante compatibilidade e organização |
+| Organização em canaletas ou dutos             | Facilita manutenção e visualização    |
+
+### Documentação e Identificação (TIA/EIA-606)
+
+- Identificar ambos os extremos dos cabos (painel e tomada)
+- Mapear posições no rack, patch panel e área de trabalho
+- Usar etiquetas permanentes (não autoadesivas simples)
+- Manter registros atualizados em software ou planilha
+
+### Normas TIA/EIA Relacionadas
+
+| Norma           | Descrição                                            |
+|-----------------|------------------------------------------------------|
+| **TIA/EIA-568** | Padrões de cabeamento para telecomunicações          |
+| **TIA/EIA-569** | Espaços e caminhos físicos (dutos, salas, canaletas) |
+| **TIA/EIA-606** | Administração, rotulagem e identificação             |
+| **TIA/EIA-607** | Aterramento e ligação equipotencial                  |
+
+### Certificação de Cabeamento
+
+| Tipo de Teste         | O que mede                            | Equipamento necessário     |
+|-----------------------|---------------------------------------|----------------------------|
+| Teste de continuidade | Verifica se os pares estão conectados | Testador de cabos simples  |
+| Certificação (Fluke)  | Verifica NEXT, PS-NEXT, atenuação     | Certificador profissional  |
+| Teste de mapeamento   | Verifica a ordem dos pinos (T568A/B)  | Testadores de par trançado |
+
+### Problemas comuns sem seguir boas práticas
+
+| Erro                                | Consequência                            |
+|-------------------------------------|-----------------------------------------|
+| Cabos dobrados ou prensados         | Perda de desempenho (sinal degradado)   |
+| Mistura de cabos de energia e dados | Interferência eletromagnética (EMI)     |
+| Falta de identificação              | Dificuldade de manutenção e rastreio    |
+| Instalação sem planejamento         | Rede desorganizada e sem escalabilidade |
+
+
+### Topologia Física Recomendada
+
+- **Topologia Estrela:**  
+  Cada estação se conecta diretamente ao switch.  
+  Permite isolamento de falhas e facilita a expansão.
+
+
+### Vantagens do Cabeamento Estruturado
+
+| Vantagem                     | Explicação                                              |
+|------------------------------|---------------------------------------------------------|
+| **Padronização**             | Compatível com equipamentos e serviços variados         |
+| **Facilidade de manutenção** | Troca de equipamentos e reorganização simples           |
+| **Flexibilidade**            | Suporta múltiplos protocolos e tecnologias (voz, dados) |
+| **Documentação**             | Organização lógica com etiquetas e mapas de rede        |
+| **Escalabilidade**           | Expansão modular conforme a necessidade do ambiente     |
+
+### Questão Modelo de Concurso
+
+No contexto do cabeamento estruturado, qual das alternativas está correta?
+
+a) A categoria do cabo não afeta sua capacidade de transmissão  
+b) O cabeamento horizontal conecta edifícios distintos  
+c) O sistema deve seguir normas como TIA/EIA-568  
+d) A topologia física padrão é em anel  
+e) Pode-se dobrar o cabo até 90° sem prejuízo
+
+> **Gabarito: c)**
+
+### Conclusão
+
+O Cabeamento Estruturado é **fundamental** para a confiabilidade, segurança e desempenho de redes modernas. Estar familiarizado com seus **subsistemas, normas e boas práticas** é essencial para qualquer profissional de TI — e frequentemente cobrado em concursos.
+
+
+
 
 ---
 
-## Cabeamento estruturado
+
+---
+
 ### Conceitos
 ### Técnicas e boas práticas de instalação
 
