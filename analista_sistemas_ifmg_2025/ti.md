@@ -937,7 +937,7 @@ b) Utiliza criptografia para proteger os dados.
 c) Substitui o protocolo IP no monitoramento de redes.  
 d) Funciona exclusivamente com switches de camada 3.
 
-**Resposta:** b) Utiliza criptografia para proteger os dados.
+> **Resposta:** b) Utiliza criptografia para proteger os dados.
 
 ## Ativos de rede
 
@@ -949,6 +949,91 @@ São os **equipamentos físicos e dispositivos eletrônicos** responsáveis pela
 - Podem operar em diferentes **camadas do modelo OSI**
 - Realizam **funções de comutação, roteamento, segurança, acesso ou repetição de sinais**
 - Necessitam de **energia elétrica**, firmware e gerenciamento
+
+### Tipos de Ativos de Rede
+| Equipamento      | Camada OSI    | Função principal                                       |
+|------------------|---------------|--------------------------------------------------------|
+| **Hub**          | 1 - Física    | Repetidor de sinais; transmite a todos os dispositivos |
+| **Switch**       | 2 - Enlace    | Comutador de quadros com base em MAC address           |
+| **Bridge**       | 2 - Enlace    | Liga segmentos de rede, filtra quadros                 |
+| **Roteador**     | 3 - Rede      | Encaminha pacotes entre redes diferentes (IP)          |
+| **Access Point** | 2 - Enlace    | Permite acesso Wi-Fi, conecta-se via switch/roteador   |
+| **Firewall**     | 3/4/7         | Controle e filtragem de tráfego, segurança de rede     |
+| **Gateway**      | 4-7           | Converte protocolos de diferentes arquiteturas         |
+| **Modem**        | 1 - Física    | Modula/demodula sinal digital ↔ analógico              |
+| **Servidor**     | 7 - Aplicação | Executa serviços de rede (web, DNS, arquivos)          |
+
+### Descrição detalhada dos principais ativos
+
+- **Hub**
+  - **Camada:** Física (1)
+  - Transmite o sinal para **todas as portas** indiscriminadamente
+  - Sem inteligência de comutação
+  - Obsoleto nas redes modernas
+
+- **Modem**
+  - **Camada:** Física (1)
+  - Realiza **modulação e demodulação**
+  - Conecta a rede local à rede da operadora (ADSL, cabo, fibra)
+  - Comumente incorporado ao roteador doméstico
+
+- **Switch**
+  - **Camada:** Enlace de Dados (2)
+  - Aprende os **endereços MAC** das máquinas conectadas
+  - Encaminha quadros **somente para a porta correta**
+  - Pode operar em modo **gerenciado** (configurável) ou **não-gerenciado**
+
+- **Access Point (AP)**
+  - **Camada:** Enlace (2)
+  - Conecta dispositivos **sem fio (Wi-Fi)** à rede cabeada
+  - Opera sob padrão **IEEE 802.11**
+  - Pode ser configurado em modo bridge ou roteador
+
+- **Bridge**
+  - **Camada:** Enlace (2)
+  - Filtra e encaminha quadros com base nos MACs
+  - Separa domínios de colisão
+  - Antecessor funcional do switch
+- 
+- **Roteador**
+  - **Camada:** Rede (3)
+  - Utiliza endereços **IP** para encaminhar pacotes
+  - Decide o **melhor caminho** para o destino
+  - Pode aplicar **NAT, firewall, DHCP, VPN**
+  - Equipamento fundamental para conexão com a Internet
+
+- **Firewall**
+  - **Camadas:** 3 (rede), 4 (transporte) e 7 (aplicação)
+  - Controla entrada e saída de pacotes com base em regras
+  - Tipos:
+    - *Packet-filtering (estático)*
+    - *Stateful inspection (dinâmico)*
+    - *Application-layer firewall (proxy)*
+  - Pode ser **software (iptables, pfSense)** ou **hardware (Cisco ASA, Fortigate)**
+
+- **Gateway**
+  - **Camadas:** 4 a 7 (camadas superiores)
+  - Faz a conversão entre **protocolos e formatos distintos**
+  - Ex: e-mail → SMS, IPv4 ↔ IPv6, rede IP ↔ rede Token Ring
+  - Pode ser incorporado ao roteador ou servidor
+
+
+- **Servidor**
+  - **Camada:** Aplicação (7)
+  - Oferece serviços como **DNS, DHCP, HTTP, FTP, banco de dados**
+  - Possui IP fixo ou mapeado dinamicamente
+  - Pode ser local ou remoto (em nuvem)
+
+### Questão
+Qual equipamento de rede opera na camada 2 do modelo OSI, encaminha quadros com base no endereço MAC de destino e é amplamente utilizado para segmentar redes locais?
+
+a) Roteador  
+b) Hub  
+c) Switch  
+d) Modem  
+e) Gateway
+
+> **Resposta correta:** c) Switch
 
 
 ### Passivos de rede
