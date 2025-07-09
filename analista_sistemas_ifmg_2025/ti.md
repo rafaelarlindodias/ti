@@ -1215,9 +1215,110 @@ e) HTTP
 
 ## Virtualização de Servidores
 
+Virtualização é a **abstração de recursos computacionais**, permitindo que **múltiplas máquinas virtuais (VMs)** operem sobre um mesmo hardware físico. Cada VM **emula um sistema completo**, incluindo SO, CPU, memória e armazenamento.
+
+### Tipos de Virtualização
+
+| Tipo                                 | Descrição                                                             |
+|--------------------------------------|-----------------------------------------------------------------------|
+| **Virtualização de Servidor**        | Vários servidores virtuais sobre um mesmo hardware físico             |
+| **Virtualização de SO (containers)** | Compartilham o mesmo kernel, são mais leves (ex: Docker)              |
+| **Virtualização de Armazenamento**   | Abstração do armazenamento em múltiplas unidades lógicas              |
+| **Virtualização de Rede**            | Criação de redes virtuais sobre infraestrutura física (ex: VLAN, SDN) |
+| **Virtualização de Desktop (VDI)**   | Infraestrutura de desktop virtual, acessada remotamente               |
+
+### Hypervisores (Monitor de Máquina Virtual)
+
+### Tipo 1 – Nativo ou Bare-metal
+Executa **diretamente no hardware** físico.
+
+| Exemplo                             | Fabricante   |
+|-------------------------------------|--------------|
+| VMware ESXi                         | VMware       |
+| Microsoft Hyper-V (modo bare-metal) | Microsoft    |
+| KVM                                 | Kernel Linux |
+| Xen                                 | Citrix/Linux |
+
+### Tipo 2 – Hospedado
+Executa **sobre um sistema operacional host**.
+
+| Exemplo            | Fabricante |
+|--------------------|------------|
+| VMware Workstation | VMware     |
+| Oracle VirtualBox  | Oracle     |
+| Parallels Desktop  | Parallels  |
+
+### Benefícios da Virtualização
+
+| Vantagem                               | Explicação                                                      |
+|----------------------------------------|-----------------------------------------------------------------|
+| **Consolidação de servidores**         | Reduz o número de equipamentos físicos                          |
+| **Alta disponibilidade**               | VMs podem ser migradas automaticamente em falhas (vMotion etc.) |
+| **Melhor utilização de recursos**      | Compartilhamento de CPU, RAM, disco                             |
+| **Facilidade de backup e recuperação** | Snapshots e clones facilitam restauração rápida                 |
+| **Escalabilidade**                     | VMs podem ser criadas sob demanda                               |
+| **Isolamento**                         | VMs funcionam de forma independente umas das outras             |
+
+### Desvantagens / Desafios
+
+| Desvantagem                | Descrição                                               |
+|----------------------------|---------------------------------------------------------|
+| **Overhead de desempenho** | Recursos físicos são compartilhados                     |
+| **Gerência mais complexa** | Exige soluções robustas de orquestração e monitoramento |
+| **Licenciamento**          | Custo de licenças (ex: VMware vSphere)                  |
+| **Segurança**              | Ataques entre VMs ou contra o hipervisor (VM escape)    |
+
+### Exemplo de Arquitetura
+
+```
+[Hardware Físico]
+     ↓
+[Hypervisor]
+     ↓
++-------------+    +-------------+
+| VM: WebSrv  |    | VM: DBSrv   |
+| Ubuntu      |    | CentOS      |
++-------------+    +-------------+
+```
+
+### Questão de Concurso Exemplo
+No contexto da virtualização de servidores, o software responsável por gerenciar as máquinas virtuais e intermediar o acesso aos recursos de hardware é denominado:
+
+a) Container  
+b) Guest OS  
+c) Host OS  
+d) Hypervisor  
+e) Switch Virtual
+
+> **Resposta correta:** d) Hypervisor
+
+### Virtualização vs Containers
+
+| Comparativo            | Máquinas Virtuais (VMs) | Containers            |
+|------------------------|-------------------------|-----------------------|
+| Kernel próprio         | ✅ Sim                   | ❌ Compartilham o host |
+| Overhead               | Maior                   | Menor                 |
+| Isolamento             | Forte                   | Moderado              |
+| Leveza                 | Mais pesado             | Mais leve             |
+| Tempo de inicialização | Lento                   | Rápido                |
+| Exemplo                | VMware, VirtualBox      | Docker, Podman        |
+
+### Softwares/Ferramentas Relacionadas
+
+| Ferramenta        | Função                                |
+|-------------------|---------------------------------------|
+| VMware vSphere    | Gerenciamento de clusters de VMs      |
+| Proxmox           | Hypervisor open-source                |
+| KVM + Libvirt     | Virtualização nativa no Linux         |
+| Vagrant           | Automatiza VMs para desenvolvimento   |
+| Docker            | Containers (virtualização leve)       |
+| OpenStack         | Nuvem privada baseada em VMs          |
 
 
 ## Virtual Lans (VLAN)
+
+**VLAN (Virtual Local Area Network)** é uma técnica de **segmentação lógica de redes LAN**, permitindo que dispositivos físicos, mesmo em locais distintos, se comportem como se estivessem na **mesma rede local**.
+
 
 ## Cabeamento estruturado
 ### Conceitos
