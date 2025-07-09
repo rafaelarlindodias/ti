@@ -1109,12 +1109,87 @@ e) Antena, roteador e impressora de rede
 
 > **Resposta correta:** c) Cabo de rede, patch panel e rack
 
+## Softwares e métricas de monitoramento
+
+### Softwares de Monitoramento (NMS – Network Management Systems)
+
+Softwares de monitoramento são sistemas utilizados para **supervisionar continuamente** a infraestrutura de rede e seus dispositivos. Eles atuam principalmente na **camada de aplicação do modelo TCP/IP** e utilizam protocolos como **SNMP, ICMP, NetFlow, Syslog**, entre outros.
+
+### Principais Softwares
+
+| Software             | Tipo        | Características Principais                                            |
+|----------------------|-------------|-----------------------------------------------------------------------|
+| **Zabbix**           | Open-source | Monitoramento de rede, servidores, aplicações, com alertas e gráficos |
+| **Nagios**           | Open-source | Modular, com foco em disponibilidade, plugins diversos                |
+| **PRTG**             | Comercial   | Interface gráfica intuitiva, auto-descoberta, múltiplos sensores      |
+| **Cacti**            | Open-source | Focado em gráficos via SNMP e RRDTool                                 |
+| **WhatsUp Gold**     | Comercial   | Monitoramento visual com alertas em tempo real                        |
+| **SolarWinds**       | Comercial   | Alta escalabilidade, foco em grandes redes                            |
+| **NetFlow Analyzer** | Comercial   | Específico para tráfego e análise de fluxos                           |
+
+### Protocolos Comuns Utilizados
+
+| Protocolo           | Porta | Função                                                |
+|---------------------|-------|-------------------------------------------------------|
+| **SNMP**            | 161   | Coleta de dados de dispositivos de rede               |
+| **ICMP**            | —     | Verifica disponibilidade (ping, traceroute)           |
+| **Syslog**          | 514   | Armazena mensagens e logs gerados por dispositivos    |
+| **NetFlow / sFlow** | —     | Coleta estatísticas detalhadas de tráfego             |
+| **WMI**             | —     | (Windows) Acesso a informações de sistema operacional |
+| **Zabbix Agent**    | 10050 | Instalado em hosts para coleta ativa                  |
+
+### Métricas de Monitoramento de Rede
+
+As métricas são **indicadores-chave de desempenho (KPIs)** que ajudam a avaliar a saúde e o desempenho da rede.
+
+| Métrica                      | Descrição                                                                    |
+|------------------------------|------------------------------------------------------------------------------|
+| **Disponibilidade (uptime)** | Percentual de tempo que o serviço está acessível                             |
+| **Latência**                 | Tempo para um pacote ir e voltar (RTT - Round Trip Time)                     |
+| **Perda de pacotes**         | Percentual de pacotes que não chegam ao destino                              |
+| **Vazão (throughput)**       | Quantidade de dados transmitidos por segundo (ex: Mbps)                      |
+| **Utilização de banda**      | Porcentagem da largura de banda utilizada                                    |
+| **Jitter**                   | Variação no tempo de chegada dos pacotes (importante em VoIP)                |
+| **Erros de interface**       | Pacotes corrompidos, descartados ou com colisão em portas de switch/roteador |
+| **Temperatura e tensão**     | Condições físicas dos equipamentos (em data centers)                         |
+| **Carga de CPU/RAM**         | Utilização de recursos nos hosts monitorados                                 |
+| **Status de serviço**        | Se um serviço (como HTTP, DNS) está em execução                              |
+
+
+### Exemplos práticos de uso de métricas
+
+| Situação                        | Métrica relevante               | Ação esperada                    |
+|---------------------------------|---------------------------------|----------------------------------|
+| Reclamações de lentidão na rede | Latência, perda de pacotes      | Verificar roteadores, links WAN  |
+| Voz sobre IP com cortes         | Jitter, perda, latência         | Ajustar QoS ou verificar link    |
+| Alta carga em servidor web      | CPU, memória, conexões ativas   | Balanceamento ou upgrade         |
+| Link de internet saturando      | Vazão, uso de banda             | Planejar upgrade ou controle QoS |
+| Porta de switch com quedas      | Erros de interface, logs Syslog | Substituir cabo/dispositivo      |
+
+
+### Benefícios do Monitoramento
+
+- Prevenção de falhas
+- Diagnóstico rápido de problemas
+- Otimização da performance
+- Segurança operacional
+- Base para planejamento de capacidade (capacity planning)
+
+
+### Questão de Concurso
+
+Um administrador deseja medir a variação no tempo de chegada dos pacotes em uma chamada VoIP. A métrica mais adequada para essa finalidade é:
+a) Latência  
+b) Throughput  
+c) Jitter  
+d) Perda de pacotes  
+e) Round Trip Time
+
+> **Resposta correta:** c) Jitter
+
+
+
 ---
-
-
-
-
-### Softwares e métricas de monitoramento
 
 ## Gerenciamento e monitoramento de equipamentos de rede
 ### Conhecimento sobre ferramentas e métricas de monitoramento
