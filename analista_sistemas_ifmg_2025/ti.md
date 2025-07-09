@@ -1138,6 +1138,22 @@ Softwares de monitoramento são sistemas utilizados para **supervisionar continu
 | **WMI**             | —     | (Windows) Acesso a informações de sistema operacional |
 | **Zabbix Agent**    | 10050 | Instalado em hosts para coleta ativa                  |
 
+### SNMP (Simple Network Management Protocol)**
+
+- **Estrutura**
+  - **Manager:** Sistema que coleta dados
+  - **Agent:** Software no equipamento monitorado
+  - **MIB (Management Information Base):** Estrutura hierárquica com variáveis de estado
+  - 
+- **Tipos de mensagens SNMP**
+
+| Tipo        | Descrição                                                   |
+|-------------|-------------------------------------------------------------|
+| **GET**     | Solicita valor de um parâmetro                              |
+| **SET**     | Altera valor de um parâmetro                                |
+| **TRAP**    | Enviado automaticamente pelo agente em caso de falha/alerta |
+| **GETNEXT** | Solicita próximo parâmetro na MIB                           |
+
 ### Métricas de Monitoramento de Rede
 
 As métricas são **indicadores-chave de desempenho (KPIs)** que ajudam a avaliar a saúde e o desempenho da rede.
@@ -1178,7 +1194,7 @@ As métricas são **indicadores-chave de desempenho (KPIs)** que ajudam a avalia
 
 ### Questão de Concurso
 
-Um administrador deseja medir a variação no tempo de chegada dos pacotes em uma chamada VoIP. A métrica mais adequada para essa finalidade é:
+1. Um administrador deseja medir a variação no tempo de chegada dos pacotes em uma chamada VoIP. A métrica mais adequada para essa finalidade é:
 a) Latência  
 b) Throughput  
 c) Jitter  
@@ -1187,14 +1203,19 @@ e) Round Trip Time
 
 > **Resposta correta:** c) Jitter
 
+2. O protocolo padrão para o gerenciamento de dispositivos de rede, baseado em um conjunto hierárquico de variáveis chamado MIB, é:
 
+a) ICMP  
+b) SNMP  
+c) Telnet  
+d) SSH  
+e) HTTP
 
----
-
-## Gerenciamento e monitoramento de equipamentos de rede
-### Conhecimento sobre ferramentas e métricas de monitoramento
+> **Resposta correta:** **b) SNMP*
 
 ## Virtualização de Servidores
+
+
 
 ## Virtual Lans (VLAN)
 
