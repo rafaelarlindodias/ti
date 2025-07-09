@@ -1035,8 +1035,85 @@ e) Gateway
 
 > **Resposta correta:** c) Switch
 
+## Passivos de rede
 
-### Passivos de rede
+Passivos de rede são os **elementos físicos que compõem a infraestrutura de comunicação**, porém **não processam dados diretamente**. São responsáveis por **transmitir, organizar e proteger os sinais**.
+
+Diferentemente dos ativos (como switches e roteadores), os passivos **não têm inteligência própria**. São essenciais para garantir **conectividade, desempenho e segurança física da rede**.
+
+Principais Componentes Passivos
+
+| Componente                                         | Função Principal                                                             |
+|----------------------------------------------------|------------------------------------------------------------------------------|
+| **Cabos de rede (UTP/STP, coaxial, fibra óptica)** | Transmissão física de sinais elétricos ou ópticos                            |
+| **Patch cords**                                    | Cabos curtos para interligação de pontos (patch panel ↔ switch, por exemplo) |
+| **Patch panels**                                   | Painéis organizadores de conexões de rede                                    |
+| **Racks e gabinetes**                              | Estrutura metálica para organizar e proteger os equipamentos e cabeamento    |
+| **Keystones / Tomadas RJ-45**                      | Interfaces de conexão entre o cabo e o equipamento                           |
+| **Canaletas, calhas e eletrocalhas**               | Organização e proteção do cabeamento em ambientes internos                   |
+| **Etiquetas e identificação**                      | Padronização e rastreabilidade dos pontos de rede                            |
+
+
+### Tipos de Cabeamento
+
+- **Par Trançado (UTP/STP)**
+  - **UTP (Unshielded Twisted Pair):** Sem blindagem, mais econômico
+  - **STP (Shielded Twisted Pair):** Com blindagem, usado em ambientes com interferência eletromagnética
+
+| Categoria | Largura de Banda | Velocidade Máxima  | Observações                       |
+|-----------|------------------|--------------------|-----------------------------------|
+| CAT5e     | 100 MHz          | 1 Gbps             | Mais comum em redes LAN           |
+| CAT6      | 250 MHz          | 10 Gbps (até 55m)  | Melhor blindagem                  |
+| CAT6A     | 500 MHz          | 10 Gbps (até 100m) | Blindado, para ambientes ruidosos |
+| CAT7      | 600 MHz          | 10 Gbps            | Uso industrial e data centers     |
+
+- **Fibra Óptica**
+  - Alta largura de banda
+  - Imune a interferências
+  - Maior custo de instalação
+
+| Tipo      | Modo           | Distância  | Uso                                |
+|-----------|----------------|------------|------------------------------------|
+| Multimodo | Vários feixes  | até 2 km   | Redes locais, campus universitário |
+| Monomodo  | Um único feixe | até 100 km | Redes de longa distância (WAN)     |
+
+
+### Normas de Cabeamento Estruturado (segundo MARIN, 2009)
+
+- **ANSI/TIA-568**: Padrão norte-americano de cabeamento estruturado
+- **ISO/IEC 11801**: Padrão internacional
+- **Cores de pares padrão**: azul, laranja, verde e marrom
+- **Comprimento máximo recomendado**: 100 metros para par trançado (90 m + 10 m patch cords)
+- **Padrões de crimpagem**: T568A e T568B
+
+### Organização Física
+
+- Racks
+  - Tamanhos padronizados (ex: 19 polegadas)
+  - Podem ser **abertos** ou **fechados (com portas e ventilação)**
+  - Classificados em **rack de piso** e **rack de parede**
+
+- Patch Panel
+  - Centraliza as conexões de rede de um ambiente
+  - Permite remanejamento rápido com patch cords
+  - Numerado e identificado conforme padrão do projeto
+
+### Questão
+Assinale a alternativa que apresenta apenas componentes passivos de uma rede de computadores:
+
+a) Roteador, switch e servidor  
+b) Modem, firewall e access point  
+c) Cabo de rede, patch panel e rack  
+d) Hub, gateway e bridge  
+e) Antena, roteador e impressora de rede
+
+> **Resposta correta:** c) Cabo de rede, patch panel e rack
+
+---
+
+
+
+
 ### Softwares e métricas de monitoramento
 
 ## Gerenciamento e monitoramento de equipamentos de rede
