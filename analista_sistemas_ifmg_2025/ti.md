@@ -1294,14 +1294,14 @@ e) Switch Virtual
 
 ### Virtualização vs Containers
 
-| Comparativo            | Máquinas Virtuais (VMs) | Containers            |
-|------------------------|-------------------------|-----------------------|
-| Kernel próprio         | ✅ Sim                   | ❌ Compartilham o host |
-| Overhead               | Maior                   | Menor                 |
-| Isolamento             | Forte                   | Moderado              |
-| Leveza                 | Mais pesado             | Mais leve             |
-| Tempo de inicialização | Lento                   | Rápido                |
-| Exemplo                | VMware, VirtualBox      | Docker, Podman        |
+| Comparativo            | Máquinas Virtuais (VMs) | Containers          |
+|------------------------|-------------------------|---------------------|
+| Kernel próprio         | Sim                     | Compartilham o host |
+| Overhead               | Maior                   | Menor               |
+| Isolamento             | Forte                   | Moderado            |
+| Leveza                 | Mais pesado             | Mais leve           |
+| Tempo de inicialização | Lento                   | Rápido              |
+| Exemplo                | VMware, VirtualBox      | Docker, Podman      |
 
 ### Softwares/Ferramentas Relacionadas
 
@@ -1319,6 +1319,97 @@ e) Switch Virtual
 
 **VLAN (Virtual Local Area Network)** é uma técnica de **segmentação lógica de redes LAN**, permitindo que dispositivos físicos, mesmo em locais distintos, se comportem como se estivessem na **mesma rede local**.
 
+### Objetivos da VLAN
+
+- **Segmentação lógica da rede**
+- **Segurança e isolamento de tráfego**
+- **Redução de broadcast**
+- **Melhor gerenciamento da rede**
+- **Flexibilidade de realocação de estações**
+
+### Como funciona?
+
+- Cada porta do switch é **associada a uma VLAN**
+- O tráfego de cada VLAN é **isolado** dos demais
+- VLANs são identificadas por um **ID VLAN (VID)** – número entre 1 e 4094
+- A comunicação entre VLANs exige um **roteador** ou um **switch L3**
+
+### Tag VLAN – IEEE 802.1Q
+
+- Adiciona um campo de **4 bytes** no cabeçalho Ethernet
+- Permite identificar a qual VLAN um quadro pertence
+
+### Estrutura do Tag 802.1Q:
+
+| Campo         | Bits | Função                                |
+|---------------|------|---------------------------------------|
+| TPID          | 16   | Identificador do protocolo (0x8100)   |
+| Priority      | 3    | QoS / prioridade                      |
+| CFI           | 1    | Indica se é compatível com Token Ring |
+| VLAN ID (VID) | 12   | Identificador da VLAN (1–4094)        |
+
+### Tipos de Porta no Switch
+
+| Tipo de Porta | Descrição                                                             |
+|---------------|-----------------------------------------------------------------------|
+| **Access**    | Porta comum, associada a uma única VLAN. Usada por hosts              |
+| **Trunk**     | Transporta tráfego de **várias VLANs** entre switches ou com roteador |
+| **Hybrid**    | Transporta VLAN nativa e tagged simultaneamente (menos comum)         |
+
+
+### Exemplo Prático
+
+```
+[PC1]---[Switch]---[PC2]
+   |         |        |
+ VLAN 10   VLAN 20  VLAN 10
+
+> PC1 e PC3 se comunicam (VLAN 10)
+> PC1 e PC2 NÃO se comunicam (VLANs diferentes)
+```
+
+### Comunicação entre VLANs
+
+- Exige um dispositivo de **camada 3**:
+  - **Router tradicional**
+  - **Switch camada 3 (L3 switch)** com **roteamento interno**
+
+### Benefícios da VLAN
+
+| Benefício              | Explicação                                                  |
+|------------------------|-------------------------------------------------------------|
+| **Segurança**          | Tráfego isolado por departamento (RH, TI, Financeiro etc.)  |
+| **Eficiência**         | Redução de broadcast                                        |
+| **Flexibilidade**      | Mudança de local física sem recabeamento                    |
+| **Gerenciamento**      | Administra grupos de dispositivos com políticas específicas |
+
+### Desvantagens
+
+| Desvantagem                   | Descrição                                     |
+|-------------------------------|-----------------------------------------------|
+| **Complexidade**              | Requer planejamento de endereçamento          |
+| **Gerência adicional**        | Requer switches gerenciáveis                  |
+| **Necessidade de roteamento** | VLANs diferentes não se comunicam diretamente |
+
+### VLAN Nativa
+
+- VLAN **sem tag** (untagged) usada em links **trunk**
+- Por padrão é a **VLAN 1**, mas pode ser alterada
+- Usada quando o dispositivo de origem não suporta 802.1Q
+
+### Exemplo de Questão de Concurso
+Em uma rede corporativa, o tráfego de diferentes departamentos deve ser isolado para aumentar a segurança e reduzir o domínio de broadcast. A solução mais adequada é:
+
+a) Substituir os switches por hubs  
+b) Ativar o protocolo DHCP em todos os equipamentos  
+c) Configurar VLANs nos switches gerenciáveis  
+d) Dividir fisicamente a rede em vários switches  
+e) Adicionar repetidores entre os departamentos
+
+> **Resposta correta:** c) Configurar VLANs nos switches gerenciáveis
+
+
+---
 
 ## Cabeamento estruturado
 ### Conceitos
