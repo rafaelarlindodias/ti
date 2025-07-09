@@ -653,96 +653,196 @@ Camada 7 – Aplicação
 
 ### Estrutura Geral
 
-| Camada (TCP/IP) | Função principal                            | Equivalente no OSI |
-|-----------------|---------------------------------------------|--------------------|
-| Aplicação       | Serviços para aplicações do usuário         | Camadas 5, 6 e 7   |
-| Transporte      | Comunicação fim a fim entre processos       | Camada 4           |
-| Internet        | Endereçamento lógico e roteamento           | Camada 3           |
-| Acesso à Rede   | Acesso físico ao meio (MAC e meios físicos) | Camadas 1 e 2      |
+| Camada (TCP/IP) | Função principal                            | Equivalente no OSI | Protocolos Principais                                    |
+|-----------------|---------------------------------------------|--------------------|----------------------------------------------------------|
+| Aplicação       | Serviços para aplicações do usuário         | Camadas 5, 6 e 7   | HTTP, FTP, DNS, SSH, SMTP, NFS, TELNET, SNMP, RDP        |
+| Transporte      | Comunicação fim a fim entre processos       | Camada 4           | TCP, UDP                                                 |
+| Internet        | Endereçamento lógico e roteamento           | Camada 3           | IP, ICMP, ARP, IGMP, IPsec                               |
+| Acesso à Rede   | Acesso físico ao meio (MAC e meios físicos) | Camadas 1 e 2      | Ethernet, Wi-Fi, Token Ring, PPP, drivers de dispositivo |
 
 > Observação: Alguns autores apresentam uma **5ª camada** chamada **Camada Física**, separando da subcamada de enlace. No entanto, em muitas abordagens simplificadas, ela está embutida na **camada de acesso à rede**.
 
-### Camada de Aplicação
-
-> KUROSE & ROSS (2014)
-
-- Fornece **serviços de rede diretamente às aplicações dos usuários**.
-- Aqui operam os protocolos de **transferência de arquivos, navegação, e-mail, etc.**
-- Trata do **formato de dados, autenticação, criptografia, etc.**
-
-#### Principais protocolos
-
-| Protocolo        | Função                              |
-|------------------|-------------------------------------|
-| HTTP             | Navegação web                       |
-| HTTPS            | Web segura (SSL/TLS)                |
-| FTP              | Transferência de arquivos           |
-| SMTP, IMAP, POP3 | Envio e recebimento de e-mails      |
-| DNS              | Resolução de nomes                  |
-| DHCP             | Atribuição dinâmica de endereços IP |
-| SNMP             | Gerência de redes                   |
-
-### Camada de Transporte
-
-> TANENBAUM (2011)
-
-- Responsável pela **comunicação lógica fim a fim** entre processos em hosts diferentes.
-- Garante confiabilidade, controle de fluxo, detecção de erro, etc.
-
-#### Protocolos principais
-
-| Protocolo | Características                                                                         |
-|-----------|-----------------------------------------------------------------------------------------|
-| TCP       | Confiável, orientado à conexão (3-way handshake, ACK, controle de fluxo, retransmissão) |
-| UDP       | Não confiável, sem conexão, menor overhead, usado em streaming, DNS, VoIP               |
+### 1. Camada de Acesso à Rede (Link Layer)
 
 #### Funções
-- Segmentação e remontagem
-- Controle de congestionamento
-- Multiplexação por portas (ex: TCP/80, UDP/53)
 
-### Camada de Internet
+- Acesso físico ao meio de transmissão
+- Endereçamento físico (MAC)
+- Controle de acesso ao meio (CSMA/CD, CSMA/CA)
+- Encapsulamento em quadros
 
-> RFC 791 e **Kurose & Ross**
+#### Tecnologias e Protocolos:
 
-- Responsável por **endereçamento lógico**, **roteamento** e entrega de pacotes na rede.
-- Trata da **comunicação entre redes diferentes** (inter-rede).
+| Protocolo/Tecnologia      | Descrição                           |
+|---------------------------|-------------------------------------|
+| **Ethernet** (IEEE 802.3) | Rede cabeada LAN (comutação)        |
+| **Wi-Fi** (IEEE 802.11)   | Redes sem fio                       |
+| **PPP**                   | Redes ponto a ponto                 |
+| **Token Ring**            | Topologia baseada em token (legado) |
+| **Frame Relay, ATM**      | Tecnologias WAN (obsoletas)         |
+| **Drivers de interface**  | Interface com hardware              |
 
-#### Principais protocolos
+### 2. Camada de Internet (Internet Layer)
 
-| Protocolo | Função                                      |
-|-----------|---------------------------------------------|
-| IP        | Encaminhamento de pacotes (IPv4/IPv6)       |
-| ICMP      | Diagnóstico (ping, traceroute)              |
-| ARP       | Descoberta de endereços MAC a partir de IPs |
-| IGMP      | Gerência de grupos multicast                |
+#### Funções
 
-#### Características
-- Camada **sem conexão** e **não confiável**
-- Usa **endereçamento IP**
-- Permite fragmentação de pacotes
+- Endereçamento lógico
+- Roteamento entre redes
+- Fragmentação de pacotes
+- Diagnóstico e controle
 
-## Camada de Acesso à Rede
-*(Link Layer ou Host-to-Network)*
+#### Protocolos
 
-> TANENBAUM (2011), RFC 1122
+| Protocolo | Descrição                                                |
+|-----------|----------------------------------------------------------|
+| **IPv4**  | Endereçamento de 32 bits, cabeçalho variável             |
+| **IPv6**  | Endereçamento de 128 bits, sem fragmentação por roteador |
+| **ICMP**  | Diagnóstico de rede (ping, traceroute)                   |
+| **ARP**   | Mapeia IP para MAC (IPv4)                                |
+| **IGMP**  | Gerência de grupos multicast                             |
+| **IPsec** | Segurança na camada IP (criptografia, tunelamento)       |
+| **NAT**   | Tradução de endereços IP privados ↔ públicos             |
 
-- Responsável por **entregar os dados fisicamente através da rede local**.
-- Inclui:
-  - **Controle de acesso ao meio (MAC)**
-  - **Endereçamento físico**
-  - **Transmissão elétrica, óptica ou por radiofrequência**
+#### Roteamento
 
-#### Exemplos de tecnologias
-| Tecnologia      | Descrição                        |
-|-----------------|----------------------------------|
-| Ethernet        | IEEE 802.3 (com fio)             |
-| Wi-Fi           | IEEE 802.11 (sem fio)            |
-| Token Ring      | IBM (obsoleta)                   |
-| Frame Relay     | Redes WAN                        |
-| PPP             | Redes ponto a ponto              |
+- **Estático**: configurado manualmente
+- **Dinâmico**: via RIP, OSPF, BGP (usados em roteadores)
 
-> Obs: Essa camada **engloba as camadas Física e Enlace do modelo OSI**.
+#### IPv4 (Internet Protocol version 4)
+
+**Características gerais:**
+
+- 32 bits, aproximadamente 4,3 bi de endereços
+- Notado em decimal: `192.168.0.1`
+- Cabeçalho mínimo de 20 bytes
+
+**Estrutura do cabeçalho (simplificada)**
+
+| Campo               | Tamanho | Função               |
+|---------------------|---------|----------------------|
+| Version             | 4 bits  | Versão (4)           |
+| IHL                 | 4 bits  | Tamanho do cabeçalho |
+| TTL                 | 8 bits  | Tempo de vida        |
+| Protocol            | 8 bits  | Indica TCP, UDP etc. |
+| Source Address      | 32 bits | IP de origem         |
+| Destination Address | 32 bits | IP de destino        |
+
+**Limitações**
+
+- Escassez de endereços
+- Cabeçalho complexo
+- Sem segurança nativa
+
+#### IPv6 (Internet Protocol version 6)
+
+**Características gerais**
+
+- 128 bits, formato hexadecimal: `2001:db8::1`
+- Cabeçalho fixo de 40 bytes
+- Suporte a autoconfiguração e IPsec embutido
+
+**Estrutura do cabeçalho (simplificada)**
+
+| Campo               | Tamanho  | Função                       |
+|---------------------|----------|------------------------------|
+| Version             | 4 bits   | Versão (6)                   |
+| Payload Length      | 16 bits  | Tamanho dos dados            |
+| Next Header         | 8 bits   | Protocolo superior (TCP/UDP) |
+| Hop Limit           | 8 bits   | Substitui TTL                |
+| Source Address      | 128 bits | IP de origem                 |
+| Destination Address | 128 bits | IP de destino                |
+
+**Vantagens**
+
+- Mais endereços
+- Cabeçalho mais simples
+- IPsec e mobilidade nativas
+- Sem broadcast (usa multicast)
+
+### 3. Camada de Transporte (Transport Layer)
+
+#### Funções
+
+- Entrega fim a fim
+- Multiplexação por portas
+- Controle de fluxo e congestionamento
+
+#### Protocolos
+
+| Protocolo | Características                                       |
+|-----------|-------------------------------------------------------|
+| **TCP**   | Confiável, orientado à conexão, 3-way handshake, ACKs |
+| **UDP**   | Sem conexão, sem garantia, menor overhead             |
+
+#### Exemplos de portas
+
+- TCP/80: HTTP
+- UDP/53: DNS
+- TCP/443: HTTPS
+
+### 4. Camada de Aplicação (Application Layer)
+
+#### Funções
+
+- Interface com o usuário final
+- Fornece serviços de rede às aplicações
+
+#### Protocolos por categoria
+
+**1. Transferência de Arquivos**
+
+| Protocolo | Porta | Descrição                 |
+|-----------|-------|---------------------------|
+| FTP       | 21    | Transferência de arquivos |
+| NFS       | 2049  | Compartilhamento em rede  |
+
+**2. Acesso Remoto**
+
+| Protocolo | Porta | Descrição             |
+|-----------|-------|-----------------------|
+| SSH       | 22    | Terminal seguro       |
+| TELNET    | 23    | Terminal inseguro     |
+| RDP       | 3389  | Acesso remoto gráfico |
+
+**3. Web**
+
+| Protocolo | Porta | Descrição            |
+|-----------|-------|----------------------|
+| HTTP      | 80    | Web sem criptografia |
+| HTTPS     | 443   | Web com SSL/TLS      |
+
+**4. E-mail**
+
+| Protocolo | Porta | Função           |
+|-----------|-------|------------------|
+| SMTP      | 25    | Envio de e-mails |
+| IMAP      | 143   | Leitura remota   |
+| POP3      | 110   | Download local   |
+
+**5. Infraestrutura**
+
+| Protocolo | Porta | Função                    |
+|-----------|-------|---------------------------|
+| DNS       | 53    | Resolução de nomes        |
+| DHCP      | 67/68 | Atribuição de IP          |
+| SNMP      | 161   | Gerência de redes         |
+| LDAP      | 389   | Diretórios e autenticação |
+
+**6. Segurança**
+
+| Protocolo | Função                     |
+|-----------|----------------------------|
+| IPsec     | Segurança IP (IPv6 nativo) |
+| SSL/TLS   | Criptografia ponto a ponto |
+
+#### Tabela Geral por Camada
+
+| Camada TCP/IP | Protocolos Principais                                     |
+|---------------|-----------------------------------------------------------|
+| Aplicação     | HTTP, HTTPS, FTP, SSH, DNS, TELNET, SMTP, SNMP, DHCP, RDP |
+| Transporte    | TCP, UDP                                                  |
+| Internet      | IP (v4/v6), ICMP, ARP, IGMP, NAT, IPsec                   |
+| Acesso à Rede | Ethernet, Wi-Fi, PPP                                      |
 
 ## Comparativo OSI x TCP/IP
 
@@ -759,63 +859,98 @@ Camada 7 – Aplicação
 
 ---
 
-
-    - **Endereçamento IP**
-   ```
-   IPv4: 32 bits (ex: 192.168.0.1)
-   IPv6: 128 bits (ex: 2001:db8::1)
-   ```
-
-  - Endereçamento e Protocolos
-
-    - Protocolos importantes:
-    
-    | Protocolo      | Finalidade                |
-    |----------------|---------------------------|
-    | HTTP/HTTPS     | Acesso à web              |
-    | FTP/SFTP       | Transferência de arquivos |
-    | SMTP/POP3/IMAP | E-mail                    |
-    | TCP/UDP        | Transporte de dados       |
-    | ICMP           | Diagnóstico (ping)        |
-    | DNS            | Resolução de nomes        |
-    | DHCP           | Atribuição dinâmica de IP |
-
-### Redes de computadores e sistemas distribuídos: arquiteturas de rede
-
-### Equipamentos de interconexão e transmissão de redes de computadores
-- Hubs
-- Repetidores
-- Switches
-- roteadores
-
-### Funcionamento e aplicação dos Modelos de referência ISO/OSI e TCP/IP
-
-### Arquitetura e pilhas de protocolos TCP/IP
-- camada de rede (IPv4 eIPv6) conceitos básicos de endereçamento e roteamento; 
-- camada de transporte (TCP e UDP)
-- níveisde aplicação TCP/IP:
-  - FTP
-  - SSH
-  - DNS
-  - NFS
-  - TELNET
-  - SMTP
-  - HTTP
-  - HTTPS
-  - LDAP
-  - IPSEC
-  - SNMP
-  - NAT
-  - SSL
-  - DNS
-  - RDP
-  - DHCP
-
----
-
 ## Infraestrutura e Sistemas Operacionais
-### Gerenciamento e monitoramento de equipamentos de rede
-### Ativos de rede
+## Gerenciamento e monitoramento de equipamentos de rede
+
+### Objetivos do Gerenciamento
+
+- **Monitorar desempenho** e utilização de recursos
+- **Detectar falhas** e eventos anômalos
+- **Gerenciar configuração** de dispositivos de rede
+- **Controlar acesso e segurança**
+- **Realizar manutenção preditiva e corretiva**
+
+### Áreas Funcionais (FCAPS - ISO/ITU)
+| Área              | Descrição                                                        |
+|-------------------|------------------------------------------------------------------|
+| **Fault**         | Gerenciamento de falhas (detecção, notificação e correção)       |
+| **Configuration** | Gerenciamento de configuração (inicialização, alteração, backup) |
+| **Accounting**    | Medição de uso (para cobrança ou estatística)                    |
+| **Performance**   | Monitoramento da performance e análise de gargalos               |
+| **Security**      | Controle de acesso, logs de autenticação, detecção de intrusões  |
+
+### Protocolos e Ferramentas de Monitorament
+- **Camada:** Aplicação (Modelo TCP/IP)
+- **Portas:** UDP 161 (consulta), 162 (trap)
+- **Componentes:**
+  - *Manager:* sistema de gerenciamento (ex: Zabbix, PRTG, Nagios)
+  - *Agent:* software no dispositivo gerenciado (switch, roteador)
+  - *MIB (Management Information Base):* base de dados hierárquica
+- **Versões:**
+  - SNMPv1: básico, sem segurança
+  - SNMPv2c: melhorias de desempenho
+  - SNMPv3: segurança com autenticação e criptografia
+
+### Syslog
+- Protocolo de **log centralizado**
+- Utilizado por switches, roteadores, firewalls e servidores
+- Permite auditoria e resposta a incidentes
+- Porta UDP 514
+
+### NetFlow / sFlow
+- Coleta de **estatísticas de tráfego** e fluxos de dados
+- Muito usado por roteadores Cisco (NetFlow) e switches de camada 3
+- Auxilia no diagnóstico e análise de tráfego em tempo real
+
+### Exemplos de Equipamentos Monitoráveis
+
+| Equipamento      | Parâmetros Monitorados                               |
+|------------------|------------------------------------------------------|
+| **Switch**       | Taxa de uso de porta, status das VLANs, erros de CRC |
+| **Roteador**     | Roteamento ativo, latência, descarte de pacotes      |
+| **Access Point** | Conexões ativas, sinal, interferência, SSIDs         |
+| **Firewall**     | Tentativas de acesso negado, tráfego bloqueado       |
+| **Servidor**     | Interface de rede, carga da CPU, memória             |
+
+### Ferramentas Populares
+
+| Ferramenta    | Tipo                  | Características principais                       |
+|---------------|-----------------------|--------------------------------------------------|
+| **Zabbix**    | NMS completo          | Gráficos, alertas, mapas, SNMP, agentes          |
+| **Nagios**    | NMS modular           | Muito usado com plugins, foco em disponibilidade |
+| **PRTG**      | Comercial             | Interface intuitiva, discovery automático        |
+| **Wireshark** | Analizador de pacotes | Captura e inspeção detalhada do tráfego de rede  |
+
+## Segurança no Gerenciamento
+
+- Utilizar **SNMPv3** sempre que possível (criptografia e autenticação)
+- **Restringir acesso** por IP ou VPN aos sistemas de gerenciamento
+- **Auditar logs** gerados por SNMP, Syslog, etc.
+- **Isolar redes de gerenciamento** do tráfego de produção
+
+### Questão de Concurso Exemplo
+
+O protocolo SNMP permite o monitoramento de dispositivos de rede. Em relação ao SNMPv3, assinale a alternativa correta:
+
+a) Não oferece recursos de autenticação.  
+b) Utiliza criptografia para proteger os dados.  
+c) Substitui o protocolo IP no monitoramento de redes.  
+d) Funciona exclusivamente com switches de camada 3.
+
+**Resposta:** b) Utiliza criptografia para proteger os dados.
+
+## Ativos de rede
+
+São os **equipamentos físicos e dispositivos eletrônicos** responsáveis pela comunicação, conectividade e gerenciamento da rede de computadores.
+
+### Características principais
+
+- Possuem **endereçamento lógico e/ou físico**
+- Podem operar em diferentes **camadas do modelo OSI**
+- Realizam **funções de comutação, roteamento, segurança, acesso ou repetição de sinais**
+- Necessitam de **energia elétrica**, firmware e gerenciamento
+
+
 ### Passivos de rede
 ### Softwares e métricas de monitoramento
 
