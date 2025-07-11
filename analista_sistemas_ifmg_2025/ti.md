@@ -1528,26 +1528,443 @@ e) Pode-se dobrar o cabo até 90° sem prejuízo
 
 O Cabeamento Estruturado é **fundamental** para a confiabilidade, segurança e desempenho de redes modernas. Estar familiarizado com seus **subsistemas, normas e boas práticas** é essencial para qualquer profissional de TI — e frequentemente cobrado em concursos.
 
+## Sistemas de Comunicação Óptica: Técnicas e Práticas de Instalação
+
+A **comunicação óptica** utiliza **luz modulada** como meio de transmissão, guiada por um **meio dielétrico** (fibra óptica) para transportar dados com **alta velocidade**, **baixa perda** e **imunidade a ruídos eletromagnéticos**.
+
+### Vantagens da Fibra Óptica
+
+| Vantagem                   | Descrição                                     |
+|----------------------------|-----------------------------------------------|
+| Altíssima largura de banda | Velocidades de Gbps a Tbps                    |
+| Imunidade eletromagnética  | Não sofre interferência como cabos metálicos  |
+| Longo alcance              | Até centenas de km sem regeneração            |
+| Segurança                  | Difícil de interceptar sem detecção           |
+| Peso e tamanho reduzidos   | Menor que cabos de cobre com mesma capacidade |
+
+### Tipos de Fibra Óptica
+
+| Tipo               | Núcleo (core)  | Aplicação                           | Distância | Fonte de luz |
+|--------------------|----------------|-------------------------------------|-----------|--------------|
+| **Monomodo** (SM)  | ~8–10 µm       | Longas distâncias (WAN, operadoras) | > 10 km   | Laser (LD)   |
+| **Multimodo** (MM) | ~50 ou 62,5 µm | Curtas distâncias (LAN, campus)     | Até 2 km  | LED ou VCSEL |
+
+### Identificação de cores (ANSI/TIA-598-C):
+- Monomodo: Amarelo
+- Multimodo 62,5/125 µm: Laranja
+- Multimodo 50/125 µm (laser otimizada): Aqua ou azul claro
+
+### Componentes da Instalação Óptica
+
+| Componente                  | Função                                |
+|-----------------------------|---------------------------------------|
+| Fibra óptica                | Meio de transmissão                   |
+| Conectores                  | Junção entre cabos e equipamentos     |
+| Emendas (fusão ou mecânica) | Conexão de fibras                     |
+| Patch cords                 | Cabos para interligação no rack       |
+| Bandejas de emenda          | Proteção e organização das emendas    |
+| Distribuidor Óptico (DIO)   | Painel de terminação e organização    |
+| Splitters                   | Dividem o sinal óptico (em redes PON) |
+
+### Técnicas de Instalação
+
+1. Preparação do Cabo
+- Remoção da capa externa com ferramenta adequada
+- Exposição da fibra sem danificar revestimentos
+- Limpeza com álcool isopropílico e lenço não abrasivo
+
+2. Conectorização
+- Polimento do conector (PC, UPC, APC)
+- Conectores mais comuns: **SC, LC, ST**
+- Utilização de kits de terminação óptica (quick connectors)
+
+3. Emenda por fusão
+- Método preferido (baixa perda, alta confiabilidade)
+- Utiliza **emendadora de fusão** e protetores térmicos
+
+4. Dobramento mínimo
+- Obedecer raio de curvatura mínimo (ex: 10x o diâmetro externo)
+- Curvas muito fechadas causam **perda por microcurvatura**
+
+### Boas Práticas
+
+| Prática                            | Justificativa                                |
+|------------------------------------|----------------------------------------------|
+| Etiquetagem dos cabos e conectores | Facilita manutenção e rastreabilidade        |
+| Testes após instalação             | Garantir atenuação dentro dos padrões        |
+| Documentação completa              | Registro de rotas, conectores e resultados   |
+| Evitar dobras e tensão mecânica    | Protege a integridade da fibra               |
+| Aterramento de DIO (não da fibra)  | Segurança elétrica (apenas partes metálicas) |
+
+### Testes em Fibra Óptica
+
+| Teste        | Equipamento          | Finalidade                                     |
+|--------------|----------------------|------------------------------------------------|
+| Atenuação    | Power Meter + Fonte  | Mede a perda (em dB) entre dois pontos         |
+| OTDR         | OTDR (reflectômetro) | Detecta eventos (emendas, quebras, curvaturas) |
+| Continuidade | Laser visível (VFL)  | Verifica se a fibra está fisicamente intacta   |
+
+### Comparativo: Cobre x Fibra
+
+| Característica           | Par trançado (cobre) | Fibra óptica       |
+|--------------------------|----------------------|--------------------|
+| Velocidade               | Até 10 Gbps (CAT6a)  | 10 Gbps – Tbps     |
+| Distância                | Até 100 m            | Até centenas de km |
+| Interferência            | Alta (EMI)           | Imune              |
+| Segurança                | Menor                | Alta               |
+| Custo por metro          | Mais barato          | Mais caro          |
+| Facilidade de instalação | Mais simples         | Mais especializada |
+
+### Conclusão
+
+A comunicação óptica é essencial para redes modernas de **alto desempenho e longo alcance**. Sua instalação exige **técnica apurada, ferramentas específicas** e **aderência a normas**, garantindo confiabilidade, segurança e escalabilidade da infraestrutura.
 
 
+###  Questão modelo de concurso
+Qual das alternativas descreve corretamente uma boa prática na instalação de sistemas de comunicação óptica?
 
----
+a) A curvatura da fibra pode ser feita em ângulos de até 90°  
+b) A conectorização óptica não necessita de polimento  
+c) O raio mínimo de curvatura deve ser respeitado para evitar perdas  
+d) Fibra óptica é ideal apenas para redes locais curtas  
+e) A limpeza da fibra pode ser feita com água e sabão
 
-
----
-
-### Conceitos
-### Técnicas e boas práticas de instalação
-
-## Sistemas de comunicação óptica 
-### técnicas e práticasde instalação
+> **Gabarito: c)**
 
 ## Arquitetura das redes de comunicação
 
-## Armazenamento
-### SAN
-### NAS
-### RAID
+A **arquitetura de redes de comunicação** define **como os dispositivos se comunicam entre si**, organizando funções em **camadas** e especificando os **protocolos** e **interfaces** que regem a troca de dados.
+
+### Modelos de Arquitetura
+
+1. **Modelo OSI (ISO/IEC 7498)**
+
+- Padrão conceitual de 7 camadas
+- Separação clara de responsabilidades
+- Mais usado para ensino e documentação
+
+| Camada          | Função Principal                           |
+|-----------------|--------------------------------------------|
+| 7. Aplicação    | Interface com usuário e aplicações         |
+| 6. Apresentação | Formatação, compressão, criptografia       |
+| 5. Sessão       | Controle de sessão e diálogo               |
+| 4. Transporte   | Entrega fim a fim, confiabilidade          |
+| 3. Rede         | Roteamento e endereçamento lógico (IP)     |
+| 2. Enlace       | Acesso ao meio, endereçamento físico (MAC) |
+| 1. Física       | Transmissão de bits no meio físico         |
+
+2. **Modelo TCP/IP (Prático e implementado)**
+
+- Baseado em protocolos reais
+- Utilizado na Internet e redes modernas
+- Mais enxuto: 4 camadas principais
+
+| Camada TCP/IP        | Equivalente OSI                   | Protocolos Típicos        |
+|----------------------|-----------------------------------|---------------------------|
+| Aplicação            | Aplicação + Apresentação + Sessão | HTTP, FTP, DNS, SMTP, SSH |
+| Transporte           | Transporte                        | TCP, UDP                  |
+| Internet             | Rede                              | IPv4, IPv6, ICMP, ARP     |
+| Acesso à Rede (Link) | Enlace + Física                   | Ethernet, Wi-Fi, PPP      |
+
+### Arquiteturas de Comunicação
+
+1. **Cliente/Servidor**
+
+| Característica          | Descrição                                         |
+|-------------------------|---------------------------------------------------|
+| Centralização           | Servidor fornece serviços para múltiplos clientes |
+| Escalabilidade limitada | Sobrecarrega o servidor com muitos acessos        |
+| Segurança e controle    | Mais fácil de auditar e gerenciar                 |
+| Exemplo                 | Web (HTTP), E-mail (SMTP/IMAP/POP3)               |
+
+2. **Ponto-a-Ponto (P2P)**
+
+| Característica      | Descrição                                     |
+|---------------------|-----------------------------------------------|
+| Descentralização    | Todos os nós podem ser clientes e servidores  |
+| Alta escalabilidade | Compartilhamento de recursos entre pares      |
+| Menor controle      | Difícil de gerenciar segurança e consistência |
+| Exemplo             | BitTorrent, eMule, Skype (antigo)             |
+
+### Classificação de Redes por Escopo
+
+| Tipo          | Sigla | Abrangência                | Exemplo                  |
+|---------------|-------|----------------------------|--------------------------|
+| Local         | LAN   | Prédio ou campus           | Escritórios, escolas     |
+| Metropolitana | MAN   | Cidade ou região urbana    | TV a cabo, universidades |
+| Ampla         | WAN   | Países/continentes         | Internet                 |
+| Sem fio       | WLAN  | LAN com Wi-Fi              | Redes domésticas, cafés  |
+| PAN           | PAN   | Curtíssimo alcance pessoal | Bluetooth, wearables     |
+
+### Topologias de Rede
+
+| Topologia  | Característica                                          |
+|------------|---------------------------------------------------------|
+| Barramento | Todos os dispositivos compartilham um único cabo        |
+| Estrela    | Cada dispositivo se conecta a um ponto central (switch) |
+| Anel       | Nós conectados circularmente                            |
+| Malha      | Todos os dispositivos conectados entre si               |
+| Árvore     | Hierarquia em níveis (switches interligados)            |
+| Híbrida    | Combinação de duas ou mais topologias                   |
+
+### Tipos de Comunicação
+
+| Tipo            | Descrição                                            |
+|-----------------|------------------------------------------------------|
+| **Simplex**     | Comunicação unidirecional (ex: rádio FM)             |
+| **Half-Duplex** | Bidirecional, mas um de cada vez (ex: walkie-talkie) |
+| **Full-Duplex** | Bidirecional simultâneo (ex: telefone)               |
+
+### Protocolos de Comunicação por Camada (TCP/IP)
+
+| Camada        | Protocolos                       |
+|---------------|----------------------------------|
+| Aplicação     | HTTP, HTTPS, DNS, FTP, SMTP, SSH |
+| Transporte    | TCP, UDP                         |
+| Internet      | IPv4, IPv6, ICMP, ARP, NAT       |
+| Acesso à Rede | Ethernet, Wi-Fi, PPP             |
+
+### Conclusão
+
+A **arquitetura de redes** define os fundamentos sobre os quais toda comunicação digital se apoia. Conhecer seus **modelos, camadas, protocolos e formas de organização** é essencial para compreender a infraestrutura de redes e sistemas distribuídos modernos — e um tema **quase sempre presente em provas de concurso**.
+
+### Questão modelo de concurso
+Sobre os modelos de arquitetura de redes de computadores, assinale a opção correta:
+
+a) O modelo TCP/IP é composto por sete camadas conceituais.  
+b) No modelo OSI, a camada de transporte oferece roteamento entre redes.  
+c) A topologia estrela exige que todos os nós estejam conectados entre si diretamente.  
+d) A camada de rede do modelo OSI é responsável por endereçamento lógico.  
+e) A arquitetura cliente/servidor distribui igualmente os serviços entre os clientes.
+
+> **Gabarito: d)**
+
+
+## Armazenamento: SAN, NAS, RAID
+
+O armazenamento em redes corporativas pode ser feito de diversas formas, mas os principais conceitos giram em torno de:
+
+- **RAID** – Organização de discos para redundância e desempenho
+- **NAS** – Armazenamento em nível de **arquivo** via rede
+- **SAN** – Armazenamento em nível de **bloco**, com alta performance
+
+## RAID (Redundant Array of Independent Disks)
+
+RAID é uma tecnologia de armazenamento que **combina múltiplos discos rígidos** para obter **redundância**, **tolerância a falhas**, **aumento de desempenho**, ou uma combinação desses objetivos.
+
+> RAID pode ser implementado:
+> - via **hardware** (controladoras RAID dedicadas)
+> - via **software** (em sistemas operacionais como Linux ou Windows)
+
+### Níveis de RAID mais comuns
+
+| Nível   | Nome                    | Características                                        | Redundância | Desempenho |
+|---------|-------------------------|--------------------------------------------------------|-------------|------------|
+| RAID 0  | Striping                | Divide os dados entre dois ou mais discos sem paridade | Não         | Alta       |
+| RAID 1  | Espelhamento (Mirror)   | Cópia exata dos dados em dois discos                   | Sim         | Leitura    |
+| RAID 5  | Paridade distribuída    | Usa paridade distribuída, exige pelo menos 3 discos    | Sim         | Equilíbrio |
+| RAID 6  | Paridade dupla          | Como o RAID 5, mas com paridade dupla (mín. 4 discos)  | Sim         | Moderado   |
+| RAID 10 | Espelhamento + Striping | Combina RAID 1 + RAID 0 (mínimo 4 discos)              | Sim         | Alta       |
+
+### Conceitos importantes
+
+- **Paridade**: Informação gerada para permitir reconstrução de dados em caso de falha
+- **Striping**: Distribuição de blocos de dados em vários discos
+- **Espelhamento**: Cópia fiel de dados em discos diferentes
+
+### Exemplos de uso
+
+| Aplicação                           | Nível RAID sugerido |
+|-------------------------------------|---------------------|
+| Desempenho sem importância de falha | RAID 0              |
+| Backup local ou pessoal             | RAID 1              |
+| Servidores corporativos             | RAID 5 ou 6         |
+| Bancos de dados críticos            | RAID 10             |
+
+- RAID não é Backup: RAID protege contra **falhas de hardware**, mas não substitui cópias de segurança externas. Riscos como:
+  - Exclusão acidental
+  - Vírus/Ransomware
+  - Desastres físicos (fogo, água)
+  
+### RAID: Hardware x Software
+
+| Tipo         | Vantagens                        | Desvantagens                       |
+|--------------|----------------------------------|------------------------------------|
+| **Hardware** | Melhor desempenho, transparência | Mais caro, depende da controladora |
+| **Software** | Flexível, sem custo adicional    | Maior uso da CPU, menor desempenho |
+
+### Conclusão
+
+O conhecimento sobre **RAID** é essencial em redes corporativas, servidores e sistemas de armazenamento. Saber quando e como aplicar cada nível de RAID é uma habilidade exigida para concursos e prática profissional.
+
+### Questão de Concurso (Exemplo)
+O RAID 1 fornece:
+
+a) Aumento de velocidade sem tolerância a falhas  
+b) Redundância por paridade distribuída  
+c) Espelhamento, garantindo redundância total dos dados  
+d) Striping com paridade dupla  
+e) Armazenamento em bloco com compressão
+
+> **Gabarito: c)**
+
+## SAN (Storage Area Network)
+
+SAN (**Storage Area Network**) é uma **rede dedicada e de alta velocidade** que interconecta dispositivos de armazenamento (como discos e fitas) a servidores, permitindo acesso em **nível de bloco**, como se fossem discos locais.
+
+### Arquitetura da SAN
+
+- Cria uma **rede separada** da LAN principal
+- Utiliza **protocolos específicos**, como Fibre Channel ou iSCSI
+- É altamente escalável, confiável e usada em **datacenters e ambientes críticos**
+
+### Componentes principais:
+
+| Componente                        | Função                                                |
+|-----------------------------------|-------------------------------------------------------|
+| **Dispositivos de armazenamento** | Discos, arrays, bibliotecas de fita                   |
+| **Switches SAN**                  | Conectam servidores e dispositivos de armazenamento   |
+| **Host Bus Adapter (HBA)**        | Placa do servidor que conecta à SAN via Fibre Channel |
+| **Cabling**                       | Cabos de fibra óptica ou Ethernet (iSCSI)             |
+
+### Protocolos utilizados
+
+| Protocolo         | Descrição                                   |
+|-------------------|---------------------------------------------|
+| **Fibre Channel** | Alta velocidade, baixa latência (2–32 Gbps) |
+| **iSCSI**         | Usa TCP/IP sobre redes Ethernet             |
+| **FCoE**          | Fibre Channel over Ethernet                 |
+
+
+### Vantagens da SAN
+
+- Alta **velocidade e performance**
+- **Baixa latência**
+- Ideal para **bancos de dados e servidores virtualizados**
+- Escalabilidade e disponibilidade
+- Pode ser replicada ou espelhada para **disaster recovery**
+
+### Desvantagens
+
+- Custo elevado
+- Alta complexidade de configuração e manutenção
+- Exige equipe especializada
+
+### Casos de uso comuns
+
+- Datacenters corporativos
+- Hospedagem de máquinas virtuais (VMware, Hyper-V)
+- Bancos de dados críticos (Oracle, PostgreSQL, SQL Server)
+- Ambientes com alta disponibilidade (HA)
+
+
+### Conclusão
+
+SAN é a escolha ideal para **ambientes críticos**, onde o desempenho e a confiabilidade do armazenamento são cruciais. Seu uso exige infraestrutura especializada, mas oferece escalabilidade e performance superiores — conhecimentos cobrados em concursos de infraestrutura, redes e servidores.
+
+## Armazenamento: NAS (Network Attached Storage)
+
+NAS é a sigla para **Network Attached Storage**, ou seja, **armazenamento conectado à rede**.  
+É um **dispositivo dedicado** que oferece **compartilhamento de arquivos** por meio da rede local, funcionando como um **servidor de arquivos autônomo**.
+
+### Características do NAS
+
+| Aspecto                | Detalhes                                        |
+|------------------------|-------------------------------------------------|
+| Tipo de acesso         | **Arquivo** (file-level)                        |
+| Protocolo de rede      | SMB/CIFS (Windows), NFS (Linux/Unix), FTP, HTTP |
+| Sistema operacional    | Sim (Linux embarcado, FreeNAS, TrueNAS etc.)    |
+| IP próprio             | Sim                                             |
+| Facilidade de uso      | Interface gráfica via navegador (Web UI)        |
+| Nível de gerenciamento | Médio (fácil instalação e configuração)         |
+| Redundância suportada  | Suporte a RAID 0/1/5/6/10 (varia por modelo)    |
+| Backup e replicação    | Recursos nativos em modelos avançados           |
+
+### Como o NAS funciona?
+
+- Fica conectado na LAN via cabo Ethernet ou Wi-Fi
+- Permite que múltiplos usuários acessem arquivos simultaneamente
+- Pode ser acessado via IP e protocolo de compartilhamento
+- Age como um "servidor de arquivos" com capacidade de gerenciamento
+
+### Vantagens
+
+- **Fácil de instalar e configurar**
+- **Acesso multiusuário por IP**
+-  **Custo mais baixo** do que soluções SAN
+-  **Suporte a RAID** e backup em alguns modelos
+-  **Compatível com sistemas Windows, Linux, macOS**
+
+### Desvantagens
+
+- **Desempenho inferior** a SAN (limitação da rede TCP/IP)
+- Vulnerável a sobrecarga se muitos usuários acessarem simultaneamente
+- Segurança depende de boa configuração de permissões
+
+### Exemplos de uso
+
+- Compartilhamento de arquivos em pequenas empresas
+- Servidor de mídia doméstico
+- Backup automatizado de máquinas da rede
+- Armazenamento central para departamentos
+
+### Protocolos mais comuns no NAS
+
+| Protocolo    | Descrição                                  | Porta padrão |
+|--------------|--------------------------------------------|--------------|
+| **SMB/CIFS** | Compartilhamento de arquivos no Windows    | 445          |
+| **NFS**      | Compartilhamento de arquivos em Linux/Unix | 2049         |
+| **FTP**      | Transferência de arquivos                  | 21           |
+| **HTTP**     | Interface Web e compartilhamento leve      | 80           |
+
+### Conclusão
+
+O NAS é uma solução acessível e amplamente usada para **compartilhamento de arquivos via rede**, com **instalação simples** e **compatibilidade multiplataforma**, sendo ideal para pequenas e médias empresas, e frequentemente citado em provas de concurso para analista de redes e suporte técnico.
+
+### NAS x SAN x DAS
+
+| Recurso        | NAS               | SAN                   | DAS                     |
+|----------------|-------------------|-----------------------|-------------------------|
+| Tipo de acesso | Arquivo           | Bloco                 | Bloco                   |
+| Conexão        | Ethernet (TCP/IP) | Fibre Channel / iSCSI | Direto ao host          |
+| Facilidade     | Fácil de instalar | Requer especialistas  | Simples                 |
+| Custo          | Médio             | Alto                  | Baixo                   |
+| Desempenho     | Médio             | Alto                  | Alto (limitado ao host) |
+
+
+### Questão modelo de concurso
+Acerca das redes de armazenamento, assinale a opção correta:
+
+a) A rede SAN fornece acesso em nível de arquivo, sendo ideal para compartilhamento entre usuários.  
+b) A SAN é uma rede dedicada de armazenamento com acesso a blocos e uso de protocolos como iSCSI.  
+c) A SAN utiliza apenas redes Ethernet e protocolo FTP para acesso rápido a dados.  
+d) A SAN substitui a necessidade de discos locais em servidores NAS.  
+e) A SAN é composta por switches comuns de rede e compartilhamentos CIFS.
+
+> **Gabarito: b)**
+
+### Questão modelo de concurso
+Assinale a alternativa que descreve corretamente uma solução NAS:
+
+a) Fornece acesso em nível de bloco para servidores de banco de dados.  
+b) Requer protocolos Fibre Channel e switches dedicados.  
+c) Atua como um servidor de arquivos, acessado via rede local.  
+d) É uma tecnologia de acesso direto aos discos de armazenamento.  
+e) Implementa armazenamento de backup exclusivamente em nuvem.
+
+>  **Gabarito: c)**
+
+
+
+---
+
+## ❌ Desvantagens
+
+- Custo elevado
+- Alta complexidade de configuração e manutenção
+- Exige equipe especializada
+
+
 
 ## Noções de Backup
 ## Armazenamento
