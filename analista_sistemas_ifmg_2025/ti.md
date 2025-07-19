@@ -1954,27 +1954,126 @@ e) Implementa armazenamento de backup exclusivamente em nuvem.
 
 >  **Gabarito: c)**
 
+## Noções de Backup: Armazenamento, Tipos, Contingência e Ferramentas
 
+Backup é a cópia segura dos dados de um sistema para garantir sua recuperação em caso de falhas, desastres, ataques ou perda acidental. É parte essencial da segurança e continuidade de negócios.
 
----
+### Meios de Armazenamento
 
-## ❌ Desvantagens
+| Meio                 | Características                          | Vantagens                        | Desvantagens                      |
+|----------------------|------------------------------------------|----------------------------------|-----------------------------------|
+| HD externo           | USB, portátil                            | Custo acessível, fácil uso       | Risco de perda física             |
+| SSD externo          | Alta velocidade                          | Rápido, resistente               | Custo mais elevado                |
+| Fita magnética (LTO) | Corporativo                              | Alta capacidade, durabilidade    | Leitura sequencial, mais lento    |
+| NAS                  | Armazenamento em rede (file-level)       | Multiusuário, RAID               | Performance dependente da rede    |
+| SAN                  | Armazenamento em bloco, uso profissional | Alta performance, escalabilidade | Alto custo, configuração complexa |
+| Mídias ópticas       | DVD, Blu-ray                             | Barato                           | Obsoleto, pouca capacidade        |
+| Nuvem (Cloud)        | Amazon S3, Azure, Google Drive etc.      | Escalável, redundante            | Dependente de internet, custo     |
 
-- Custo elevado
-- Alta complexidade de configuração e manutenção
-- Exige equipe especializada
+> **Regra 3-2-1 de backup:** 3 cópias, 2 mídias diferentes, 1 externa.
 
+### Sistemas de Backup
 
+| Sistema       | Descrição                                             |
+|---------------|-------------------------------------------------------|
+| Manual        | Executado por operador, sem agendamento               |
+| Agendado      | Realizado em intervalos definidos                     |
+| Automatizado  | Agendamento + relatórios e alertas                    |
+| Em tempo real | Backup contínuo: cópia imediata de arquivos alterados |
+| Centralizado  | Todos os dados da rede salvos em um servidor central  |
+| Distribuído   | Cada dispositivo faz seu próprio backup               |
 
-## Noções de Backup
-## Armazenamento
-### Meios de armazenamento
-### Sistemas e tipos de backup
-### planos de contingência ferramentas
+### Tipos de Backup
+
+| Tipo            | O que copia?                                     | Vantagens                  | Desvantagens                       |
+|-----------------|--------------------------------------------------|----------------------------|------------------------------------|
+| Completo        | Todos os arquivos selecionados                   | Fácil restauração          | Demorado, ocupa mais espaço        |
+| Incremental     | Somente arquivos alterados desde último backup   | Rápido, ocupa pouco espaço | Restauração lenta (cadeia)         |
+| Diferencial     | Arquivos alterados desde o último completo       | Restauração mais rápida    | Ocupa mais espaço que incremental  |
+| Espelhamento    | Cópia idêntica dos dados (mirror)                | Sincronização rápida       | Risco de sobrescrever exclusões    |
+| Snapshot        | Foto instantânea de um sistema/volume            | Restauração instantânea    | Requer recursos de sistema         |
+| Imagem de disco | Clona o sistema completo (SO, aplicações, dados) | Restauração completa       | Arquivo grande, ocupa muito espaço |
+
+### Periodicidade e Estratégias
+
+| Tipo        | Frequência          | Uso comum                       |
+|-------------|---------------------|---------------------------------|
+| Diário      | Toda noite          | Dados de sistemas de produção   |
+| Semanal     | Toda semana         | Sistemas com baixa alteração    |
+| Mensal      | Fim de cada mês     | Armazenamento legal/regulatório |
+| Sob demanda | Conforme necessário | Antes de atualizações críticas  |
+
+> Exemplo prático: Backup completo aos domingos, incrementais nos dias úteis.
+
+### Planos de Contingência e Recuperação
+
+| Termo                          | Definição                                       |
+|--------------------------------|-------------------------------------------------|
+| RTO (Recovery Time Objective)  | Tempo máximo aceitável para restaurar o sistema |
+| RPO (Recovery Point Objective) | Tempo máximo de perda aceitável (entre backups) |
+
+### Elementos do plano:
+
+- Análise de risco e impacto
+- Ambientes alternativos: **Cold**, **Warm**, **Hot Site**
+- Documentação e procedimentos testáveis
+- Testes e auditorias regulares
+
+### Ferramentas e Softwares
+
+| Nome          | Plataforma      | Nível       | Características principais                       |
+|---------------|-----------------|-------------|--------------------------------------------------|
+| Cobian Backup | Windows         | Pessoal     | Grátis, agendamento, compactação                 |
+| Bacula        | Linux/Windows   | Corporativo | CLI e interface web, agendamentos, segurança     |
+| Veeam         | Multiplataforma | Enterprise  | Física/virtual/cloud, replicação, snapshots      |
+| Acronis       | Windows/Linux   | Comercial   | Imagem de disco, proteção contra ransomware      |
+| Duplicati     | Multiplataforma | Pessoal/SMB | Backup em nuvem, criptografia, agendamento       |
+| Timeshift     | Linux           | Desktop     | Snapshots de sistema, ideal para ambientes Linux |
+
+### Segurança em Backup
+
+- **Criptografia** dos dados em trânsito e em repouso
+- **Controle de acesso** com autenticação e permissões
+- **Isolamento** dos backups (desconectados ou separados da rede)
+- **Auditoria e logs** de acesso e restauração
+
+### Diferença entre Backup e Arquivamento
+
+| Fator        | Backup                   | Arquivamento                 |
+|--------------|--------------------------|------------------------------|
+| Objetivo     | Recuperação de desastres | Armazenamento de longo prazo |
+| Frequência   | Regular                  | Esporádico                   |
+| Tipo de dado | Ativo (em uso)           | Inativo (histórico)          |
+| Local comum  | HDD, SSD, nuvem, fita    | Fita, NAS, repositórios      |
+| Restauração  | Imediata, frequente      | Rara, mas precisa            |
+
+### Termos Técnicos para Concursos
+
+- **Dump**: cópia completa de banco de dados ou sistema
+- **Cold Backup**: sistema parado durante cópia
+- **Hot Backup**: sistema ativo durante cópia
+- **Deduplicação**: remoção de arquivos duplicados
+- **Compressão**: redução de tamanho dos arquivos
+- **Versionamento**: manutenção de várias versões do mesmo arquivo
+
+### Questão de Concurso
+
+Um backup que realiza apenas a cópia dos arquivos modificados desde o último backup completo é denominado:
+
+a) Completo  
+b) Espelho  
+c) Diferencial  
+d) Incremental  
+e) Imagem
+
+> **Gabarito: d) Incremental**
 
 ## Administração de sistemas operacionais
-### LINU
+
+### LINUX
+
 ### MS-WINDOWS
+
 
 ## Configuração e administração de servidores Windows Server 2016 e Linux
 
