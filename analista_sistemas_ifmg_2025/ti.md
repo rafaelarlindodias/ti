@@ -2397,6 +2397,111 @@ e) taskmgr
 
 ## Configuração e administração de servidores Windows Server 2016 e Linux
 
+### Windows Server
+
+| Ferramenta         | Descrição                                           |
+|--------------------|-----------------------------------------------------|
+| PowerShell DSC     | Desired State Configuration – automação declarativa |
+| Group Policy (GPO) | Políticas de segurança, login, scripts              |
+| Task Scheduler     | Agendamento de tarefas e scripts                    |
+| Event Forwarding   | Coleta centralizada de logs com `wecutil` e `winrm` |
+
+```powershell
+# Exemplo PowerShell - Criar novo usuário e adicionar a grupo
+New-LocalUser "usuario1" -Password (ConvertTo-SecureString "Senha123!" -AsPlainText -Force)
+Add-LocalGroupMember -Group "Administradores" -Member "usuario1"
+```
+
+### Linux
+
+| Ferramenta     | Finalidade                                   |
+|----------------|----------------------------------------------|
+| Cron / Anacron | Agendamento de tarefas em background         |
+| Systemd timers | Alternativa moderna ao cron                  |
+| Bash scripts   | Automatização de tarefas administrativas     |
+| Ansible        | Gerenciamento de configuração e orquestração |
+
+```bash
+# Exemplo cron: backup diário às 2h
+0 2 * * * /usr/local/bin/backup.sh
+```
+
+### Segurança Avançada
+
+| Item               | Windows Server              | Linux                                    |
+|--------------------|-----------------------------|------------------------------------------|
+| Auditoria          | Event Viewer, AuditPol      | AuditD, `ausearch`, `auditctl`           |
+| Hardening          | STIG, SecPol.msc            | CIS Benchmarks, `lynis`, `chkrootkit`    |
+| Controle de acesso | ACLs, GPO                   | `setfacl`, `getfacl`, PAM                |
+| Autenticação       | Active Directory + Kerberos | LDAP, SSSD, Kerberos, sudoers            |
+| VPN                | RRAS, Always On VPN         | OpenVPN, WireGuard, strongSwan           |
+| Firewall           | Windows Defender Firewall   | `iptables`, `firewalld`, `ufw`           |
+| SELinux / AppArmor | —                           | Mandatory Access Control (MAC) no kernel |
+
+### Diagnóstico, Logs e Monitoramento
+
+| Ferramenta             | Windows Server                             | Linux                                          |
+|------------------------|--------------------------------------------|------------------------------------------------|
+| Logs                   | Event Viewer, `Get-WinEvent`               | `journalctl`, `/var/log/`, rsyslog             |
+| Diagnóstico de rede    | `netsh`, `ping`, `tracert`, `telnet`       | `ss`, `ip`, `tcpdump`, `nmap`, `wireshark`     |
+| Performance            | PerfMon, Resource Monitor                  | `htop`, `iotop`, `vmstat`, `dstat`             |
+| Monitoramento central  | Zabbix, Nagios, PRTG                       | Zabbix, Prometheus, Netdata                    |
+
+### Serviços de Infraestrutura e Domínio
+
+| Serviço          | Windows Server           | Linux (equivalente)                      |
+|------------------|--------------------------|------------------------------------------|
+| Active Directory | Gerenciamento de domínio | Samba4 AD/DC, OpenLDAP                   |
+| DNS              | DNS Manager              | BIND, dnsmasq                            |
+| DHCP             | DHCP Manager             | `isc-dhcp-server`, `dhcpd.conf`          |
+| GPO              | `gpedit.msc`, `gpmc.msc` | Políticas via Puppet, Ansible ou scripts |
+| WSUS             | Atualizações locais      | Espelhos de repositório (APT/YUM proxy)  |
+
+### Virtualização e Contêineres
+
+| Tecnologia        | Windows Server                                       | Linux                                       |
+|-------------------|------------------------------------------------------|---------------------------------------------|
+| Hyper-V           | Nativo a partir do Server 2012                       | Não nativo, possível com drivers especiais  |
+| Docker            | Desde Server 2016 (com suporte a containers Windows) | Nativo: Docker CE/EE, Podman                |
+| KVM/QEMU          | —                                                    | Kernel-based VM com boa performance         |
+| Proxmox / Libvirt | —                                                    | Ambiente de virtualização e gestão completa |
+| LXC               | —                                                    | Contêineres de sistema (não só apps)        |
+
+
+### Backup, Restauração e Alta Disponibilidade
+
+| Ferramenta/Conceito | Windows Server                   | Linux                          |
+|---------------------|----------------------------------|--------------------------------|
+| Backup              | Windows Backup, Veeam, Acronis   | `rsync`, `tar`, Bacula, Amanda |
+| Shadow Copy         | VSS – Volume Shadow Copy         | LVM Snapshots, ZFS snapshots   |
+| Failover Cluster    | Cluster Manager + Shared Storage | Pacemaker + Corosync, DRBD     |
+| Replicação          | DFS-R (File Server)              | `rsync`, GlusterFS, DRBD       |
+| Imagem de sistema   | Sysprep + WIM / DISM             | `dd`, Clonezilla, `partclone`  |
+
+### Compartilhamento e Arquivos
+
+| Recurso          | Windows Server                       | Linux                               |
+|------------------|--------------------------------------|-------------------------------------|
+| Compartilhamento | SMB (via Explorador, `net share`)    | Samba (via `smb.conf`)              |
+| NFS              | Instalável via Roles                 | `nfs-kernel-server`, `/etc/exports` |
+| FTP              | IIS FTP Server                       | `vsftpd`, `proftpd`, `pure-ftpd`    |
+| DFS              | Distributed File System (Enterprise) | GlusterFS, CephFS                   |
+
+
+### Questão Simulada (Estilo CEBRASPE)
+
+Um analista precisa configurar autenticação de usuários Linux contra um servidor Windows Server 2016 com Active Directory. Qual das opções abaixo representa o método mais indicado?
+
+a) Utilizar NFS com compartilhamento LDAP  
+b) Configurar Samba apenas com arquivos locais  
+c) Usar SSSD com Kerberos e LDAP integrados ao AD  
+d) Instalar um servidor FTP e autenticar via radius  
+e) Utilizar rsync com SSH e firewall ativo
+
+> **Gabarito: c)** Usar SSSD com Kerberos e LDAP integrados ao AD
+
+
+
 ## Configuração e administração de serviços
 
 ### AD
