@@ -2068,33 +2068,365 @@ e) Imagem
 
 > **Gabarito: d) Incremental**
 
-## Administração de sistemas operacionais
+## Administração de sistemas operacionais: LINUX
 
-### LINUX
+### Distribuições Linux
 
-### MS-WINDOWS
+| Distribuição | Finalidade                     | Gerenciador de Pacotes |
+|--------------|--------------------------------|------------------------|
+| Ubuntu       | Uso geral, servidores, desktop | `apt` (Debian-based)   |
+| Debian       | Estável, servidores            | `apt`                  |
+| CentOS       | Corporativo, baseado em RHEL   | `yum`, `dnf`           |
+| Fedora       | Inovação, testes para Red Hat  | `dnf`                  |
+| Arch Linux   | Avançado, personalizado        | `pacman`               |
+| Red Hat      | Corporativo, com suporte pago  | `yum`, `dnf`           |
 
+### Gerenciamento de Pacotes
+
+- **APT (Debian/Ubuntu)**
+```bash
+sudo apt update && sudo apt upgrade
+sudo apt install <pacote>
+sudo apt remove <pacote>
+```
+
+- **YUM/DNF (RHEL/CentOS/Fedora)**
+```bash
+sudo yum install <pacote>
+sudo yum update
+sudo yum remove <pacote>
+```
+
+### Zypper (OpenSUSE)
+```bash
+sudo zypper install <pacote>
+```
+
+### Gerenciamento de Usuários e Permissões
+
+| Comando     | Função                              |
+|-------------|-------------------------------------|
+| `adduser`   | Adiciona novo usuário               |
+| `passwd`    | Define ou altera senha              |
+| `usermod`   | Modifica atributos de usuários      |
+| `groupadd`  | Cria novo grupo                     |
+| `chown`     | Altera dono de arquivo              |
+| `chmod`     | Altera permissões de acesso         |
+| `id`        | Mostra UID, GID e grupos de usuário |
+
+**Exemplo**
+
+```bash
+sudo adduser rafael
+sudo usermod -aG sudo rafael
+chmod 755 arquivo.sh
+chown rafael:rafael arquivo.sh
+```
+
+### Sistema de Arquivos
+
+| Comando  | Descrição                    |
+|----------|------------------------------|
+| `df -h`  | Mostra uso de disco          |
+| `du -sh` | Mostra tamanho de diretórios |
+| `mount`  | Monta sistemas de arquivos   |
+| `umount` | Desmonta volumes             |
+| `lsblk`  | Lista blocos de disco        |
+| `fdisk`  | Particionamento de discos    |
+
+### Serviços e Daemons
+
+| Comando            | Descrição                         |
+|--------------------|-----------------------------------|
+| `systemctl start`  | Inicia um serviço                 |
+| `systemctl stop`   | Encerra um serviço                |
+| `systemctl status` | Exibe status do serviço           |
+| `systemctl enable` | Habilita serviço na inicialização |
+| `cron`, `crontab`  | Agendamento de tarefas periódicas |
+
+**Exemplo (agendar backup)**
+
+```bash
+crontab -e
+0 2 * * * /home/rafael/scripts/backup.sh
+```
+
+### Comandos de Rede
+
+| Comando                | Função                                                                |
+|------------------------|-----------------------------------------------------------------------|
+| `ip a`                 | Mostra interfaces de rede                                             |
+| `ip link`              | Mostra e configura links (interfaces)                                 |
+| `ip route`             | Exibe tabela de roteamento                                            |
+| `ping`                 | Testa conectividade com outro host                                    |
+| `traceroute destino`   | Exibe caminho percorrido até o destino                                |
+| `netstat -tuln`        | Lista portas abertas (TCP/UDP)                                        |
+| `ss -tuln`             | Mostra conexões de rede (substituto moderno do netstat)               |
+| `dig dominio.com`      | Consulta DNS (resolução de nomes)                                     |
+| `nslookup dominio.com` | Consulta DNS (alternativo ao dig)                                     |
+| `host dominio.com`     | Consulta DNS simples                                                  |
+| `whois dominio.com`    | Informações de registro de domínios                                   |
+| `curl http://site.com` | Requisições HTTP diretamente no terminal                              |
+| `wget http://site.com` | Faz download de arquivos via HTTP, FTP, etc.                          |
+| `nmap IP`              | Escaneia portas e serviços de rede (necessita instalação)             |
+| `ethtool eth0`         | Mostra e configura parâmetros da interface (ex: velocidade)           |
+| `nmcli`                | Gerenciador de conexões de rede via linha de comando (NetworkManager) |
+| `iwconfig`             | Configura rede wireless (substituído por `iw`)                        |
+| `iw dev`               | Exibe interfaces Wi-Fi e status                                       |
+| `tcpdump`              | Sniffer de pacotes (análise de tráfego)                               |
+| `ip neigh`             | Mostra tabela ARP (equivalente ao `arp -a`)                           |
+| `arping IP`            | Envia requisições ARP (verifica se IP responde na rede local)         |
+| `route -n`             | Mostra tabela de roteamento legada                                    |
+| `firewalld-cmd`        | Gerencia regras do firewall com firewalld                             |
+| `ufw`                  | Firewall simplificado (Ubuntu)                                        |
+| `ifconfig`             | Configura IPs e interfaces (obsoleto, mas ainda usado)                |
+
+> **Dica**: comandos como `tcpdump`, `nmap`, `ethtool` e `dig` podem precisar ser instalados via `apt`, `yum` ou `dnf`.
+
+### Logs do Sistema
+
+| Caminho              | Descrição                   |
+|----------------------|-----------------------------|
+| `/var/log/syslog`    | Log geral do sistema        |
+| `/var/log/auth.log`  | Log de autenticação         |
+| `/var/log/dmesg`     | Mensagens do kernel         |
+| `journalctl`         | Visualização com systemd    |
+
+### Gerenciamento de Processos
+
+| Comando            | Função                              |
+|--------------------|-------------------------------------|
+| `ps aux`           | Lista todos os processos            |
+| `top`              | Monitoramento em tempo real         |
+| `htop`             | Interface interativa                |
+| `kill PID`         | Mata processo com ID                |
+| `nice`             | Define prioridade de processo       |
+| `jobs`, `bg`, `fg` | Gerencia processos em segundo plano |
+
+### Shell Scripting
+
+**Exemplo simples**
+
+```bash
+#!/bin/bash
+echo "Início do backup em: $(date)"
+tar -czf /home/rafael/backup.tar.gz /home/rafael
+echo "Fim do backup em: $(date)"
+```
+
+```bash
+chmod +x backup.sh
+./backup.sh
+```
+
+### SSH – Acesso Remoto Seguro
+
+| Comando                | Descrição                            |
+|------------------------|--------------------------------------|
+| `ssh user@ip`          | Acesso remoto ao servidor            |
+| `scp arquivo user@ip:` | Envia arquivo via SSH                |
+| `ssh-keygen`           | Gera chave pública/privada           |
+| `ssh-copy-id`          | Envia chave pública para host remoto |
+
+
+### Backup no Linux
+
+| Ferramenta  | Descrição                              |
+|-------------|----------------------------------------|
+| `rsync`     | Sincronização de arquivos e diretórios |
+| `tar`       | Compressão e backup local              |
+| `dd`        | Clonagem bit a bit de discos           |
+| `timeshift` | Snapshots do sistema (Linux Desktop)   |
+| `bacula`    | Backup empresarial em rede             |
+
+### Questão de Concurso
+
+Em sistemas Linux, o comando utilizado para alterar as permissões de um arquivo é:
+
+a) chown  
+b) chmod  
+c) ps  
+d) kill  
+e) mount
+
+> **Gabarito: b)** `chmod
+
+
+## Administração de sistemas operacionais: MS-WINDOWS
+
+### Edições do Windows
+
+| Edição             | Finalidade                                                       |
+|--------------------|------------------------------------------------------------------|
+| Windows Home       | Uso doméstico                                                    |
+| Windows Pro        | Profissional, recursos de domínio                                |
+| Windows Enterprise | Corporativo, com recursos avançados de segurança e gerenciamento |
+| Windows Server     | Servidores, AD, DHCP, DNS, Hyper-V                               |
+
+### Ferramentas Administrativas
+
+| Ferramenta                                   | Finalidade                              |
+|----------------------------------------------|-----------------------------------------|
+| **Painel de Controle**                       | Configurações clássicas do sistema      |
+| **Gerenciador de Tarefas**                   | Monitoramento de processos e desempenho |
+| **Gerenciamento do Computador**              | Acesso a logs, serviços e discos        |
+| **Editor de Diretiva de Grupo (gpedit.msc)** | Políticas locais                        |
+| **Editor de Registro (regedit)**             | Configurações do sistema em nível baixo |
+| **msconfig**                                 | Configuração de inicialização           |
+| **Services.msc**                             | Gerencia serviços e daemons             |
+| **Eventvwr.msc**                             | Visualiza logs de eventos               |
+| **Task Scheduler**                           | Agendamento de tarefas automatizadas    |
+| **DISKPART**                                 | Gerenciamento de partições via CLI      |
+| **PowerShell**                               | Automação e administração avançada      |
+
+### Gerenciamento de Usuários
+
+| Ferramenta ou comando     | Função                                             |
+|---------------------------|----------------------------------------------------|
+| `lusrmgr.msc`             | Gerencia usuários e grupos locais (exceto no Home) |
+| `net user`                | Cria, remove ou modifica usuários via CLI          |
+| Painel de Controle        | Gerenciamento básico de contas                     |
+| Active Directory (AD)     | Em servidores Windows, gerencia rede e domínios    |
+
+```powershell
+net user rafael /add
+net localgroup administradores rafael /add
+```
+
+### Segurança e Controle de Acesso
+
+- **UAC (User Account Control)**: controle de permissões elevadas
+- **Permissões NTFS**: leitura, gravação, modificação, controle total
+- **Firewall do Windows**: regras de entrada/saída por perfil (domínio, público, privado)
+- **BitLocker**: criptografia de disco nativa
+- **Windows Defender**: antivírus e antimalware padrão
+- **Políticas de Grupo (GPO)**: controle granular de configurações
+
+### Gerenciamento de Disco
+
+| Ferramenta           | Finalidade                                |
+|----------------------|-------------------------------------------|
+| Gerenciador de Disco | Criação, formatação e expansão de volumes |
+| `diskpart`           | CLI para particionamento                  |
+| `chkdsk`             | Verifica integridade do disco             |
+| `defrag`             | Desfragmenta disco (HDD)                  |
+| `format`             | Formata volumes via CLI                   |
+
+```cmd
+diskpart
+list disk
+select disk 0
+create partition primary
+format fs=ntfs quick
+```
+
+### Comandos de Rede no Windows
+
+| Comando       | Função                               |
+|---------------|--------------------------------------|
+| `ipconfig`    | Mostra IPs e interfaces de rede      |
+| `ping`        | Testa conectividade                  |
+| `tracert`     | Rastreia rota até destino            |
+| `nslookup`    | Consulta servidores DNS              |
+| `netstat -an` | Lista conexões de rede e portas      |
+| `tasklist`    | Lista processos ativos               |
+| `net use`     | Mapeia/unmapeia unidades de rede     |
+| `net share`   | Compartilhamento de pastas           |
+| `net view`    | Visualiza computadores na rede local |
+| `arp -a`      | Exibe tabela ARP                     |
+| `route print` | Mostra tabela de rotas IP            |
+
+### PowerShell (CLI avançada)
+
+```powershell
+# Criar usuário
+New-LocalUser -Name "rafael" -Password (ConvertTo-SecureString "Senha@123" -AsPlainText -Force)
+
+# Habilitar serviço
+Start-Service -Name wuauserv
+
+# Listar processos
+Get-Process
+
+# Listar atualizações instaladas
+Get-HotFix
+
+# Ver espaço em disco
+Get-PSDrive
+```
+
+### Logs e Diagnóstico
+
+| Ferramenta              | Descrição                            |
+|-------------------------|--------------------------------------|
+| Visualizador de Eventos | Logs de sistema, segurança e apps    |
+| `perfmon`               | Monitoramento de desempenho          |
+| `dxdiag`                | Diagnóstico gráfico e som            |
+| `Reliability Monitor`   | Histórico de estabilidade do sistema |
+
+### Backup e Restauração
+
+- **Histórico de Arquivos**: cópias automáticas de bibliotecas
+- **Backup e Restauração (Windows 7)**: imagem do sistema
+- **Ponto de Restauração**: snapshots do sistema
+- **OneDrive**: sincronização e backup na nuvem
+- **Ferramentas externas**: Cobian Backup, Acronis, Veeam Agent
+
+### Recursos Avançados (Servidor)
+
+| Recurso              | Função                                  |
+|----------------------|-----------------------------------------|
+| Active Directory     | Autenticação centralizada e políticas   |
+| DNS e DHCP           | Gerência de nomes e IPs na rede         |
+| Hyper-V              | Virtualização de servidores/desktops    |
+| RDP (Remote Desktop) | Acesso remoto ao sistema                |
+| WSUS                 | Atualizações centralizadas              |
+| Serviços de Arquivo  | Compartilhamento com cotas e permissões |
+
+### Questão de Concurso
+
+A ferramenta usada para editar políticas locais de segurança em estações Windows é:
+
+a) msconfig  
+b) regedit  
+c) services.msc  
+d) gpedit.msc  
+e) taskmgr
+
+> **Gabarito: d)** gpedit.msc
 
 ## Configuração e administração de servidores Windows Server 2016 e Linux
 
-## Configuração e administração de serviços 
+## Configuração e administração de serviços
+
 ### AD
+
 ### DNS
+
 ### DHCP
+
 ### GPO
 
 ## Administração de usuários
 
 ## Noções de administração de serviços:
+
 ### apache
+
 ### NFS
+
 ### Samba
+
 ### SSH
+
 ### cron
+
 ### sistemas de arquivos
 
 ## Noções de Virtualização
+
 ### Hypervisors
+
 ### containers
 
 ## Tecnologia de roteamento de pacotes
