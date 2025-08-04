@@ -2500,19 +2500,485 @@ e) Utilizar rsync com SSH e firewall ativo
 
 > **Gabarito: c)** Usar SSSD com Kerberos e LDAP integrados ao AD
 
-
-
 ## Configuração e administração de serviços
 
-### AD
+### Active Directory (AD) — Administração e Conceitos Fundamentais
 
-### DNS
+#### O que é o Active Directory?
 
-### DHCP
+Serviço de diretório da Microsoft que:
+- Armazena dados de objetos da rede.
+- Controla autenticação, autorização e diretivas de segurança.
+- Permite administração centralizada de recursos.
 
-### GPO
+#### Estrutura Lógica do AD
+
+| Elemento       | Descrição                                                             |
+|----------------|-----------------------------------------------------------------------|
+| **Domínio**    | Conjunto de objetos que compartilham políticas e segurança.           |
+| **DC**         | Controlador de Domínio: autentica logins e gerencia o AD.             |
+| **Árvore**     | Hierarquia de domínios.                                               |
+| **Floresta**   | Conjunto de árvores com relações de confiança.                        |
+| **OU**         | Contêiner lógico de objetos. Permite delegar administração.           |
+
+#### Protocolos
+
+| Protocolo  | Função                      |
+|------------|-----------------------------|
+| LDAP       | Leitura/gravação de dados.  |
+| Kerberos   | Autenticação.               |
+| DNS        | Localização de serviços AD. |
+
+#### Instalação no Windows Server
+
+```powershell
+Install-WindowsFeature -Name AD-Domain-Services
+Install-ADDSForest -DomainName "empresa.local"
+```
+
+#### Objetos no AD
+
+- Usuários
+- Computadores
+- Grupos
+- GPOs (ver seção específica)
+
+#### PowerShell Básico
+
+```powershell
+New-ADUser -Name "Rafael Sabioni" -SamAccountName rsabioni -AccountPassword (ConvertTo-SecureString "SenhaSegura123" -AsPlainText -Force) -Enabled $true
+New-ADOrganizationalUnit -Name "Concursados" -Path "DC=empresa,DC=local"
+```
+
+#### Segurança
+
+- Autenticação central com Kerberos.
+- Delegação de controle por OU.
+- ACLs nos objetos do AD.
+
+#### Modelo de Kurose & Ross
+
+| Camada     | Serviço no AD      |
+|------------|--------------------|
+| Aplicação  | LDAP, autenticação |
+| Transporte | TCP                |
+| Rede       | IP                 |
+| Enlace     | Ethernet           |
+
+#### Resumo
+
+- AD organiza recursos de rede em uma estrutura hierárquica.
+- Usa LDAP, Kerberos e DNS.
+- Administra usuários, grupos, OUs e políticas (GPOs).
+
+### DNS – Domain Name System
+
+Segundo Kurose & Ross (2014), o DNS é um serviço distribuído e hierárquico que traduz nomes simbólicos (como www.exemplo.com) em endereços IP (como 192.0.2.1).
+
+“O DNS é uma aplicação cliente-servidor essencial que fornece a resolução de nomes em grandes redes, como a Internet.” — Kurose & Ross
+
+#### Arquitetura do DNS
+
+| Componente                | Função                                                                        |
+|---------------------------|-------------------------------------------------------------------------------|
+| **Cliente (resolver)**    | Solicita resolução de nomes (ex: navegador, sistema operacional).             |
+| **Servidor DNS local**    | Servidor recursivo próximo ao host, consulta outros servidores se necessário. |
+| **Servidores raiz**       | Conhecem os servidores de domínio de topo (TLDs como `.com`, `.org`).         |
+| **Servidores TLD**        | Direcionam para os servidores autoritativos de domínios específicos.          |
+| **Servidor autoritativo** | Contém os registros reais de um domínio.                                      |
+
+#### Tipos de Resolução de Nomes
+
+1. **Iterativa:** servidor retorna indicações; o cliente faz novas requisições.
+
+2. **Recursiva:** servidor resolve toda a requisição e responde com o IP final.
+
+Tanenbaum (2011) destaca a eficiência da recursividade para clientes finais, com uso de cache.
+
+#### Tipos de Registros DNS
+
+| Tipo    | Descrição                                           |
+|---------|-----------------------------------------------------|
+| `A`     | Mapeia nome → IPv4                                  |
+| `AAAA`  | Mapeia nome → IPv6                                  |
+| `PTR`   | Mapeia IP → nome (resolução reversa)                |
+| `MX`    | Define servidores de e-mail                         |
+| `CNAME` | Alias (nome alternativo para outro domínio)         |
+| `NS`    | Define os servidores autoritativos de uma zona      |
+| `SOA`   | Informações básicas da zona (autoridade, TTL, etc.) |
+| `SRV`   | Localização de serviços específicos (ex: AD DS)     |
+
+#### Configuração do DNS no Windows Server
+
+**Instalar o servidor DNS**
+```
+Install-WindowsFeature -Name DNS -IncludeManagementTools
+```
+
+**Criar uma zona primária**
+```
+Add-DnsServerPrimaryZone -Name "empresa.local" -ZoneFile "empresa.local.dns"
+```
+
+**Adicionar registros A**
+```
+Add-DnsServerResourceRecordA -Name "intranet" -ZoneName "empresa.local" -IPv4Address "192.168.1.20"
+```
+
+#### Tipos de Zonas DNS
+
+| Tipo de Zona        | Características                                           |
+|---------------------|-----------------------------------------------------------|
+| **Primária**        | Armazena os registros localmente; permite edição.         |
+| **Secundária**      | Cópia de uma zona primária; leitura somente.              |
+| **Stub**            | Contém apenas registros mínimos (NS, SOA, A).             |
+| **Integrada ao AD** | Usa replicação automática entre controladores de domínio. |
+
+#### Segurança e DNS Dinâmico
+
+- DNS dinâmico: permite atualização automática de registros por clientes (como controladores de domínio).
+- DNSSEC: adiciona assinaturas digitais para garantir a autenticidade das respostas DNS.
+
+“A segurança de serviços de diretório depende da integridade das informações fornecidas pelo DNS.” — Stallings (2007)
+
+#### Ferramentas e Diagnóstico
+
+| Ferramenta/Comando     | Função                                                    |
+|------------------------|-----------------------------------------------------------|
+| `nslookup`             | Consulta DNS interativa.                                  |
+| `ipconfig /displaydns` | Exibe o cache DNS do sistema.                             |
+| `ipconfig /flushdns`   | Limpa o cache DNS local.                                  |
+| `dnscmd`               | Administra zonas e registros via CLI.                     |
+| `DNS Manager`          | Interface gráfica para configuração de zonas e registros. |
+
+#### Integração com o Active Directory
+
+- O AD depende de registros SRV no DNS para localizar controladores de domínio.
+- A prática recomendada é usar zonas integradas ao AD, com replicação segura via serviço de diretório.
+
+#### Aplicações Comuns em Concursos
+
+- Diferenciar registros (A, CNAME, MX, SRV, PTR);
+- Conhecer a hierarquia do DNS (raiz → TLD → autoritativo);
+- Entender os conceitos de resolução direta e reversa;
+- Identificar os tipos de zonas e quando usá-las;
+- Relacionar DNS ao funcionamento do Active Directory;
+- Conhecer os comandos de diagnóstico (nslookup, ipconfig).
+
+#### Resumo Final
+
+- DNS traduz nomes para endereços IP usando uma estrutura distribuída e hierárquica;
+- Tipos de zonas: primária, secundária, stub, integrada ao AD;
+- Registros comuns: A, MX, PTR, CNAME, SRV;
+- Ferramentas de diagnóstico importantes: nslookup, ipconfig, dnscmd;
+- DNS é essencial para o AD e pode ser protegido com DNSSEC.
+
+### DHCP – Dynamic Host Configuration Protocol
+
+#### O que é o DHCP?
+
+Protocolo que **atribui dinamicamente configurações IP** aos dispositivos de uma rede:
+- Endereço IP
+- Máscara de sub-rede
+- Gateway padrão
+- Servidor DNS
+
+#### Funcionamento
+
+1. **Discover** – Cliente busca servidores DHCP.
+2. **Offer** – Servidor oferece um IP.
+3. **Request** – Cliente escolhe e solicita IP.
+4. **ACK** – Servidor confirma a concessão.
+
+> Conhecido como processo **DORA** (Discover, Offer, Request, Acknowledge).
+
+#### Elementos do DHCP
+
+| Elemento     | Descrição                                                |
+|--------------|----------------------------------------------------------|
+| **Escopo**   | Faixa de IPs que podem ser atribuídos.                   |
+| **Lease**    | Tempo de validade da concessão de IP.                    |
+| **Reserva**  | IP fixo atribuído a um MAC específico.                   |
+| **Exclusão** | Endereços dentro do escopo que **não** devem ser usados. |
+
+#### Instalação no Windows Server
+
+```powershell
+Install-WindowsFeature -Name DHCP -IncludeManagementTools
+```
+
+#### Criar escopo
+
+```powershell
+Add-DhcpServerv4Scope -Name "RedeInterna" -StartRange 192.168.0.100 -EndRange 192.168.0.200 -SubnetMask 255.255.255.0
+```
+
+#### Autorizar o DHCP no AD
+
+```powershell
+Add-DhcpServerInDC -DnsName "srv-dhcp.empresa.local" -IpAddress 192.168.0.10
+```
+
+#### Segurança e Controle
+
+- O DHCP **pode ser explorado por invasores** para fornecer configurações maliciosas.
+- Em ambientes empresariais, **DHCP com autenticação e filtragem de MAC** é uma prática recomendada.
+- Relaciona-se com segurança da camada de enlace (**switch com DHCP snooping**).
+
+#### Diagnóstico e Administração
+
+| Ferramenta/Comando      | Finalidade                                |
+|-------------------------|-------------------------------------------|
+| `dhcpmgmt.msc`          | Interface gráfica para gerenciar escopos. |
+| `netsh dhcp`            | Interface CLI para administração.         |
+| `Get-DhcpServerv4Scope` | Ver escopos existentes via PowerShell.    |
+
+#### Integração com AD e DNS
+
+- Ao integrar com o AD, o DHCP pode registrar automaticamente os clientes no DNS.
+- Atualização dinâmica de registros A e PTR.
+
+#### Referências Bibliográficas Relacionadas
+
+| Conceito               | Referência                  |
+|------------------------|-----------------------------|
+| Alocação dinâmica IP   | **Kurose & Ross (2014)**    |
+| Protocolo DORA         | **Tanenbaum (2011)**        |
+| DHCP no Windows Server | **WARREN, Exam Ref 70-741** |
+| Prática e segurança    | **Torres (2009)**           |
+
+#### Resumo Final
+
+- O DHCP automatiza a configuração de IP na rede.
+- Utiliza processo DORA.
+- Recurso essencial em redes médias e grandes.
+- Pode ser integrado ao AD e DNS.
+
+### GPO – Group Policy Objects
+
+#### O que são as GPOs?
+
+São **objetos de política de grupo** usados para:
+- Controlar configurações de **usuários e computadores**.
+- Automatizar segurança, scripts, restrições, instalação de software.
+- Aplicadas em níveis: **site**, **domínio**, **OU**.
+
+#### Componentes de uma GPO
+
+| Componente          | Função                                                         |
+|---------------------|----------------------------------------------------------------|
+| **GPO (objeto)**    | Conjunto de configurações.                                     |
+| **GPMC**            | Console de Gerenciamento de Políticas de Grupo.                |
+| **GPO Link**        | Associa a GPO a um contêiner (site, domínio ou OU).            |
+| **RSoP**            | Resultado do conjunto de políticas aplicadas.                  |
+
+#### Ordem de Aplicação das GPOs
+
+1. **Local**
+2. **Site**
+3. **Domínio**
+4. **OU** (da mais geral para a mais específica)
+
+> A última aplicada prevalece, salvo restrições (como bloqueios e heranças).
+
+#### Herança e Precedência
+
+- As GPOs **herdam configurações** de contêineres superiores.
+- Pode-se **bloquear herança** ou usar **Forçar** para sobrepor prioridades.
+
+#### Exemplos de Configuração via GPO
+
+- Restringir acesso ao Painel de Controle.
+- Redirecionar pastas (ex: Documentos → servidor).
+- Scripts de logon/logoff.
+- Instalar softwares automaticamente.
+- Configurar políticas de senha e bloqueio de tela.
+
+#### GPOs de Segurança
+
+- Definir complexidade de senhas e número de tentativas.
+- Restringir dispositivos USB.
+- Aplicar firewall padrão em estações.
+- Impedir execução de aplicativos (AppLocker).
+
+#### Ferramentas e Diagnóstico
+
+| Ferramenta        | Função                                             |
+|-------------------|----------------------------------------------------|
+| `gpmc.msc`        | Console de Gerenciamento de Política de Grupo.     |
+| `gpedit.msc`      | Editor de política local (não AD).                 |
+| `gpupdate /force` | Atualiza políticas imediatamente.                  |
+| `gpresult /r`     | Exibe resultado de políticas aplicadas no sistema. |
+| `rsop.msc`        | Mostra o Resultado do Conjunto de Políticas.       |
+
+#### Integração com o Active Directory
+
+- GPOs são vinculadas a **domínios e OUs**.
+- Aplicadas apenas em **usuários e computadores** autenticados no domínio.
+- Usadas para **padronizar ambientes corporativos**.
+
+#### Referências Bibliográficas Relacionadas
+
+| Tópico                      | Referência                  |
+|-----------------------------|-----------------------------|
+| Estrutura de GPO            | **WARREN, Exam Ref 70-741** |
+| Políticas e gerenciamento   | **Tanenbaum (2011)**        |
+| Prática em AD               | **Torres (2009)**           |
+| Ferramentas administrativas | **Microsoft Docs**          |
+
+#### Resumo Final
+
+- GPOs centralizam e padronizam a configuração de usuários e computadores.
+- Aplicam-se em níveis hierárquicos com herança e precedência.
+- Ferramentas como `gpmc.msc`, `gpresult`, `gpupdate` são essenciais para diagnóstico.
+- Muito cobradas em concursos na área de administração de sistemas.
 
 ## Administração de usuários
+
+### Administração de Usuários no Windows Serve
+
+- Um **objeto do Active Directory** que representa uma identidade digital.
+- Pode autenticar, acessar recursos, aplicar políticas (GPO), entre outros.
+- Pode ser **usuário local** ou **usuário de domínio**.
+
+
+#### Atributos Importantes do Usuário
+
+| Atributo         | Função                                              |
+|------------------|-----------------------------------------------------|
+| `SamAccountName` | Nome de logon (ex: jdoe).                           |
+| `UPN`            | Nome de usuário no formato `usuario@dominio.local`. |
+| `SID`            | Identificador exclusivo de segurança do usuário.    |
+| `Home Directory` | Diretório pessoal do usuário.                       |
+| `MemberOf`       | Grupos aos quais pertence (controla permissões).    |
+
+#### Criando e Gerenciando Usuários
+
+**Via GUI (Server Manager)**
+
+1. Acesse **"Active Directory Users and Computers"** (`dsa.msc`).
+2. Botão direito na OU → *New > User*.
+3. Preencha nome, senha e opções como "Senha nunca expira".
+ 
+**Via PowerShell**
+
+```
+# Criar usuário
+New-ADUser -Name "Rafael Dias" -SamAccountName rdias `
+  -UserPrincipalName rsabioni@empresa.local `
+  -AccountPassword (ConvertTo-SecureString "Senha@123" -AsPlainText -Force) `
+  -Enabled $true
+
+# Habilitar conta
+Enable-ADAccount -Identity "rsabioni"
+
+# Definir senha
+Set-ADAccountPassword -Identity "rsabioni" -Reset -NewPassword (ConvertTo-SecureString "NovaSenha123" -AsPlainText -Force)
+```
+
+#### Administração Comum
+
+| Ação                  | Comando PowerShell                                       |
+|-----------------------|----------------------------------------------------------|
+| Listar usuários       | `Get-ADUser -Filter *`                                   |
+| Bloquear conta        | `Disable-ADAccount -Identity nomeUsuario`                |
+| Mover para uma OU     | `Move-ADObject -Identity ... -TargetPath "OU=..."`       |
+| Adicionar a grupo     | `Add-ADGroupMember -Identity "Grupo" -Members "Usuario"` |
+| Ver grupos do usuário | `Get-ADUser nomeUsuario -Properties MemberOf`            |
+
+#### Políticas e Segurança
+
+- Exigir senhas complexas: via GPO.
+- Bloqueio após tentativas de login: via política de conta.
+- Delegação de permissões: operadores de conta de usuário podem ser delegados para criação de usuários sem ser administradores.
+
+#### Princípios de Segurança (Tanenbaum, Stallings)
+
+- Mínimo privilégio: atribuir somente o necessário.
+- Segregação de funções: separar quem cria usuários de quem gerencia permissões.
+- Auditoria: habilitar logs de criação, alteração e exclusão de contas.
+
+#### Prática em Ambiente Corporativo
+
+| Prática                     | Objetivo                                     |
+|-----------------------------|----------------------------------------------|
+| Criar contas em lote        | Automatizar criação de múltiplos usuários.   |
+| Desabilitar conta inativa   | Manutenção de segurança e conformidade.      |
+| Redefinir senhas em massa   | Política preventiva de segurança.            |
+| Usar scripts para auditoria | Validar conformidade com políticas internas. |
+
+#### Resumo Final
+- Usuários são objetos essenciais no AD.
+- Podem ser criados via GUI ou PowerShell.
+- Pertencem a grupos, seguem GPOs e políticas de senha.
+- Devem ser monitorados e auditados por questões de segurança.
+
+### Administração de Usuários no Linux
+
+#### O que é um Usuário no Linux?
+
+- Identidade que permite autenticação e autorização.
+- Associado a um **UID** (User ID) numérico único.
+- Possui um **grupo primário** (GID) e possivelmente grupos secundários.
+- Dados armazenados em arquivos como `/etc/passwd`, `/etc/shadow`, `/etc/group`.
+
+
+#### Arquivos Importantes
+
+| Arquivo           | Função                                                    |
+|-------------------|-----------------------------------------------------------|
+| `/etc/passwd`     | Informações básicas do usuário (nome, UID, shell padrão). |
+| `/etc/shadow`     | Senhas criptografadas e políticas de senha.               |
+| `/etc/group`      | Definição dos grupos do sistema.                          |
+| `/etc/login.defs` | Configurações padrão para usuários e senhas.              |
+
+#### Comandos Básicos de Administração de Usuários
+
+| Comando   | Função                                      |
+|-----------|---------------------------------------------|
+| `useradd` | Criar um novo usuário.                      |
+| `usermod` | Modificar propriedades do usuário.          |
+| `userdel` | Remover usuário do sistema.                 |
+| `passwd`  | Alterar senha do usuário.                   |
+| `id`      | Exibe UID, GID e grupos de um usuário.      |
+| `groups`  | Lista grupos dos quais o usuário faz parte. |
+
+
+#### Exemplo de Criação de Usuário
+
+```bash
+# Criar usuário com diretório home
+sudo useradd -m -s /bin/bash rafael
+
+# Definir senha
+sudo passwd rafael
+
+# Adicionar usuário a grupo 'sudo'
+sudo usermod -aG sudo rafael
+```
+
+#### Gerenciamento de Grupos
+
+| Comando                    | Função                      |
+|----------------------------|-----------------------------|
+| `groupadd`                 | Criar um novo grupo.        |
+| `groupmod`                 | Modificar grupo existente.  |
+| `groupdel`                 | Apagar grupo.               |
+| `gpasswd -a usuario grupo` | Adicionar usuário ao grupo. |
+
+####  Segurança e Políticas
+
+- Senhas armazenadas em /etc/shadow com hashes seguros.
+- Política de senhas configurada em /etc/login.defs (ex: comprimento mínimo).
+- Controle de acesso via permissões de arquivo e grupos.
+- Ferramentas adicionais: SELinux, AppArmor.
+
+#### Auditoria e Logs
+
+- Logs de autenticação: /var/log/auth.log ou /var/log/secure.
+- Comandos para auditoria: last, lastlog, faillog.
+- Monitoramento de alterações em /etc/passwd e /etc/shadow.
+
 
 ## Noções de administração de serviços:
 
