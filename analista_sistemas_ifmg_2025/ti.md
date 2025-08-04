@@ -3466,11 +3466,115 @@ chown rafael:rafael arquivo
 - Ferramentas como fsck, lsblk, df, du são fundamentais.
 
 
-## Noções de Virtualização
+## Noções de Virtualização: Hypervisors e Containers
 
-### Hypervisors
+### O que é Virtualização?
 
-### containers
+Virtualização é a técnica de criar uma versão **virtual** de um recurso computacional, como:
+
+- Um sistema operacional
+- Um servidor
+- Um disco rígido
+- Um switch de rede
+
+> Permite isolar ambientes, otimizar recursos e escalar sistemas de forma eficiente.
+
+###  Hypervisors
+
+- Software responsável por criar e gerenciar máquinas virtuais (**VMs**).
+- Também chamados de **VMMs** (Virtual Machine Monitors).
+
+#### Tipos:
+
+| Tipo                    | Descrição                                                   | Exemplos                            |
+|-------------------------|-------------------------------------------------------------|-------------------------------------|
+| **Tipo 1 (bare-metal)** | Executa diretamente no hardware físico (não depende de SO). | VMware ESXi, Microsoft Hyper-V, KVM |
+| **Tipo 2 (hosted)**     | Executa sobre um sistema operacional já instalado.          | VirtualBox, VMware Workstation      |
+
+#### Comparativo:
+
+| Característica     | Tipo 1                      | Tipo 2                      |
+|--------------------|-----------------------------|-----------------------------|
+| Desempenho         | Alto                        | Médio a baixo               |
+| Complexidade       | Alta                        | Baixa                       |
+| Usabilidade        | Ambientes de produção       | Ambientes de teste          |
+
+#### Principais Hypervisors
+
+- **KVM (Linux)**: kernel-based, nativo no Linux.
+- **VirtualBox**: multiplataforma, interface gráfica amigável.
+- **VMware ESXi**: robusto, amplamente utilizado em data centers.
+- **Hyper-V (Windows Server)**: integração nativa em sistemas Microsoft.
+
+#### Containers
+
+- Alternativa leve às máquinas virtuais.
+- Compartilham o kernel do sistema operacional, mas isolam processos e bibliotecas.
+- Mais rápidos, leves e portáveis que VMs.
+
+**Vantagens:**
+
+- Inicialização rápida
+- Baixo consumo de recursos
+- Portabilidade (ex: via DockerHub)
+- Ideal para microserviços e DevOps
+
+#### Containers vs Máquinas Virtuais
+
+| Característica      | Containers           | Máquinas Virtuais    |
+|---------------------|----------------------|----------------------|
+| Isolamento          | A nível de processo  | A nível de hardware  |
+| Sistema operacional | Compartilhado (host) | Completo (convidado) |
+| Inicialização       | Segundos             | Minutos              |
+| Tamanho             | Pequeno (MB)         | Grande (GB)          |
+
+#### Docker: o container mais popular
+
+**Instalação no Linux (Debian/Ubuntu)**
+
+```
+sudo apt update
+sudo apt install docker.io
+sudo systemctl enable --now docker
+```
+
+#### Comandos básicos
+
+**Ver versão**
+```
+docker version
+```
+
+**Executar um container**
+```
+docker run -it ubuntu bash
+```
+
+**Listar containers**
+```
+docker ps -a
+```
+
+**Listar imagens baixadas**
+```
+docker images
+```
+
+**Parar container**
+```
+docker stop container_id
+```
+
+#### Segurança em Containers
+- Uso de namespaces e cgroups para isolamento.
+- Evitar execução como root.
+- Monitoramento com ferramentas como docker scan, Podman, Sysdig.
+
+#### Resumo
+- Virtualização permite isolar ambientes usando VMs ou containers.
+- Hypervisors Tipo 1 oferecem maior desempenho e são usados em produção.
+- Containers são leves, rápidos e ideais para aplicações modernas.
+- Conhecer ambos é essencial para concursos e ambientes corporativos.
 
 ## Tecnologia de roteamento de pacotes
 
