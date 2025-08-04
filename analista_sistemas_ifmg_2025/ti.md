@@ -2982,17 +2982,489 @@ sudo usermod -aG sudo rafael
 
 ## Noções de administração de serviços:
 
-### apache
+### O que é o Apache?
 
-### NFS
+- Servidor HTTP open-source amplamente utilizado para **hospedar sites e aplicações web**.
+- Compatível com módulos como PHP, SSL, rewrite, auth, etc.
+
+#### Instalação
+
+**Debian/Ubuntu**
+
+```bash
+sudo apt update
+sudo apt install apache2
+```
+
+**RHEL/CentOS**
+```
+sudo yum install httpd
+```
+
+#### Comandos Básicos
+
+| Ação                       | Comando                              |
+|----------------------------|--------------------------------------|
+| Iniciar o serviço          | `sudo systemctl start apache2`       |
+| Habilitar na inicialização | `sudo systemctl enable apache2`      |
+| Verificar status           | `sudo systemctl status apache2`      |
+| Editar configuração        | `/etc/apache2/apache2.conf` (Debian) |
+| Local padrão dos sites     | `/var/www/html`                      |
+
+#### Segurança
+
+- Configurar firewall (ufw):
+```
+sudo ufw allow 'Apache Full'
+```
+
+- Ativar HTTPS com Let’s Encrypt:
+```
+sudo apt install certbot python3-certbot-apache
+sudo certbot --apache
+```
+
+#### Arquivos Importantes
+
+| Arquivo                         | Função                             |
+|---------------------------------|------------------------------------|
+| `/etc/apache2/apache2.conf`     | Arquivo principal de configuração. |
+| `/etc/apache2/sites-available/` | Virtual hosts configuráveis.       |
+| `/var/log/apache2/access.log`   | Log de acessos.                    |
+| `/var/log/apache2/error.log`    | Log de erros.                      |
+
+#### Diagnóstico
+
+- Testar configuração:
+```
+ apache2ctl configtest
+```
+
+- Monitorar portas:
+ ```
+sudo netstat -tuln | grep 80
+```
+
+### NFS (Network File System)
+
+#### O que é o NFS?
+
+- Protocolo que permite que sistemas Linux **compartilhem diretórios via rede**.
+- Utilizado em ambientes corporativos para montar volumes remotos como se fossem locais.
+
+
+#### Instalação
+
+**Servidor NFS**
+
+```bash
+sudo apt update
+sudo apt install nfs-kernel-server
+```
+
+**Cliente NFS**
+
+```bash
+sudo apt install nfs-common
+```
+
+#### Arquivo de Exportação
+
+Edite o arquivo `/etc/exports` para definir os diretórios compartilhados:
+
+```bash
+/home/compartilhado 192.168.1.0/24(rw,sync,no_subtree_check)
+```
+
+- `rw`: leitura e escrita.
+- `sync`: grava dados no disco antes de responder.
+- `no_subtree_check`: melhora desempenho.
+
+#### Comandos para Ativação
+
+```bash
+sudo exportfs -a
+sudo systemctl restart nfs-kernel-server
+```
+
+Verificar o que está sendo exportado:
+
+```bash
+sudo exportfs -v
+```
+
+#### No Cliente
+
+Criar ponto de montagem e montar:
+
+```bash
+sudo mkdir /mnt/remoto
+sudo mount 192.168.1.100:/home/compartilhado /mnt/remoto
+```
+
+Montagem automática em `/etc/fstab`:
+
+```fstab
+192.168.1.100:/home/compartilhado /mnt/remoto nfs defaults 0 0
+```
+
+#### Segurança
+
+- Restringir IPs no `/etc/exports`.
+- Usar firewall (`ufw`, `iptables`) para limitar portas.
+- Para autenticação e criptografia, recomenda-se **Kerberos (NFSv4)**.
+
+#### Logs e Diagnóstico
+
+| Comando                 | Função                                  |
+|-------------------------|-----------------------------------------|
+| `showmount -e servidor` | Lista os diretórios exportados.         |
+| `mount -t nfs ...`      | Monta recurso NFS.                      |
+| `dmesg`                 | Mostra mensagens do kernel (erros NFS). |
+
+#### Resumo
+
+- NFS permite compartilhamento de arquivos entre sistemas Linux.
+- Fácil de configurar, mas exige atenção à segurança.
+- Muito usado em servidores de arquivos, clusters e ambientes Unix.
+
 
 ### Samba
 
+#### O que é o Samba?
+
+- Software livre que permite que sistemas Linux **compartilhem arquivos e impressoras** com máquinas Windows.
+- Implementa o protocolo **SMB/CIFS**.
+
+#### Instalação
+
+```bash
+sudo apt update
+sudo apt install samba
+```
+
+#### Arquivo de Configuração
+
+Local: `/etc/samba/smb.conf`
+
+Exemplo básico:
+
+```ini
+[global]
+   workgroup = WORKGROUP
+   security = user
+   map to guest = Bad User
+
+[Compartilhamento]
+   path = /srv/samba/publico
+   read only = no
+   browsable = yes
+   guest ok = yes
+```
+
+#### Criar Diretório Compartilhado
+
+```bash
+sudo mkdir -p /srv/samba/publico
+sudo chown -R nobody:nogroup /srv/samba/publico
+sudo chmod -R 0775 /srv/samba/publico
+```
+
+#### Adicionar Usuário Samba
+
+```bash
+sudo smbpasswd -a rafael
+```
+
+#### Comandos de Serviço
+
+| Comando                          | Função                                     |
+|----------------------------------|--------------------------------------------|
+| `sudo systemctl restart smbd`    | Reinicia o serviço Samba.                  |
+| `testparm`                       | Valida configuração do `smb.conf`.         |
+| `smbstatus`                      | Exibe status atual do Samba.               |
+| `pdbedit -L`                     | Lista usuários do Samba.                   |
+
+#### Acesso pelo Windows
+
+No Windows Explorer:
+```
+\192.168.1.10\Compartilhamento
+```
+
+#### Segurança
+
+- Evite permissões amplas com `guest ok = yes` sem autenticação.
+- Use contas restritas e senhas fortes.
+- Configure firewall para permitir portas 137–139 e 445 (TCP/UDP).
+
+#### Logs e Diagnóstico
+
+| Arquivo / Comando        | Descrição                               |
+|--------------------------|-----------------------------------------|
+| `/var/log/samba/`        | Logs detalhados de acesso e erros.      |
+| `smbclient -L localhost` | Lista os compartilhamentos disponíveis. |
+
+#### Resumo
+
+- Samba compartilha arquivos entre Linux e Windows.
+- Configura-se via `/etc/samba/smb.conf`.
+- Segurança deve ser cuidadosamente controlada.
+
+
 ### SSH
 
-### cron
+#### Administração do Serviço SSH (Secure Shell)
+
+#### O que é o SSH?
+
+- Protocolo seguro de acesso remoto a sistemas Linux/Unix.
+- Substitui serviços inseguros como Telnet e FTP.
+- Permite:
+  - Conexões remotas seguras (shell)
+  - Cópia de arquivos (`scp`, `sftp`)
+  - Encaminhamento de portas (túneis)
+  - Acesso com chave pública
+
+#### Instalação
+
+```
+sudo apt update
+sudo apt install openssh-server
+```
+
+#### Verificar status
+
+```
+sudo systemctl status ssh
+```
+
+#### Conexão com SSH
+
+```
+ssh usu ario@192.168.1.100
+```
+
+#### Autenticação com Chave Pública
+
+**No cliente:**
+
+```
+ssh-keygen
+ssh-copy-id usuario@192.168.1.100
+```
+A chave será copiada para ~/.ssh/authorized_keys no servidor.
+
+#### Arquivo de Configuração
+
+**Parâmetros importantes:**
+```
+Port 22
+PermitRootLogin no
+PasswordAuthentication yes
+PubkeyAuthentication yes
+```
+
+**Reiniciar após alterações:**
+```
+sudo systemctl restart ssh
+```
+
+#### Boas Práticas de Segurança
+
+| Medida                      | Justificativa                               |
+|-----------------------------|---------------------------------------------|
+| Desabilitar login root      | Evita acesso direto à conta administrativa. |
+| Alterar porta padrão (22)   | Reduz ataques automatizados.                |
+| Usar autenticação por chave | Mais seguro que senha.                      |
+| Limitar IPs com firewall    | Controla quem pode acessar remotamente.     |
+| Monitorar com `fail2ban`    | Bloqueia IPs após tentativas falhas.        |
+
+#### Logs e Diagnóstico
+
+| Comando/Arquivo     | Descrição                        |                                       |
+|---------------------|----------------------------------|---------------------------------------|
+| `/var/log/auth.log` | Log de autenticações SSH.        |                                       |
+| `ssh -v usuario@ip` | Modo verboso (debug) na conexão. |                                       |
+| \`ss -tnlp          | grep ssh\`                       | Verifica se o serviço está escutando. |
+
+#### Resumo
+
+- SSH é a principal ferramenta de administração remota.
+- Requer configuração cuidadosa de segurança.
+- Permite acesso com senha ou chave pública.
+- Serviço essencial em servidores Linux.
+
+
+### cron (Agendador de Tarefas)
+
+#### O que é o cron?
+
+- Serviço utilizado para **agendar comandos ou scripts** para execução automática em horários e datas específicas.
+- Utiliza arquivos chamados **crontabs**.
+- Essencial para rotinas administrativas, backups, atualizações, monitoramento, entre outros.
+
+#### Estrutura da Crontab
+
+Cada linha do crontab segue o seguinte formato:
+
+MIN HORA DIA MÊS DIA-SEMANA COMANDO
+
+| Campo         | Valores Possíveis                 |
+|---------------|-----------------------------------|
+| Minuto        | 0–59                              |
+| Hora          | 0–23                              |
+| Dia do mês    | 1–31                              |
+| Mês           | 1–12                              |
+| Dia da semana | 0–7 (0 e 7 = Domingo)             |
+| Comando       | Comando ou script a ser executado |
+
+**Exemplo**:
+```
+30 2 * * 1 /usr/local/bin/backup.sh
+```
+
+Executa o script backup.sh toda segunda-feira às 2h30 da manhã.
+
+#### Comandos Comuns
+
+| Ação                       | Comando              |
+|----------------------------|----------------------|
+| Editar crontab do usuário  | `crontab -e`         |
+| Listar tarefas agendadas   | `crontab -l`         |
+| Remover crontab do usuário | `crontab -r`         |
+| Ver crontab de outro user  | `crontab -u nome -l` |
+
+#### Arquivos Importantes
+
+| Arquivo                    | Descrição                                          |
+|----------------------------|----------------------------------------------------|
+| `/etc/crontab`             | Crontab do sistema (formato com campo de usuário). |
+| `/etc/cron.d/`             | Scripts agendados com formato próprio.             |
+| `/var/spool/cron/crontabs` | Crontabs dos usuários.                             |
+
+#### Scripts em Diretórios Especiais
+
+- Tarefas podem ser colocadas nos diretórios:
+
+| Diretório           | Frequência             |
+|---------------------|------------------------|
+| `/etc/cron.hourly`  | Executado a cada hora  |
+| `/etc/cron.daily`   | Executado diariamente  |
+| `/etc/cron.weekly`  | Executado semanalmente |
+| `/etc/cron.monthly` | Executado mensalmente  |
+
+Scripts devem ser executáveis (chmod +x).
+
+#### Logs e Diagnóstico
+
+| Ferramenta / Arquivo                     | Descrição                              |
+|------------------------------------------|----------------------------------------|
+| `/var/log/syslog` ou `/var/log/cron.log` | Log de execuções do cron               |
+| `grep CRON /var/log/syslog`              | Ver apenas linhas relacionadas ao cron |
+| `systemctl status cron`                  | Verificar se o serviço está ativo      |
+
+#### Permissões
+
+- Arquivos que controlam quem pode usar cron:
+
+| Arquivo           | Função                                      |
+|-------------------|---------------------------------------------|
+| `/etc/cron.allow` | Lista de usuários permitidos a usar `cron`. |
+| `/etc/cron.deny`  | Lista de usuários **bloqueados**.           |
+
+#### Resumo
+- cron é essencial para automação no Linux.
+- Configurado via crontab ou diretórios específicos.
+- Usa sintaxe baseada em tempo e dia da semana.
+- Logs e permissões devem ser monitorados cuidadosamente.
 
 ### sistemas de arquivos
+
+#### O que é um Sistema de Arquivos?
+
+- Estrutura lógica usada para organizar e armazenar dados em dispositivos de armazenamento.
+- Define como os arquivos são nomeados, acessados, armazenados e protegidos.
+
+#### Principais Sistemas de Arquivos no Linux
+
+| Sistema de Arquivos | Características principais                                        |
+|---------------------|-------------------------------------------------------------------|
+| **ext4**            | Padrão atual no Linux; journaling; suporte a arquivos grandes.    |
+| **XFS**             | Alta performance com arquivos grandes; muito usado em servidores. |
+| **Btrfs**           | Suporte a snapshots e compressão; ainda em amadurecimento.        |
+| **FAT32 / exFAT**   | Compatível com Windows, mas sem suporte a permissões.             |
+| **NTFS**            | Utilizado em discos Windows; suporte via `ntfs-3g`.               |
+
+
+#### Comandos Essenciais
+
+| Ação                        | Comando                      |
+|-----------------------------|------------------------------|
+| Verificar sistemas montados | `df -h`                      |
+| Ver dispositivos de bloco   | `lsblk`                      |
+| Criar sistema de arquivos   | `mkfs.ext4 /dev/sdX1`        |
+| Montar sistema manualmente  | `mount /dev/sdX1 /mnt/ponto` |
+| Desmontar                   | `umount /mnt/ponto`          |
+| Ver uso por pasta           | `du -sh /caminho/`           |
+
+#### Montagem Permanente (via /etc/fstab)
+
+Exemplo de linha no `/etc/fstab`:
+
+```
+/dev/sdb1   /mnt/dados    ext4    defaults    0   2
+```
+
+> Erros nesse arquivo podem impedir a inicialização correta do sistema.
+
+
+#### Permissões e Propriedades
+
+Linux usa permissões baseadas em usuário (owner), grupo e outros.
+
+**Visualizar permissões:**
+```
+ls -l
+```
+
+**Modificar permissões:**
+```
+chmod 755 arquivo
+chown rafael:rafael arquivo
+```
+
+| Símbolo | Significado   |
+|---------|---------------|
+| `r`     | leitura       |
+| `w`     | escrita       |
+| `x`     | execução      |
+| `-`     | sem permissão |
+
+
+#### Verificação e Diagnóstico
+
+| Comando                | Função                                          |
+|------------------------|-------------------------------------------------|
+| `fsck /dev/sdX1`       | Verifica e repara erros no sistema de arquivos. |
+| `tune2fs -l /dev/sdX1` | Exibe parâmetros do sistema de arquivos ext4.   |
+| `mount -a`             | Re-monta sistemas com base no fstab.            |
+
+#### Arquivos Importantes
+
+| Arquivo            | Descrição                      |
+|--------------------|--------------------------------|
+| `/etc/fstab`       | Montagem automática no boot.   |
+| `/etc/mtab`        | Sistemas montados atualmente.  |
+| `/proc/partitions` | Lista de partições detectadas. |
+
+#### Resumo
+- Conhecimento de sistemas de arquivos é essencial para administração.
+- ext4 é o padrão atual, mas XFS e Btrfs ganham espaço.
+- Permissões controlam segurança dos arquivos.
+- O /etc/fstab define a montagem automática.
+- Ferramentas como fsck, lsblk, df, du são fundamentais.
+
 
 ## Noções de Virtualização
 
