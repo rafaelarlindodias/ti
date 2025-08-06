@@ -3578,35 +3578,893 @@ docker stop container_id
 
 ## Tecnologia de roteamento de pacotes
 
+### O que é Roteamento?
+
+- Roteamento é o processo de **encaminhamento de pacotes** entre redes interconectadas.
+- Realizado por dispositivos chamados **roteadores**.
+- Utiliza **tabelas de roteamento** e algoritmos para determinar o melhor caminho.
+
+### Comutação de Pacotes vs. Circuitos
+
+| Característica       | Comutação de Pacotes | Comutação de Circuitos         |
+|----------------------|----------------------|--------------------------------|
+| Alocação de recursos | Dinâmica             | Reservada                      |
+| Eficiência           | Alta                 | Baixa em redes com pouca carga |
+| Exemplo              | IP, Internet         | Telefonia tradicional          |
+
+### Tipos de Roteamento
+
+| Tipo         | Características                           |
+|--------------|-------------------------------------------|
+| **Estático** | Configurado manualmente.                  |
+| **Dinâmico** | Protocolos ajustam rotas automaticamente. |
+
+### Protocolos de Roteamento
+
+#### Roteamento Interno (IGP)
+
+| Protocolo | Descrição                                         |
+|-----------|---------------------------------------------------|
+| **RIP**   | Simples, baseado em número de saltos (hop count). |
+| **OSPF**  | Utiliza algoritmo de Dijkstra (link-state).       |
+| **EIGRP** | Protocolo proprietário Cisco.                     |
+
+#### Roteamento Externo (EGP)
+
+| Protocolo | Descrição                                        |
+|-----------|--------------------------------------------------|
+| **BGP**   | Usado na Internet para troca de rotas entre ASs. |
+
+### Endereçamento IP e Roteamento
+
+- Divisão entre **rede** e **host** feita pela **máscara de sub-rede**.
+- Roteadores tomam decisões com base no **prefixo IP mais específico** (Longest Prefix Match).
+
+### Tabela de Roteamento
+
+Exemplo de comando:
+
+```
+ip route show
+```
+
+Saída típica:
+```
+default via 192.168.0.1 dev eth0
+192.168.0.0/24 dev eth0 proto kernel scope link src 192.168.0.10
+```
+
+### Algoritmos de Roteamento
+
+| Algoritmo       | Tipo                    | Utilizado em |
+|-----------------|-------------------------|--------------|
+| Distance Vector | Distribuído             | RIP          |
+| Link-State      | Baseado em mapa da rede | OSPF         |
+| Path Vector     | Externo                 | BGP          |
+
+### Diagnóstico e Monitoramento
+
+| Comando       | Função                         |
+|---------------|--------------------------------|
+| `traceroute`  | Exibe o caminho de pacotes     |
+| `ping`        | Testa conectividade de rede    |
+| `netstat -rn` | Mostra a tabela de roteamento  |
+| `ip route`    | Configuração de rotas no Linux |
+
+
+### Resumo
+
+- O roteamento é essencial para o funcionamento da Internet.
+- Usa algoritmos e protocolos para determinar os melhores caminhos.
+- Protocolos como RIP, OSPF, BGP têm papéis distintos.
+- É fundamental compreender comutação de pacotes e estruturas de rotas.
+
 ## Gerência de redes
+
+### O que é Gerência de Redes?
+
+- Conjunto de atividades para **monitorar, controlar, configurar e diagnosticar redes**.
+- Envolve tanto aspectos **técnicos** quanto **administrativos**.
+- Essencial em ambientes corporativos e críticos (governos, bancos, universidades).
+
+### Elementos da Gerência de Redes
+
+| Elemento                              | Função                                  |
+|---------------------------------------|-----------------------------------------|
+| **NMS (Network Management Station)**  | Sistema que centraliza o gerenciamento. |
+| **Agentes de Gerência**               | Softwares nos dispositivos gerenciados. |
+| **MIB (Management Information Base)** | Base de dados com objetos monitoráveis. |
+| **Protocolos de Gerência**            | SNMP, RMON, NetFlow, etc.               |
+
+#### Modelo de Gerência da ISO (FCAPS)
+
+| Componente            | Descrição                                   |
+|-----------------------|---------------------------------------------|
+| **F - Fault**         | Detecção e correção de falhas.              |
+| **C - Configuration** | Gerenciamento de parâmetros e dispositivos. |
+| **A - Accounting**    | Registro de uso de recursos.                |
+| **P - Performance**   | Monitoramento de desempenho.                |
+| **S - Security**      | Controle de acesso e integridade.           |
+
+#### SNMP - Simple Network Management Protocol
+
+**Principais versões:**
+- **SNMPv1**: Básico e sem segurança.
+- **SNMPv2c**: Melhorias de desempenho, segurança ainda fraca.
+- **SNMPv3**: Criptografia e autenticação.
+
+#### Operações SNMP:
+
+| Operação | Função                         |
+|----------|--------------------------------|
+| `GET`    | Recupera valor de um objeto.   |
+| `SET`    | Define valor de um objeto.     |
+| `TRAP`   | Envia alerta do agente ao NMS. |
+
+#### Ferramentas de Gerência
+
+| Ferramenta   | Descrição                                 |
+|--------------|-------------------------------------------|
+| **Zabbix**   | Monitoramento ativo com agentes próprios. |
+| **Nagios**   | Monitoramento baseado em plugins.         |
+| **Net-SNMP** | Implementa agentes SNMP em sistemas Unix. |
+| **Cacti**    | Gráficos via SNMP e RRDTool.              |
+
+#### Práticas Relevantes
+
+- Monitorar links, interfaces, disponibilidade e latência.
+- Criar alertas de falhas e desempenho.
+- Utilizar logs centralizados (`syslog`, `rsyslog`).
+- Implementar métricas e dashboards.
+
+#### Segurança na Gerência
+
+- **Isolar a gerência em VLANs ou redes dedicadas**.
+- **Desabilitar SNMPv1 e v2** em redes modernas.
+- **Autenticação forte e logs de auditoria.**
+
+#### Resumo
+
+- A gerência de redes é um dos pilares da operação de TI.
+- Baseia-se no modelo FCAPS e em protocolos como SNMP.
+- Exige o uso de ferramentas para monitoramento e controle.
+- Segurança e desempenho devem ser monitorados constantemente.
 
 ## Auditoria de redes
 
-## Detecção e correço de problemas de nível físico e lógico; Segurança de redes
+### Auditoria de Redes
 
-## Noções de tecnologias Voip e SIP
+- Processo sistemático de **verificação, análise e avaliação** das políticas, práticas e dispositivos de uma rede.
+- Objetivo: garantir **segurança, conformidade, desempenho** e detectar vulnerabilidades.
+- Pode ser **interna** (equipe da própria instituição) ou **externa** (empresa especializada).
 
----
+#### Objetivos da Auditoria
+
+| Objetivo         | Descrição                                          |
+|------------------|----------------------------------------------------|
+| **Segurança**    | Verificar controles de acesso, firewalls, senhas.  |
+| **Conformidade** | Checar aderência a normas (LGPD, ISO 27001, etc.). |
+| **Desempenho**   | Avaliar uso da largura de banda e disponibilidade. |
+| **Inventário**   | Documentar ativos de rede (switches, servidores).  |
+| **Diagnóstico**  | Identificar riscos e anomalias.                    |
+
+#### Itens Auditáveis
+
+| Item                       | Exemplos                              |
+|----------------------------|---------------------------------------|
+| **Topologia da Rede**      | Mapeamento físico e lógico            |
+| **Equipamentos de Rede**   | Roteadores, switches, firewalls       |
+| **Configurações**          | Tabelas de roteamento, NAT, VLANs     |
+| **Logs de Sistema**        | Acessos, falhas, eventos suspeitos    |
+| **Controles de Acesso**    | ACLs, senhas, autenticação multifator |
+| **Atualizações e Patches** | Correções aplicadas ou pendentes      |
+
+#### Ferramentas Comuns
+
+| Ferramenta        | Função                                  |
+|-------------------|-----------------------------------------|
+| **Wireshark**     | Captura e análise de pacotes            |
+| **Nmap**          | Descoberta de hosts e serviços          |
+| **NetFlow/sFlow** | Monitoramento de tráfego em tempo real  |
+| **Snort**         | IDS/IPS para detecção de intrusões      |
+| **Logwatch**      | Análise automatizada de logs do sistema |
+
+#### Aspectos Legais e Normativos
+
+- **LGPD**: exige registros de acesso, medidas de segurança e proteção de dados.
+- **ISO/IEC 27001**: estabelece padrões de segurança da informação.
+- **IN nº 5/2021 (ME)**: diretrizes para governança e segurança de redes no setor público.
+
+#### Etapas de uma Auditoria
+
+1. **Planejamento**
+  - Definir escopo, ferramentas, cronograma e equipe.
+2. **Levantamento de Dados**
+  - Coleta de topologia, configurações, logs, políticas.
+3. **Análise Crítica**
+  - Avaliar conformidade com padrões e melhores práticas.
+4. **Teste de Segurança**
+  - Pentests, escaneamentos, checagem de portas e serviços.
+5. **Relatório Final**
+  - Entregar documentação com recomendações e plano de ação.
+
+#### Exemplos de Métricas Auditadas
+
+- Taxa de disponibilidade (uptime)
+- Latência entre sub-redes
+- Uso de largura de banda por protocolo
+- Número de tentativas de login malsucedidas
+- Número de hosts sem antivírus/firewall
+
+#### Resumo
+
+- A auditoria de redes é crucial para **segurança, conformidade e desempenho**.
+- Deve ser periódica e bem documentada.
+- Envolve ferramentas de análise e normas de referência.
+- É exigida em instituições públicas e privadas.
+
+## Detecção e correço de problemas de nível físico e lógico
+
+### Níveis da Rede: OSI
+
+| Camada OSI | Tipo de problema (exemplos)                           |
+|------------|-------------------------------------------------------|
+| Física     | Cabos rompidos, conectores danificados, interferência |
+| Enlace     | Colisões, MAC duplicado, erros CRC                    |
+| Rede       | IP incorreto, gateway errado, roteamento ausente      |
+| Transporte | Conexões instáveis, portas bloqueadas, retransmissões |
+| Aplicação  | Serviços offline, autenticação falha, DNS inválido    |
+
+### Problemas de Nível Físico
+
+#### Sintomas
+
+- Sem conectividade
+- LED de porta desligado
+- Erros intermitentes de conexão
+- Velocidade reduzida ou sem negociação automática
+
+#### Causas Comuns
+
+| Causa                          | Explicação                                  |
+|--------------------------------|---------------------------------------------|
+| Cabos danificados              | Mau contato, torção, quebra de pares        |
+| Interferência eletromagnética  | Cabos mal isolados ou próximo de fontes EMI |
+| Conectores RJ-45 mal crimpados | Falha na comunicação física                 |
+| Porta de switch/placa queimada | Hardware danificado                         |
+
+#### Ferramentas de Diagnóstico
+
+- **Testador de cabos**
+- **Certificador de rede**
+- **TDR (Time-Domain Reflectometer)**
+- **Multímetro**
+- **Verificação visual e auditiva (click do cabo)**
+
+#### Correção de Problemas Físicos
+
+- Trocar cabo de rede
+- Recrimpar conector RJ-45
+- Reorganizar cabeamento para evitar interferência
+- Trocar porta do switch ou NIC
+
+### Problemas de Nível Lógico
+
+#### Sintomas
+
+- Conectividade parcial
+- Acesso a alguns recursos falha
+- IP duplicado ou fora da faixa
+- DNS resolve incorretamente
+
+#### Causas Comuns
+
+| Causa                    | Explicação                                           |
+|--------------------------|------------------------------------------------------|
+| IP estático incorreto    | Máscara, gateway ou DNS mal configurado              |
+| DHCP não funcionando     | Dispositivo sem IP ou com IP 169.254.x.x             |
+| ARP cache corrompido     | Comunicação anormal entre hosts da mesma rede        |
+| MAC duplicado            | Equipamentos clonados ou virtualizados indevidamente |
+| Tabela de rotas inválida | Host sem rota padrão ou bloqueado                    |
+
+#### Ferramentas para Diagnóstico Lógico
+
+| Ferramenta              | Uso                           |
+|-------------------------|-------------------------------|
+| `ping`                  | Testa conectividade           |
+| `traceroute`            | Rastreia caminho de pacotes   |
+| `ipconfig` / `ifconfig` | Verifica IP, gateway, máscara |
+| `arp -a`                | Verifica mapeamento IP-MAC    |
+| `netstat`               | Verifica conexões de rede     |
+| `nslookup` / `dig`      | Diagnóstico de DNS            |
+| `tcpdump` / `wireshark` | Captura e análise de pacotes  |
+
+#### Correção de Problemas Lógicos
+
+- Liberar/renovar IP (`dhclient` ou `ipconfig /renew`)
+- Limpar cache DNS (`ipconfig /flushdns`)
+- Ajustar manualmente gateway e DNS
+- Reiniciar DHCP/DNS local
+- Atualizar firmware de roteadores/switches
+
+### Integração com Segurança
+
+- MAC spoofing pode causar conflitos lógicos
+- Switches gerenciáveis podem isolar portas problemáticas
+- Logs de switch ajudam na identificação
+
+### Resumo
+
+- Problemas físicos afetam o **meio físico**: cabos, conectores, interfaces.
+- Problemas lógicos afetam a **comunicação e configuração IP**.
+- Detecção envolve ferramentas como `ping`, testadores de cabo, `traceroute` e `Wireshark`.
+- Correção exige **procedimentos técnicos e validação da topologia**.
+
+## Segurança de Redes
+
+Conjunto de políticas, práticas, tecnologias e mecanismos utilizados para **proteger a integridade, confidencialidade e disponibilidade** dos dados em redes de computadores.
+
+### Princípios Fundamentais (Tríade CIA)
+
+| Princípio             | Descrição                                                              |
+|-----------------------|------------------------------------------------------------------------|
+| **Confidencialidade** | Garantir que apenas usuários autorizados tenham acesso à informação.   |
+| **Integridade**       | Garantir que os dados não sejam alterados indevidamente.               |
+| **Disponibilidade**   | Garantir que os serviços e dados estejam acessíveis quando necessário. |
+
+### Principais Ameaças
+
+| Ameaça                | Descrição                                         |
+|-----------------------|---------------------------------------------------|
+| **Sniffing**          | Captura de tráfego de rede                        |
+| **Spoofing**          | Falsificação de identidade (MAC, IP, DNS, etc.)   |
+| **DDoS**              | Negação distribuída de serviço                    |
+| **Phishing**          | Engenharia social por e-mail ou sites falsos      |
+| **Malware**           | Softwares maliciosos (vírus, worms, trojans)      |
+| **Man-in-the-middle** | Interceptação e possível alteração de comunicação |
+
+
+### Dispositivos e Ferramentas de Segurança
+
+| Dispositivo/Ferramenta    | Função                                            |
+|---------------------------|---------------------------------------------------|
+| **Firewall**              | Filtra pacotes com base em regras de segurança    |
+| **IDS/IPS**               | Detecta e (opcionalmente) impede intrusões        |
+| **Proxy**                 | Intermedia acessos, permite controle e cache      |
+| **VPN**                   | Criptografa comunicação entre redes remotas       |
+| **Antivírus/Antimalware** | Protege endpoints contra softwares maliciosos     |
+| **WAF**                   | Protege aplicações web de ataques como SQLi e XSS |
+
+### Técnicas e Mecanismos
+
+| Técnica                           | Aplicação                                          |
+|-----------------------------------|----------------------------------------------------|
+| **Criptografia**                  | Confidencialidade e integridade dos dados          |
+| **Assinatura digital**            | Autenticidade e não repúdio                        |
+| **Autenticação multifator (MFA)** | Acesso mais seguro                                 |
+| **Controle de acesso**            | Restrições baseadas em usuários, grupos ou funções |
+| **VLANs**                         | Isolamento lógico de tráfego de rede               |
+
+### Protocolos Seguros
+
+| Protocolo          | Função                                       |
+|--------------------|----------------------------------------------|
+| **HTTPS**          | Navegação segura com TLS/SSL                 |
+| **SSH**            | Acesso remoto seguro                         |
+| **SFTP**           | Transferência segura de arquivos             |
+| **IPSec**          | Criptografia no nível IP (VPNs, tunelamento) |
+| **RADIUS/TACACS+** | Autenticação centralizada segura             |
+
+### Testes e Monitoramento
+
+| Ferramenta    | Uso                                      |
+|---------------|------------------------------------------|
+| **Wireshark** | Análise de tráfego                       |
+| **Snort**     | IDS/IPS de código aberto                 |
+| **Fail2Ban**  | Bloqueio automático de IPs suspeitos     |
+| **nmap**      | Verificação de portas abertas e serviços |
+| **OpenVAS**   | Scanner de vulnerabilidades              |
+
+### Atualizações e Correções
+
+- Aplicação de **patches de segurança** e **firmwares atualizados**.
+- Uso de **sistemas de gerenciamento de atualizações** como WSUS ou apt/yum.
+
+### Segurança e Legislação
+
+- **LGPD (Lei 13.709/2018)**: Proteção de dados pessoais no Brasil.
+- **ISO/IEC 27001**: Padrão de segurança da informação.
+- **Marco Civil da Internet**: Responsabilidades de provedores e usuários.
+
+### Resumo
+
+- Segurança de redes é essencial para proteção de dados e continuidade do negócio.
+- Envolve práticas técnicas, políticas e dispositivos.
+- A tríade **CIA (Confidencialidade, Integridade, Disponibilidade)** norteia todas as ações.
+- Ferramentas como firewalls, IDS, criptografia e protocolos seguros são indispensáveis.
+
+## Noções de Tecnologias VoIP e SIP
+
+### O que é VoIP?
+
+- VoIP (Voice over IP) é a **transmissão de voz** em tempo real sobre redes IP.
+- Substitui a telefonia analógica tradicional por uma **infraestrutura digital** baseada em pacotes.
+
+### Componentes do Sistema VoIP
+
+| Componente                | Função                                                     |
+|---------------------------|------------------------------------------------------------|
+| **Gateway VoIP**          | Interliga a rede IP à rede telefônica convencional (PSTN). |
+| **IP Phone / Softphone**  | Equipamento/software do usuário final.                     |
+| **PBX IP (ex: Asterisk)** | Central telefônica baseada em software.                    |
+| **Servidor SIP**          | Registra, roteia e controla chamadas VoIP.                 |
+
+### Vantagens da VoIP
+
+- Redução de custos em chamadas.
+- Integração com sistemas (CRM, Helpdesk).
+- Escalabilidade e mobilidade.
+- Possibilidade de uso com **softphones** (como Linphone, Zoiper) e apps.
+
+### Funcionamento Básico da Chamada VoIP
+
+1. Estabelecimento da chamada (sinalização via **SIP**).
+2. Transmissão da voz em tempo real (**RTP**).
+3. Encerramento da chamada (mensagens SIP de finalização).
+
+### Protocolo SIP (Session Initiation Protocol)
+
+- Protocolo de **sinalização** usado para iniciar, modificar e encerrar sessões de comunicação multimídia.
+
+#### Características:
+
+- Utiliza **porta 5060/UDP** (padrão).
+- Baseado em texto, similar ao HTTP.
+- Trabalha com **mensagens REQUEST e RESPONSE**.
+
+#### Principais métodos SIP:
+
+| Método   | Descrição                       |
+|----------|---------------------------------|
+| INVITE   | Inicia uma sessão               |
+| ACK      | Confirmação do INVITE           |
+| BYE      | Encerra a sessão                |
+| REGISTER | Registro do usuário no servidor |
+| OPTIONS  | Descobre capacidades            |
+| CANCEL   | Cancela requisição em andamento |
+
+### RTP e Codecs
+
+- **RTP (Real-Time Transport Protocol)**: Responsável pelo transporte da voz (áudio) entre os dispositivos.
+- Usa portas dinâmicas (geralmente pares UDP).
+- Funciona com **codecs de áudio**, como:
+
+| Codec | Qualidade               | Uso de largura de banda |
+|-------|-------------------------|-------------------------|
+| G.711 | Alta                    | ~64 kbps                |
+| G.729 | Média (com compactação) | ~8 kbps                 |
+| OPUS  | Variável, adaptável     | 6–510 kbps              |
+
+### QoS em VoIP
+
+| Parâmetro            | Valor Ideal |
+|----------------------|-------------|
+| **Latência**         | < 150 ms    |
+| **Jitter**           | < 30 ms     |
+| **Perda de pacotes** | < 1%        |
+
+Ferramentas como **DiffServ**, **VLANs (802.1p)** e **priorização de tráfego (QoS)** em switches ajudam a garantir qualidade.
+
+### Ferramentas e Soluções Populares
+
+| Ferramenta            | Descrição                              |
+|-----------------------|----------------------------------------|
+| **Asterisk**          | PBX IP open-source                     |
+| **FreePBX**           | Interface gráfica para Asterisk        |
+| **Cisco CallManager** | Solução corporativa da Cisco           |
+| **Wireshark**         | Análise de tráfego SIP/RTP             |
+| **SIPp**              | Teste de carga e simulação de chamadas |
+
+### Infraestrutura Básica de uma Solução VoIP
+
+[Telefone IP] ──► [Switch com VLAN de Voz] ──► [Servidor SIP (Asterisk)] ──► [Gateway VoIP] ──► [PSTN]
+
+### Segurança em VoIP
+
+- **SIP over TLS**: protege a sinalização.
+- **SRTP**: criptografa a mídia (áudio).
+- **Firewall/VPN**: protege o tráfego VoIP externo.
+- **Autenticação SIP**: evita chamadas não autorizadas.
+- **Proteção contra SPIT**: "Spam over Internet Telephony".
+
+### Resumo
+
+- VoIP é a base da telefonia moderna e usa redes IP para comunicação de voz.
+- SIP é o protocolo mais comum para sinalização.
+- RTP carrega os dados de voz (áudio).
+- A qualidade da chamada depende de latência, jitter e perda.
+- Soluções como Asterisk e FreePBX são amplamente usadas.
 
 ## Segurança da Informação
 
-### conceitos básicos de confidencialidade, integridade e disponibilidade
+### Confidencialidade, Integridade e Disponibilidade (CID)
+
+#### Introdução
+
+A **Segurança da Informação** é o conjunto de práticas e políticas que têm como objetivo proteger os ativos de informação de uma organização contra acessos não autorizados, alterações indevidas e indisponibilidade.
+
+As três **bases fundamentais da segurança da informação** são conhecidas como **Tríade CID**:
+
+- **Confidencialidade**
+- **Integridade**
+- **Disponibilidade**
+
+Estas propriedades são essenciais para garantir a proteção dos dados em sistemas computacionais e redes.
+
+#### Confidencialidade
+
+**Definição:**
+Confidencialidade é o princípio que assegura que a informação seja acessível **somente às pessoas autorizadas**.
+
+**Objetivo:**
+Evitar o **acesso não autorizado** a dados sensíveis.
+
+**Exemplos:**
+- Criptografia de arquivos e comunicações (e.g., HTTPS, TLS).
+- Autenticação via senhas ou certificados digitais.
+- Controle de acesso baseado em permissões (ACLs, RBAC).
+
+**Ameaças:**
+- Espionagem eletrônica.
+- Ataques de interceptação (sniffing).
+- Engenharia social e phishing.
+
+#### Integridade
+
+**Definição:**
+
+Integridade garante que os dados não sejam **modificados indevidamente**, seja de forma acidental ou maliciosa.
+
+**Objetivo:**
+
+Assegurar que as informações estejam **exatas, completas e confiáveis**.
+
+**Exemplos:**
+
+- Verificação por hash (MD5, SHA-256).
+- Assinaturas digitais.
+- Sistemas de controle de versão.
+- Logs de auditoria.
+
+**Ameaças:**
+- Alteração de arquivos por malware.
+- Modificação de dados durante a transmissão.
+- Corrupção de banco de dados.
+
+
+####  Disponibilidade
+
+**Definição:**
+Disponibilidade garante que as informações e os sistemas estejam **acessíveis sempre que necessário** pelos usuários autorizados.
+
+**Objetivo:**
+Minimizar interrupções no serviço e evitar perda de acesso à informação.
+
+**Exemplos:**
+- Redundância de servidores.
+- Backups regulares.
+- Sistemas de balanceamento de carga.
+- Planos de recuperação de desastres (DRP).
+
+**Ameaças:**
+- Ataques DDoS (Distributed Denial of Service).
+- Falhas de hardware ou software.
+- Quedas de energia ou desastres naturais.
+
+
+#### Exemplos Práticos da Tríade CID
+
+| Exemplo                      | Confidencialidade    | Integridade          | Disponibilidade               |
+|------------------------------|----------------------|----------------------|-------------------------------|
+| Dados de cartão de crédito   | ✅ Criptografia       | ✅ Validação por hash | ✅ Acesso no momento da compra |
+| Sistema bancário online      | ✅ Autenticação forte | ✅ Logs e auditoria   | ✅ Uptime contínuo             |
+| Prontuário médico eletrônico | ✅ Controle de acesso | ✅ Assinatura digital | ✅ Backup redundante           |
+
+
+#### Conclusão
+
+A tríade **Confidencialidade, Integridade e Disponibilidade (CID)** é a base da **Segurança da Informação**. Para que um sistema seja considerado seguro, é necessário que esses três princípios estejam implementados e equilibrados, de acordo com os objetivos do negócio e a criticidade da informação tratada.
+
+O entendimento desses conceitos é essencial para qualquer profissional da área de tecnologia da informação, especialmente em **administração de redes, sistemas operacionais e políticas de segurança**.
 
 ### Segurança e proteção de redes
 
+#### Introdução
+
+A **segurança de redes** é uma subárea da **Segurança da Informação** voltada para a **proteção dos dados em trânsito**, dos dispositivos e dos serviços envolvidos na comunicação em redes locais (LANs), redes metropolitanas (MANs) ou redes amplas (WANs), como a Internet.
+
+Com o aumento da interconectividade, as ameaças à segurança de redes também cresceram, exigindo medidas robustas de **prevenção, detecção e resposta** a incidentes.
+
+#### Objetivos da Segurança de Redes
+
+Os principais objetivos são os mesmos da tríade CID:
+
+- **Confidencialidade**: proteger os dados contra acesso indevido durante a transmissão.
+- **Integridade**: assegurar que os dados não sejam alterados de forma indevida no tráfego.
+- **Disponibilidade**: garantir que os serviços de rede estejam sempre acessíveis.
+- **Autenticidade**: assegurar a identidade das partes envolvidas na comunicação.
+- **Não-repúdio**: impedir que um remetente negue ter enviado uma mensagem.
+
+#### Ameaças Comuns em Redes
+
+1. Interceptação
+Captura de pacotes por meio de sniffers como Wireshark, TCPDump.
+
+2. Ataques Man-in-the-Middle (MitM)
+Interceptação e modificação do tráfego entre duas partes sem que elas percebam.
+
+3. Spoofing
+Falsificação de IP, MAC ou identidade para enganar dispositivos ou usuários.
+
+4. Ataques de DoS/DDoS
+Tornam serviços indisponíveis ao sobrecarregar servidores com requisições.
+
+5. Scanning e Fingerprinting
+Mapeamento da rede em busca de vulnerabilidades com ferramentas como Nmap.
+
+6. Phishing e Engenharia Social
+Engano de usuários para revelar credenciais ou executar ações inseguras.
+
+#### Mecanismos de Proteção
+
+1. Firewalls
+Filtram o tráfego com base em regras de rede. Podem ser:
+
+- Firewalls de rede (hardware)
+- Firewalls de host (software)
+- Firewalls de aplicação (WAF)
+
+2. IDS/IPS
+- **IDS (Intrusion Detection System)**: monitora e alerta sobre intrusões.
+- **IPS (Intrusion Prevention System)**: além de detectar, bloqueia tentativas de ataque.
+
+3. VPN (Virtual Private Network)
+Cria túneis criptografados entre dispositivos remotos, garantindo sigilo e integridade.
+
+4. Criptografia
+Protege os dados em trânsito usando algoritmos como:
+
+- **SSL/TLS** (camada de transporte)
+- **IPSec** (camada de rede)
+
+5. Autenticação Forte
+Uso de múltiplos fatores (senhas + biometria ou tokens) para validar identidades.
+
+6. Segmentação e VLANs
+Isolam partes da rede para reduzir propagação de ataques.
+
+7. Políticas de Segurança
+Regras e boas práticas para usuários e administradores: controle de acesso, senhas fortes, atualizações, etc.
+
+#### Boas Práticas em Segurança de Redes
+
+- **Desativar serviços e portas desnecessárias**
+- **Aplicar atualizações de segurança regularmente**
+- **Utilizar autenticação baseada em certificados digitais**
+- **Implementar backups e planos de contingência**
+- **Educação dos usuários para evitar ataques de engenharia social**
+- **Auditar acessos e registrar logs de rede**
+
+#### Tecnologias Comuns
+
+| Tecnologia                    | Função                                                                    |
+|-------------------------------|---------------------------------------------------------------------------|
+| **802.1X**                    | Autenticação em nível de porta para redes com fio e sem fio               |
+| **DMZ**                       | Área desmilitarizada usada para hospedar serviços acessíveis externamente |
+| **NAT/PAT**                   | Esconde endereços internos da rede                                        |
+| **Proxy**                     | Intermedia acesso à Internet, podendo filtrar e registrar tráfego         |
+| **ACL (Access Control List)** | Lista de controle de acesso em roteadores/switches/firewalls              |
+
+#### Normas e Referências
+
+- **ISO/IEC 27033**: Segurança de redes.
+- **RFC 2196**: Site Security Handbook.
+- **ISO/IEC 27001**: Sistema de Gestão de Segurança da Informação.
+- **NIST SP 800-41**: Diretrizes de firewalls e segurança de perímetro.
+
+#### Conclusão
+
+A proteção de redes é essencial para garantir que os dados e os sistemas de uma organização permaneçam seguros contra ameaças internas e externas. A combinação de políticas de segurança, ferramentas técnicas e educação de usuários é a chave para uma postura de segurança robusta.
+
 ### Firewall
-- conceito de firewall
-- suas funções
-- tipos
 
-### Noções decriptografia
+#### Conceito de Firewall
 
-## Leis e Regulamentações
-### Lei Geral de Proteção de Dados (Lei nº 13.709, de 14 de agosto de 2018, e suas alterações)
-### Contratação de soluções de Tecnologia da Informação e Comunicação.
+Um **firewall** é um sistema de segurança que monitora e controla o tráfego de entrada e saída de uma rede com base em regras pré-definidas. Seu principal objetivo é **proteger a rede interna contra acessos não autorizados**, funcionando como uma **barreira entre uma rede confiável (como a intranet) e uma rede não confiável (como a Internet)**.
+
+> *Firewalls são componentes essenciais em qualquer política de segurança de rede.*
+
+#### Funções de um Firewall
+
+As principais funções incluem:
+
+- **Filtragem de pacotes**: controla o tráfego com base em IP, porta e protocolo.
+- **Controle de acesso**: permite ou bloqueia conexões segundo regras de segurança.
+- **Registro (logging)**: armazena logs de conexões e eventos de segurança.
+- **NAT (Network Address Translation)**: oculta endereços IP da rede interna.
+- **Inspeção de pacotes (Stateful Inspection)**: verifica o estado das conexões.
+- **Proteção contra ataques externos**: como port scanning, spoofing, DoS, etc.
+- **Redirecionamento de portas (port forwarding)**: encaminha tráfego a serviços internos.
+
+#### Tipos de Firewall
+
+Os firewalls podem ser classificados de acordo com sua arquitetura ou funcionalidade:
+
+1. **Firewall de Filtragem de Pacotes (Packet Filtering)**
+
+- Atua na **camada de rede (Camada 3)** e **camada de transporte (Camada 4)** do modelo OSI.
+- Analisa cabeçalhos dos pacotes IP (IP de origem/destino, porta, protocolo).
+- **Não mantém estado da conexão** (stateless).
+- Veloz, mas **menos seguro**.
+- Exemplo: ACLs em roteadores.
+
+2. **Firewall com Inspeção de Estado (Stateful Inspection)**
+
+- Armazena informações de estado das conexões ativas.
+- Garante que apenas pacotes pertencentes a sessões legítimas sejam permitidos.
+- Mais seguro que o anterior.
+- Atua entre camadas 3 e 5 do modelo OSI.
+
+3. **Firewall de Aplicação (Application-Level Gateway / Proxy Firewall)**
+
+- Atua na **camada de aplicação (Camada 7)**.
+- Inspeciona o conteúdo do tráfego (payload) e entende protocolos como HTTP, FTP, DNS.
+- Pode bloquear comandos maliciosos.
+- **Mais seguro**, mas **mais lento**.
+- Exemplo: Web Application Firewall (WAF).
+
+4. **Firewall Pessoal (Host-based Firewall)**
+
+- Instalado no próprio sistema operacional do computador.
+- Protege o host contra tráfego malicioso da rede local ou da Internet.
+- Exemplo: Windows Defender Firewall, iptables no Linux.
+
+5. **Firewall de Próxima Geração (Next-Generation Firewall - NGFW)**
+
+- Integra funcionalidades de IDS/IPS, DPI (Deep Packet Inspection), controle de aplicações, VPN.
+- Inspeciona conteúdo em tempo real e analisa comportamento.
+- Fornece maior proteção contra ameaças modernas (malwares, botnets, etc.).
 
 
+#### Firewalls: Baseados em Software vs Hardware
+
+| Tipo         | Vantagens                                       | Desvantagens                       |
+|--------------|-------------------------------------------------|------------------------------------|
+| **Software** | Fácil de configurar; boa para hosts individuais | Pode consumir recursos do sistema  |
+| **Hardware** | Alta performance; independente de SO            | Mais caro e complexidade na gestão |
+
+#### Topologias de Firewall
+
+- **Dual-homed host**: um host com duas interfaces de rede conectando redes distintas.
+- **Screened subnet (DMZ)**: zona intermediária onde ficam servidores públicos (web, email, DNS).
+- **Screened host**: host interno protegido por um roteador com filtragem.
+
+#### Exemplos de Firewalls Populares
+
+- **Software livre**:
+  - `iptables` (Linux)
+  - `pf` (FreeBSD/OpenBSD)
+  - `ufw` (Ubuntu)
+- **Comerciais**:
+  - Cisco ASA
+  - Palo Alto Networks
+  - Fortinet FortiGate
+  - Check Point
+  - SonicWall
+
+#### Considerações Importantes
+
+- A eficácia do firewall depende da **correta definição de regras**.
+- Firewalls devem ser atualizados constantemente contra novas ameaças.
+- **Não substitui outras camadas de segurança**, como antivírus e criptografia.
+- A utilização de **firewalls em camadas (defesa em profundidade)** é recomendada.
 
 
-```javascript
-console.log('Olá mundo!');
+### Noções de Criptografia
+
+#### Conceito de Criptografia
+
+A **criptografia** é a ciência de escrever mensagens em forma cifrada, ou seja, **transformar uma informação legível (texto claro) em uma forma ininteligível (texto cifrado)**, de forma que somente o destinatário autorizado consiga decifrar.
+
+> Objetivo principal: **proteger dados contra acessos não autorizados**.
+
+#### Objetivos da Criptografia
+
+A criptografia ajuda a garantir os **princípios básicos da segurança da informação**, especialmente:
+
+- **Confidencialidade**: impede que terceiros leiam a informação.
+- **Integridade**: assegura que a informação não foi alterada.
+- **Autenticidade**: garante a identidade do remetente.
+- **Não-repúdio**: impede que o autor negue ter enviado a mensagem.
+
+#### Tipos de Criptografia
+
+1. Criptografia Simétrica (Chave Secreta)
+
+- Usa **a mesma chave** para cifrar e decifrar.
+- Rápida e eficiente.
+- Problema: **distribuição segura da chave**.
+
+**Exemplos de algoritmos:**
+- DES (Data Encryption Standard)
+- AES (Advanced Encryption Standard)
+- RC4, Blowfish, IDEA
+
+**Esquema:**
+Mensagem → [Cifração com Chave K] → Texto Cifrado → [Decifração com Chave K] → Mensagem
+
+2. Criptografia Assimétrica (Chave Pública)
+
+- Usa um **par de chaves**:
+  - **Chave pública**: pode ser divulgada.
+  - **Chave privada**: deve ser mantida em segredo.
+- Mais segura, mas mais lenta.
+- Resolvem o problema de distribuição de chave.
+
+**Exemplos de algoritmos:**
+- RSA (Rivest-Shamir-Adleman)
+- ECC (Elliptic Curve Cryptography)
+- ElGamal
+
+**Esquema:**
+
+Mensagem → [Cifração com Chave Pública do Destinatário] → Texto Cifrado
+Texto Cifrado → [Decifração com Chave Privada do Destinatário] → Mensagem
+
+#### Criptografia em Hash
+
+- **Hashing** não é criptografia no sentido tradicional, pois **não é reversível**.
+- Garante **integridade**: qualquer alteração na mensagem muda completamente o hash.
+- Utilizado para senhas, verificação de integridade, assinaturas digitais.
+
+**Exemplos de algoritmos:**
+- MD5 (obsoleto)
+- SHA-1 (obsoleto)
+- SHA-256, SHA-3 (seguros)
+
+#### Assinatura Digital
+
+- Usa criptografia assimétrica.
+- Permite verificar:
+  - **Autenticidade** (quem enviou),
+  - **Integridade** (não houve alteração),
+  - **Não-repúdio**.
+
+**Funcionamento:**
+1. Gerar hash da mensagem.
+2. Cifrar o hash com a chave privada do remetente (assinatura).
+3. Enviar a mensagem + assinatura.
+4. Destinatário decifra com a chave pública e compara com o hash da mensagem.
+
+#### Certificados Digitais
+
+- Garantem a identidade das partes em uma comunicação.
+- São emitidos por uma **Autoridade Certificadora (AC)**.
+- Usados em conexões seguras (HTTPS, e-mail, assinatura de documentos).
+
+#### Protocolos que Usam Criptografia
+
+| Protocolo | Função                                     |
+|-----------|--------------------------------------------|
+| SSL/TLS   | Criptografia para navegação segura (HTTPS) |
+| SSH       | Acesso remoto seguro                       |
+| IPsec     | Criptografia em conexões VPN               |
+| PGP/GPG   | E-mails seguros com assinatura             |
+| S/MIME    | Criptografia em e-mails corporativos       |
+
+#### Considerações para Concursos
+
+- Conheça diferenças entre simétrica e assimétrica.
+- Saiba que a **criptografia assimétrica permite a assinatura digital**.
+- Algoritmos simétricos são **mais rápidos**, mas exigem **canal seguro** para troca de chaves.
+- O **certificado digital** vincula uma chave pública a uma identidade.
